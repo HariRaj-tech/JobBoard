@@ -1,0 +1,15 @@
+{
+    "name": "job-board",
+    "version": "0.1",
+    "description": "A platform for job posting and finding.",
+    "scripts": {
+        "devStart": "nodemon server.js"
+    },
+    "dependencies": {
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.12"
+    }
+}
+
