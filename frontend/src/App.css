@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+
+.card{
+    background-color: #CDFADB;
+    width: 18rem;
+    border-radius: 5%;
+}
+
+.card:hover{
+    transform: scale(1.05);
+    background-color: #A1EEBD;
+    /* cursor: pointer; */
+}
+
+li{
+    font-size: 13px;
+    padding: 5px;
+}
+
