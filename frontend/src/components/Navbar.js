@@ -3,25 +3,18 @@ import { Link } from 'react-router-dom'
 
 export default function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container-fluid">
-        <Link className="navbar-brand" to="/home">JobBoard</Link>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to="/home">Home</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/">About</Link>
-            </li>
-          </ul>
-          <form className="d-flex">
-            <Link className="btn btn-primary mx-2" type="submit" to="/login">Login</Link>
-            <Link className="btn btn-primary mx-2" type="submit" to="/signup">Signup</Link>
-          </form>
+    <nav className="bg-gray-800">
+      <div className="container mx-auto px-4 flex items-center justify-between py-4">
+        
+        <div className="flex items-center space-x-4">
+          <Link to="/home" className="text-white text-xl font-bold">JobBoard</Link>
+          <Link to="/home" className="text-white text-base hover:text-gray-200">Home</Link>
+          <Link to="/about" className="text-white text-base hover:text-gray-200">About</Link>
+        </div>
+
+        <div className="flex items-center space-x-4">
+          <Link to="/login" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Login</Link>
+          <Link to="/signup" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Signup</Link>
         </div>
       </div>
     </nav>

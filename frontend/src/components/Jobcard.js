@@ -1,33 +1,37 @@
 import React from 'react'
 import image from '../images.jpeg'
+import { Link } from 'react-router-dom'
 
 
 export default function Jobcard() {
     return (
-        <div className="card" >
-            <div className="card-body" >
-                <div className='container' >
-                    <img src={image} className="card-img-top" alt="..." style={{ width: '60px', height: '60px', borderRadius: '5%' }} />
-                    <div className='mx-3 my-2 d-inline-block'  >
-                        <h5 className="card-title"  >Jman group</h5>
-                        <h6 className="card-subtitle my-2 text-body-secondary"><i className="fa-solid fa-location-dot" /> Chennai</h6>
-                    </div>
-                </div>
-                <h5 className='my-2'>Full Stack developer</h5>
 
-                <p className="card-subtitle text-body-secondary"><i className="fa-solid fa-briefcase" /> Fulltime</p>
-                <p className="card-text">JMAN is a “best of” consulting organisation, taking the best of specific disciplines and industries to deliver a unique offering that is fast, smart and useful to our client partners.</p>
-                <ul className="list-inline" >
-                    <li className="list-inline-item" style={{ border: '1px solid gray', borderRadius: '10%', backgroundColor: '#E1F0DA' }}>React js</li>
-                    <li className="list-inline-item" style={{ border: '1px solid gray', borderRadius: '10%', backgroundColor: '#E1F0DA' }}>Node js</li>
-                    <li className="list-inline-item" style={{ border: '1px solid gray', borderRadius: '10%', backgroundColor: '#E1F0DA' }}>System design</li>
-                </ul>
-                <div className='d-flex justify-content-between'>
-                    <h5><i className="fa-solid fa-indian-rupee-sign" /> 5L</h5>
-                    <a className='btn btn-primary mx-3'>Apply Now</a>
+        <div className="container mx-auto p-2 w-80 border-black border-2 bg-[#CDFADB] rounded-xl hover:scale-105 hover:bg-[#A1EEBD]">
+            <div className="flex items-center justify-start mb-4">
+                <img src={image} alt=".." className="object-contain w-14 h-15 border-2 rounded-xl" />
+                <div className='mx-8'>
+                    <p className="text-2xl font-bold text-black">Jman group</p>
+                    <p className="text-sm text-gray-500 "><i className="fa-solid fa-location-dot mr-2" />Chennai, India</p>
                 </div>
-
+            </div>
+            <div className="mb-4">
+                <h5 className="text-xl font-bold text-black">Full Stack developer</h5>
+                <div className="text-sm text-gray-500"><i className="fa-solid fa-briefcase mr-2" />Fulltime</div>
+            </div>
+            <div className="mb-4">
+                <p className="text-gray-700">JMAN is a “best of” consulting organisation, taking the best of specific disciplines and industries to deliver a unique offering that is fast, smart and useful to our client partners.</p>
+            </div>
+            <div className="mb-4">
+                {/* <span className="inline-block mr-2 text-sm text-gray-500">Skills:</span> */}
+                <span className="inline-block bg-gray-200 p-1 rounded text-xs text-gray-500 mr-2">React js</span>
+                <span className="inline-block bg-gray-200 p-1 rounded text-xs text-gray-500 mr-2">Node js</span>
+                <span className="inline-block bg-gray-200 p-1 rounded text-xs text-gray-500">Python</span>
+            </div>
+            <div className="flex justify-start">
+                <span className="text-2xl font-bold text-black"><i className="fa-solid fa-indian-rupee-sign mr-2" />5L</span>
+                <Link to="/jobid" className="inline-block mx-auto px-4 py-2 bg-blue-500 text-white font-bold text-center rounded">Apply Now</Link>
             </div>
         </div>
+
     )
 }
