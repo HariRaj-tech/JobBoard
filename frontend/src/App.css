@@ -3,5 +3,9 @@
     padding: 0;
     
 }
-
+.app{
+    padding: 0 70px;
+    height: 100%;
+    width: 100%;
+}
 

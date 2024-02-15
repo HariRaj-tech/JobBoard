@@ -1,7 +1,15 @@
 .applyjob {
-    padding: 50px 70px;
-    height: 100vh;
+    height: 100%;
     width: 100%;
+}
+.header {
+   padding: 30px 0;
+   border-bottom: 1px solid #dee2e6;
+}
+.header::after{
+    content:"";
+
+
 }
 .img-container img {
     border-radius: 12px;
@@ -10,13 +18,19 @@
 }
 .title-container {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    
     padding: 20px;
+}
+.title p{
+    font-size: 2rem;
+    font-weight: 600;
 }
 .apply-btn {
     color: #fff;
-    border: 1px solid transparent;
+    border:1px solid ;
+    outline: transparent;
     background-color:  #3c65f5;
-    border-radius: 10px;
-    padding: 10px 30px;
+    border-radius: 7px;
+    padding: 10px 10px;
 } 
