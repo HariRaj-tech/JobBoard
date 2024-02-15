@@ -3,7 +3,7 @@
     "version": "0.1",
     "description": "A platform for job posting and finding.",
     "scripts": {
-        "devStart": "nodemon server.js"
+        "devStart": "nodemon src/server.js"
     },
     "dependencies": {
         "express": "^4.17.1"
