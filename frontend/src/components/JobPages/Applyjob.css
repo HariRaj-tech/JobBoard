@@ -1,0 +1,22 @@
+.applyjob {
+    padding: 50px 70px;
+    height: 100vh;
+    width: 100%;
+}
+.img-container img {
+    border-radius: 12px;
+    height: 100%;
+    width: 100%;
+}
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+.apply-btn {
+    color: #fff;
+    border: 1px solid transparent;
+    background-color:  #3c65f5;
+    border-radius: 10px;
+    padding: 10px 30px;
+} 
