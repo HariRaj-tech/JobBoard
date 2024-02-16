@@ -4,8 +4,12 @@
     
 }
 .app{
-    padding: 0 70px;
+    padding: 0 50px;
     height: 100%;
     width: 100%;
 }
-
+@media only screen and (max-width:680px) {
+    .app {
+        padding: 0 10px;
+    }
+}
