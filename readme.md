@@ -2,56 +2,80 @@
 
 The server will be hosted at port 3000.
 
-## API
+## User API
 
 ---
 
-Create user.
+User signup.
 
 ```
-POST /api/users
+POST /api/user/signup
 
 {
     "name": "user-name",
+    "email": "user-email",
     "password": "user-password"
 }
 ```
 
 ---
 
-Get all users.
+User login.
 
 ```
-GET /api/users
-```
-
----
-
-Get user details.
-
-```
-GET /api/users:userId
-```
-
----
-
-Update user details.
-
-```
-PUT /api/users:userId
+POST /api/user/login
 
 {
-    # add the details to update, remaining details will stay the same.
-    "name": "new-name"
+    "email": "user-email",
+    "password": "user-password"
 }
 ```
 
 ---
 
-Delete a user.
+User authentication.
 
 ```
-DELETE /api/users:userId
+GET /api/user/auth
+```
+
+---
+
+## Company API
+
+---
+
+Company signup.
+
+```
+POST /api/company/signup
+
+{
+    "name": "company-name",
+    "email": "company-email",
+    "password": "company-password"
+}
+```
+
+---
+
+Company login.
+
+```
+POST /api/company/login
+
+{
+    "email": "company-email",
+    "password": "company-password"
+}
+```
+
+---
+
+Company authentication.
+
+```
+GET /api/company/auth
 ```
 
 ---
