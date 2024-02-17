@@ -1,4 +1,4 @@
-const { users } = require("../modal/user_database");
+const { users } = require("../modals/user_database");
 const statusCodes = require('http-status-codes').StatusCodes
 
 exports.auth = async (req, res) => {
