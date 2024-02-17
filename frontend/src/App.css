@@ -22,3 +22,31 @@ h2 {
 input {
     outline: transparent;
 }
+
+.home-image1 {
+    animation: animation-bouncey 2s linear infinite alternate;
+}
+
+@keyframes animation-bouncey {
+    0% {
+        transform: translateY(0px);
+    }
+
+    100% {
+        transform: translateY(50px);
+    }
+}
+
+.home-image2 {
+    animation: animation-bouncex 2s linear infinite alternate;
+}
+
+@keyframes animation-bouncex {
+    0% {
+        transform: translateX(30px);
+    }
+
+    100% {
+        transform: translateX(90px);
+    }
+}

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Jobcard from '../../components/Jobcard'
 import image from '../../Jobs-image.png'
 import companies from '../../assets/tempdata'
-
+import banner1 from '../../assets/banner1.png'
+import banner2 from '../../assets/banner2.png'
 
 export default function Home(props) {
 
@@ -27,33 +28,39 @@ export default function Home(props) {
 
 
     return (
-        <div className='container bg-[#D7E4C0]'>
+        <div className='container '>
 
-            <div className="container mx-auto px-4 pt-8 mb-9">
-                <div className="text-5xl font-bold text-center text-grey-500">The Easiest Way to Get Your New Job</div>
+            {/* <div className="container mx-auto px-4 pt-8 mb-9"> */}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center gap-4 mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center gap-4 mt-4">
 
-                    <div className="grid grid-cols-1  w-96 mt-11">
-                        <div className="bg-gray-100 p-4 rounded shadow-md">
-                            <h3 className="text-lg font-bold mb-2">Job Seekers</h3>
-                            <p>Each month, more than 3 million job seekers turn to Job Board in their search for work, making over 140,000 applications every single day.</p>
-                        </div>
-                        <div className="bg-gray-100 p-4 rounded shadow-md mt-8">
-                            <h3 className="text-lg font-bold mb-2">Employers</h3>
-                            <p>With over number of active job listings, Job Board connects you with a vast pool of talented candidates.</p>
-                        </div>
+
+                <div className="grid grid-cols-1 mt-11 w-9/12">
+                    <div className="text-5xl font-bold text-start text-grey-500">The Easiest Way<br />to Get Your New Job</div>
+
+                    <div className="bg-gray-100 p-4 rounded shadow-md">
+                        <h3 className="text-lg font-bold mb-2">Job Seekers</h3>
+                        <p>Each month, more than 3 million job seekers turn to Job Board in their search for work, making over 140,000 applications every single day.</p>
                     </div>
-                    <div className="container">
-                        <img src={image} alt="" className="object-fit w-9/12 rounded-xl shadow-2xl shadow-blue-700 hover:rotate-6" />
+                    <div className="bg-gray-100 p-4 rounded shadow-md mt-4">
+                        <h3 className="text-lg font-bold mb-2">Employers</h3>
+                        <p>With over number of active job listings, Job Board connects you with a vast pool of talented candidates.</p>
                     </div>
-
+                    <div className='mt-4 '>
+                        <span className='font-bold'>Popular searches: </span><a href='#'>Designer</a>, <a href='#'>Developer</a>, <a href='#'>Engineer</a>, <a href='#'>Sales</a>
+                    </div>
                 </div>
+                <div className="container w-9/12">
+                    <img src={banner1} alt="" className="home-image1 h-4/5 object-fit rounded-xl shadow-2xl shadow-blue-700" />
+                    <img src={banner2} alt="" className="home-image2 z-1 object-fit rounded-xl shadow-2xl shadow-blue-700" />
+                </div>
+
+                {/* </div> */}
 
             </div>
 
 
-            <p className='container mx-auto text-4xl font-bold text-center my-1 '>Jobs of the day</p>
+            <p className='container mx-auto text-4xl font-bold text-center my-1 mt-8 '>Jobs of the day</p>
             <p className='text-xl my-1 text-center'>Search and connect with the right candidates faster</p>
 
             <form action="" className='container mx-auto max-w-lg my-5'>
