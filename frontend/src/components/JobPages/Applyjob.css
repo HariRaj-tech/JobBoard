@@ -56,6 +56,11 @@
     .job-overview .table-row .col {
         width: 50%;
     }
+    .media-container div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 @media only screen and (max-width: 668px){
     .col1 {
@@ -78,7 +83,7 @@
     padding: 20px;
 }
 
-.title h3 {
+.title h3 ,h4{
     font-size: 2rem;
     font-weight: 600;
     word-wrap: break-word;
@@ -106,7 +111,7 @@
 
 
 .row {
-    margin-top: 10px;
+    margin-top: 70px;
 }
 
 .job-overview {
@@ -115,7 +120,7 @@
     padding: 20px 30px 30px;
     margin-bottom: 50px;
 }
-.job-overview>h5 {
+.job-overview>h5 , .jobs-card h5 {
     margin-bottom: 30px;
     padding-bottom: 15px;
     border-bottom: 1px solid #dee2e6;
@@ -123,7 +128,6 @@
     font-size: 20px;
     font-weight:700;
 }
-
 
 
 .job-overview .table-row .col {
@@ -151,13 +155,14 @@
 }
 
 
-.address-card {
+.address-card, .jobs-card{
     border: 1px solid #e0e6f7;
     padding: 25px;
     border-radius: 8px;
     background-color: #fff;
     margin-bottom: 40px;
 }
+
 .address-title {
     display: flex;
     align-items: start;
@@ -174,7 +179,66 @@
     min-width: 120px;
     max-width: 120px;
 }
-
-.address-card .address-container {
-    margin-top: 20px;
+.map {
+    width: 100%;
+    margin: 20px 0;
 }
+
+.about-company p{
+    font-size: 16px;
+    line-height: 200%;
+    color: #4f5e64;
+    line-height: 32px;
+    margin-bottom: 20px;
+}
+ul {
+    list-style-type: disc;
+}
+ul li {
+    padding: 5px;
+}
+ul {
+    padding-left: 30px;
+    line-height: 32px;
+    font-size: 16px;
+    color: #4f5e64;
+}
+.col1-footer {
+    display: inline-block;
+    padding-left: 26px;
+    padding-top: 10px;
+    margin-left: 10px;
+}
+.col1-footer span{
+    position: relative;
+    background-color: #fff;
+    font-size: 18px;
+    color: #4f5e64;
+    line-height: 28px;
+    font-weight: 700;
+}
+.col1-footer span::before,.col1-footer span::after {
+    content: "";
+    height: 1px;
+    border-top: 2px solid #a5a5a5;
+    width: 31px;
+    position: absolute;
+    top: 13px;
+}
+.col1-footer span::after {
+    right: -37px;
+}
+.col1-footer span::before{
+    left: -36px;
+}
+.media {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+.media-icon {
+    display: inline-block;
+    padding: 5px;
+    cursor: pointer;
+}
+
