@@ -3,7 +3,7 @@ const statusCodes = require('http-status-codes').StatusCodes
 
 exports.auth = async (req, res) => {
     try {
-        const sessionUser = req.session.user;
+        const sessionUser = req.session.session.useruser;
 
         // Check if the user session exists
         if (!sessionUser) {
