@@ -14,9 +14,17 @@ import fb from '../../assets/fb.svg';
 import x from '../../assets/x.svg';
 import reddit from '../../assets/rd.svg';
 import wa from '../../assets/wa.svg';
+import brandimg from '../../assets/brand.png';
 import './Applyjob.css';
 function Applyjob() {
-
+    const data = [
+        [brandimg,"UI / UX Designer fulltime"],
+        [brandimg,"UI / UX Designer fulltime"],
+        [brandimg,"UI / UX Designer fulltime"],
+        [brandimg,"UI / UX Designer fulltime"],
+        [brandimg,"UI / UX Designer fulltime"],
+        [brandimg,"UI / UX Designer fulltime"]
+    ]
     return (
         <div className="applyjob">
             <div className="header">
@@ -219,12 +227,43 @@ function Applyjob() {
                         </div>
                         <div className="jobs-card">
                             <h5 style={{"font-size":"18px"}}>Similar jobs</h5>
-                            
+                            <Card data={data}/>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     );
+}
+
+function Card({data}) {
+    const style={
+        "display": "inline-block",
+        "width":" 100%",
+        "padding-bottom": "20px"
+    };
+    return(
+        <ul style={{"listStyle":"none"}}>
+            {data.map((value,i)=><li key={i} style={style}> 
+                <div className="jobcard-container" >
+                    <div className="jobimage-1"><img style={{"max-width":"100%"}}src={value[0]} alt="image"/></div>
+                    <div className="jobcard-2">
+                        <h5>{value[1]}</h5>
+                        <div>
+                            <span style={{ 'background': `url(${briefcaseimg}) no-repeat 0 10px` }} className="briefcase">Fulltime</span>
+                            <span style={{ 'background': `url(${timeimg}) no-repeat 0 10px` }} className="time">3 mins ago</span>
+                        </div>
+                        <div className="jobinfo">
+                            <div style={{"display":"flex"}}>
+                                <div><h6>$200/Hour</h6></div>
+                                <div><span style={{ 'background': `url(${briefcaseimg}) no-repeat 0 10px` }} className="briefcase">Fulltime</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>)}
+        </ul>
+    );
+
 }
 export default Applyjob;

@@ -11,7 +11,7 @@ import Signup from './components/Signup';
 import Home from './components/Home';
 import Companydetails from './components/Companydetails';
 import Applyjob from './components/JobPages/Applyjob';
-
+import Profile from './components/Profile';
 function App() {
   return (
     <>
@@ -24,6 +24,7 @@ function App() {
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/companydetails" element={<Companydetails />} />
             <Route exact path="/apply" element={<Applyjob />} />
+            <Route  path="/profile" element={<Profile/>} />
         </Routes>
       </div>
     </Router >

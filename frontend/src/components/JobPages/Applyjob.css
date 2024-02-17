@@ -120,7 +120,7 @@
     padding: 20px 30px 30px;
     margin-bottom: 50px;
 }
-.job-overview>h5 , .jobs-card h5 {
+.job-overview>h5 , .jobs-card>h5 {
     margin-bottom: 30px;
     padding-bottom: 15px;
     border-bottom: 1px solid #dee2e6;
@@ -242,3 +242,17 @@ ul {
     cursor: pointer;
 }
 
+.jobcard-container {
+    display:flex;
+    width: 100%;
+    padding: 0 0 15px;
+    border-bottom: 1px solid #e0e6f7;
+}
+.jobcard-container .jobimage-1 {
+    min-width:60px;
+    padding-right:10px;
+}
+.jobcard-container .jobcard-2 {
+    width: 100%;
+    margin-top: -5px;
+}
