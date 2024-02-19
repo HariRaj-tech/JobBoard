@@ -151,7 +151,7 @@ function Applyjob() {
                             <p>The AliStudio Design team has a vision to establish a trusted platform that enables productive and healthy enterprises in a world of digital and remote everything, constantly changing work patterns and norms, and the need for organizational resiliency.</p>
                             <p>The ideal candidate will have strong creative skills and a portfolio of work which demonstrates their passion for illustrative design and typography. This candidate will have experiences in working with numerous different design platforms such as digital and print forms.</p>
                             <h4>Essential Knowledge, Skills, and Experience</h4>
-                            <ul>
+                            <ul style={{"paddingLeft":"30px"}}>
                                 <li>A portfolio demonstrating well thought through and polished end to end customer journeys</li>
                                 <li>5+ years of industry experience in interactive design and / or visual design</li>
                                 <li>Excellent interpersonal skills</li>
@@ -163,7 +163,7 @@ function Applyjob() {
                                 <li>Proficiency in a variety of design tools such as Figma, Photoshop, Illustrator, and Sketch</li>
                             </ul>
                             <h4>Preferred Experience</h4>
-                            <ul>
+                            <ul style={{"paddingLeft":"30px"}}>
                                 <li>Designing user experiences for enterprise software / services</li>
                                 <li>Creating and applying established design principles and interaction patterns</li>
                                 <li>Aligning or influencing design thinking with teams working in other geographies</li>
@@ -181,10 +181,10 @@ function Applyjob() {
                             <div>
                                 <div>
                                     <button className="apply-btn" style={{"margin":"10px 10px"}}>Apply now</button>
-                                    <button className="apply-btn" style={{"background":"#ffff","border": "1px solid #b4c0e0","color":"#4f5e64","font-size":"16px","line-height":"26px","font-weight": "700"}}>Save job</button>
+                                    <button className="apply-btn" style={{"background":"#ffff","border": "1px solid #b4c0e0","color":"#4f5e64","fontSize":"16px","lineHeight":"26px","fontWeight": "700"}}>Save job</button>
                                 </div>
                                 <div className="media">
-                                    <h5 style={{"font-size":"16px","font-weight": "600"}}>Share this</h5>
+                                    <h5 style={{"fontSize":"16px","fontWeight": "600"}}>Share this</h5>
                                     <span className="media-icon"><img src={fb} alt="facebook"/></span>
                                     <span className="media-icon"><img src={x} alt="facebook"/></span>
                                     <span className="media-icon"><img src={reddit} alt="facebook"/></span>
@@ -192,7 +192,7 @@ function Applyjob() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>    
                     <div className="col2">
                         <div className="address-card">
                             <div className="address-title">
@@ -226,7 +226,7 @@ function Applyjob() {
                             </div>
                         </div>
                         <div className="jobs-card">
-                            <h5 style={{"font-size":"18px"}}>Similar jobs</h5>
+                            <h5 style={{"fontSize":"18px"}}>Similar jobs</h5>
                             <Card data={data}/>
                         </div>
                     </div>
@@ -240,13 +240,13 @@ function Card({data}) {
     const style={
         "display": "inline-block",
         "width":" 100%",
-        "padding-bottom": "20px"
+        "paddingBottom": "20px"
     };
     return(
         <ul style={{"listStyle":"none"}}>
             {data.map((value,i)=><li key={i} style={style}> 
                 <div className="jobcard-container" >
-                    <div className="jobimage-1"><img style={{"max-width":"100%"}}src={value[0]} alt="image"/></div>
+                    <div className="jobimage-1"><img style={{"maxWidth":"100%"}}src={value[0]} alt="image"/></div>
                     <div className="jobcard-2">
                         <h5>{value[1]}</h5>
                         <div>
@@ -254,7 +254,7 @@ function Card({data}) {
                             <span style={{ 'background': `url(${timeimg}) no-repeat 0 10px` }} className="time">3 mins ago</span>
                         </div>
                         <div className="jobinfo">
-                            <div style={{"display":"flex"}}>
+                            <div style={{"display":"flex","gap":"10px"}}>
                                 <div><h6>$200/Hour</h6></div>
                                 <div><span style={{ 'background': `url(${briefcaseimg}) no-repeat 0 10px` }} className="briefcase">Fulltime</span></div>
                             </div>

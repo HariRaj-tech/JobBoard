@@ -6,12 +6,12 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Home from './components/Home';
-import Companydetails from './components/Companydetails';
-import Applyjob from './components/JobPages/Applyjob';
-import Profile from './components/Profile';
+import Login from './pages/login/Login.js';
+import Signup from './pages/login/Signup.js.js';
+import Home from './pages/home/Home.js';
+import Companydetails from './pages/recruiters/Companydetails.js';
+import Applyjob from './pages/jobdescription/Applyjob.js';
+
 function App() {
   return (
     <>
@@ -24,7 +24,6 @@ function App() {
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/companydetails" element={<Companydetails />} />
             <Route exact path="/apply" element={<Applyjob />} />
-            <Route  path="/profile" element={<Profile/>} />
         </Routes>
       </div>
     </Router >

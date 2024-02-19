@@ -1,6 +1,6 @@
-import React from 'react'
-import Jobcard from './Jobcard'
-import image from '../Jobs-image.png'
+import React from 'react';
+import Jobcard from '../../components/Jobcard';
+import image from '../../images.jpeg';
 
 
 export default function Home() {
