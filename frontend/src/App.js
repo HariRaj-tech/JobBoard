@@ -7,11 +7,11 @@ import {
   Link
 } from "react-router-dom";
 import Login from './pages/login/Login.js';
-import Signup from './pages/login/Signup.js.js';
+import Signup from './pages/login/Signup.js';
 import Home from './pages/home/Home.js';
 import Companydetails from './pages/recruiters/Companydetails.js';
 import Applyjob from './pages/jobdescription/Applyjob.js';
-
+import About from './pages/about/About.js';
 function App() {
   return (
     <>
@@ -19,11 +19,14 @@ function App() {
         <Navbar />
         <div className="app">
           <Routes>
-            <Route exact path="/home" element={<Home />} />
-            <Route exact path="/login" element={<Login/> } />
-            <Route exact path="/signup" element={<Signup />} />
-            <Route exact path="/companydetails" element={<Companydetails />} />
-            <Route exact path="/apply" element={<Applyjob />} />
+            <Route 
+            path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/login" element={<Login/> } />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/companydetails" element={<Companydetails />} />
+            <Route path="/apply" element={<Applyjob />} />
         </Routes>
       </div>
     </Router >

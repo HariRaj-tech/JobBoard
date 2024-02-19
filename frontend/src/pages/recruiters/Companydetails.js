@@ -5,7 +5,7 @@ export default function Companydetails() {
 
     const companyData = {
         name: 'AliThemes',
-        field: 'Accounting/Finance',
+        field: 'Finance',
         about: "The AliStudio Design team has a vision to establish a trusted platform that enables productive and healthy enterprises in a world of digital and remote everything, constantly changing work patterns and norms, and the need for organizational resiliency.The ideal candidate will have strong creative skills and a portfolio of work which demonstrates their passion for illustrative design and typography.This candidate will have experiences in working with numerous different design platforms such as digital and print forms.",
         location: 'Chicago, US',
         isRemoteFriendly: true,
@@ -30,7 +30,7 @@ export default function Companydetails() {
     ]
 
     return (
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 bg-[#C6DCBA] h-screen">
 
             <div className="flex justify-around items-center py-4 border-b border-gray-200">
                 <h1 className="text-3xl font-bold">{companyData.name}</h1>
@@ -81,6 +81,7 @@ export default function Companydetails() {
                         <dd>{companyData.email}</dd>
                     </dl>
                 </div>
+                
             </div>
 
 
