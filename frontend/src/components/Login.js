@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 export default function Login() {
   // const [role, setRole] = useState('user');
@@ -31,11 +32,10 @@ export default function Login() {
     }
 
     try {
-      const data = await axios.post("/api/user/login", loginData);
+      const data = await axios.post("http://localhost:8080/api/user/login", loginData);
 
       if (data.status === 200) {
         alert("Loged in successfully");
-        setsigninComplete(true);
         console.log("Loged in");
       } else {
         alert("Put valid data");
