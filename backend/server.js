@@ -1,4 +1,3 @@
-const db = require("./db_config");
 const express = require("express");
 const user_routes = require("./routes/user_routes");
 const company_routes = require("./routes/company_routes");
