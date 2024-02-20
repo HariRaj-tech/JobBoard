@@ -68,6 +68,9 @@ exports.signup = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
+
+  console.log('user login request recieved.')
+  
   const email = req.body.email;
   const password = req.body.password;
 
@@ -83,9 +86,15 @@ exports.login = async (req, res) => {
     const values = [email, password];
     const result = await pool.query(query, values);
     if (result.rows.length > 0) {
+
+      console.log('user login succesfull.')
+
       const user = result.rows[0];
       return res.status(statusCodes.OK).send({ status: true, user: user });
     } else {
+
+      console.log('user doesnt exist.')
+
       return res
         .status(statusCodes.BAD_REQUEST)
         .send({ status: false, message: "user doesn't exist." });
