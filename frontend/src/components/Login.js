@@ -10,7 +10,7 @@ export default function Login() {
   });
 
   const handleChange = (e) => {
-    const { name, value, checked, type } = e.target;
+    const { name, value,checked, type } = e.target;
 
     setLoginData((prevData) => ({
       ...prevData,
@@ -133,11 +133,12 @@ export default function Login() {
               </label>
               <input
                 type="email"
+                name="email"
                 id="userEmail"
                 placeholder="Enter your email address"
                 value={loginData.email}
                 onChange={handleChange}
-                required
+                
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5"
               />
             </div>
@@ -150,6 +151,7 @@ export default function Login() {
               </label>
               <input
                 type="password"
+                name="password"
                 id="userPassword"
                 placeholder="Enter your password"
                 value={loginData.password}
