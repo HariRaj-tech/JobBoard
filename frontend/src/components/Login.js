@@ -32,6 +32,7 @@ export default function Login() {
     }
 
     try {
+      console.log("request chali ");
       const data = await axios.post("http://localhost:8080/api/user/login", loginData);
 
       if (data.status === 200) {
