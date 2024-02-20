@@ -1,4 +1,5 @@
 const statusCodes = require("http-status-codes").StatusCodes;
+const pool = require("../modals/db");
 
 exports.auth = async (req, res) => {
   try {
@@ -12,7 +13,7 @@ exports.auth = async (req, res) => {
     }
 
     // Find company in the dummy database based on email
-    const foundCompany = companies.find((u) => u.email === sessionUser.email);
+    const foundCompany = false;
     if (!foundCompany) {
       return res
         .status(statusCodes.UNAUTHORIZED)
