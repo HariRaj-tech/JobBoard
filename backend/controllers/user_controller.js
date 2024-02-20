@@ -1,5 +1,5 @@
 const statusCodes = require("http-status-codes").StatusCodes;
-const { pool } = require("pg");
+const pool = require("../modals/user_database");
 
 exports.auth = async (req, res) => {
   try {
@@ -40,7 +40,7 @@ exports.signup = async (req, res) => {
     }
 
     // Check if the email already exists
-    const existingUserQuery = "SELECT * FROM registered_user WHERE email = $1";
+    const existingUserQuery = "SELECT * FROM registered_users WHERE email = $1";
     const existingUserResult = await pool.query(existingUserQuery, [email]);
     if (existingUserResult.rows.length > 0) {
       return res.status(400).send("This email already exists");
@@ -48,7 +48,7 @@ exports.signup = async (req, res) => {
 
     // Create a new user
     const insertUserQuery =
-      "INSERT INTO registered_user (name, email, password) VALUES ($1, $2, $3) RETURNING *";
+      "INSERT INTO registered_users (name, email, password) VALUES ($1, $2, $3) RETURNING *";
     const insertUserValues = [name, email, password];
     const savedUserResult = await pool.query(insertUserQuery, insertUserValues);
     const savedUser = savedUserResult.rows[0];
@@ -79,7 +79,7 @@ exports.login = async (req, res) => {
 
   try {
     const query =
-      "SELECT * FROM registered_user WHERE email = $1 AND password = $2";
+      "SELECT * FROM registered_users WHERE email = $1 AND password = $2";
     const values = [email, password];
     const result = await pool.query(query, values);
     if (result.rows.length > 0) {
