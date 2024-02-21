@@ -36,34 +36,40 @@ exports.signup = async (req, res) => {
   try {
     console.log("company create request recieved.");
 
-    const { name, email, password } = req.body;
-    if (!email) {
+    const company_name = req.body.companyName;
+    const company_email = req.body.companyEmail;
+    const company_address = req.body.companyAddress;
+    const owner_name = req.body.ownerName;
+    const password = req.body.password;
+
+    if (!company_email) {
       return res
         .status(statusCodes.BAD_REQUEST)
         .send("invalid company request.");
     }
 
-    // Check if the email already exists
-    const existingCompQuery = "SELECT * FROM registered_org WHERE email = $1";
-    const existingCompResult = await pool.query(existingCompQuery, [email]);
+    // Check if the company_email already exists
+    const existingCompQuery = "SELECT * FROM registered_orgs WHERE company_email = $1";
+    const existingCompResult = await pool.query(existingCompQuery, [company_email]);
     if (existingCompResult.rows.length > 0) {
-      return res.status(400).send("This email already exists");
+      console.log("a company with this email already exists");
+      return res.status(400).send("a company with this email already exists");
     }
 
     // Create a new company
     const insertCompQuery =
-      "INSERT INTO registered_org (name, email, password) VALUES ($1, $2, $3) RETURNING *";
-    const insertCompValues = [name, email, password];
+      'INSERT INTO registered_orgs (company_name, owner_name, company_address, company_email, password) VALUES ($1, $2, $3, $4, $5) RETURNING *';
+    const insertCompValues = [company_name, owner_name, company_address, company_email, password];
     const savedCompResult = await pool.query(insertCompQuery, insertCompValues);
     const savedComp = savedCompResult.rows[0];
 
     // Simulate session creation
     // todo: fix this.
-    // req.session.user = newUser;
+    // req.session.user = savedComp;
 
     console.log("company created successfully.");
 
-    return res.status(statusCodes.OK).send({ status: true, company: newUser });
+    return res.status(statusCodes.OK).send({ status: true, company: savedComp });
   } catch (err) {
     console.error(err);
     return res
@@ -85,7 +91,7 @@ exports.login = async (req, res) => {
   try {
     // Find company in the dummy database based on email and password
     const query =
-      "SELECT * FROM registered_org WHERE email = $1 AND password = $2";
+      "SELECT * FROM registered_orgs WHERE email = $1 AND password = $2";
     const values = [email, password];
     const result = await pool.query(query, values);
     if (result.rows.length > 0) {

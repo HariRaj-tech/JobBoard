@@ -75,7 +75,7 @@ export default function Signup() {
             companyName: formData.companyName,
             ownerName: formData.ownerName,
             companyAddress: formData.companyAddress,
-            email: formData.companyEmail,
+            companyEmail: formData.companyEmail,
             password: formData.companyPassword,
           }
         );
