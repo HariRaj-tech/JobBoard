@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { isValidElement, useState } from "react";
 import axios from "axios";
 import './Login.css';
 import spaceShip from '../../assets/spaceship.svg';
@@ -23,18 +23,17 @@ export default function Signup() {
     });
 
     var inputFields = [
-        { name: 'fullName', label: 'FullName *' },
-        { name: 'userEmail', label: 'Email *',type:'email' },
-        { name: 'userName', label: 'Username *'},
+        { name: 'userName', label: 'User Name *' },
+        { name: 'userEmail', label: 'Email *', type: 'email' },
         { name: 'userPassword', label: 'Password *', type: 'password' },
         { name: 'userConfirmPassword', label: 'confirmPassword *', type: 'password' }
     ];
-    if(formData.role === 'company') {
+    if (formData.role === 'company') {
         inputFields = [
             { name: 'companyName', label: 'Company Name *' },
-            {name: 'ownerName', label: 'Owner Name *'},
-            {name: 'companyAddress', label: 'Company Address *'},
-            {name: 'companyEmail', label: 'Company Email Address *'},
+            { name: 'ownerName', label: 'Owner Name *' },
+            { name: 'companyAddress', label: 'Company Address *' },
+            { name: 'companyEmail', label: 'Company Email Address *' },
             { name: 'companyPassword', label: 'Password *', type: 'password' },
             { name: 'companyConfirmPassword', label: 'confirmPassword *', type: 'password' }
         ]
@@ -66,15 +65,19 @@ export default function Signup() {
                     ...prevErrors,
                     userPassword: 'password and confirm password must be same'
                 }));
+
                 return;
-            }else {
+            } else {
                 const isVaildPassword = passwordValidation(formData.userPassword);
-                console.log(isVaildPassword);
-                setErrors((prevErrors) => ({
-                    ...prevErrors,
-                    userPassword: isVaildPassword ? '' :'password must contain more than 8 character'
-                }));
-                return;
+
+                if (!isVaildPassword) {
+                    setErrors((prevErrors) => ({
+                        ...prevErrors,
+                        userPassword: isVaildPassword ? '' : 'password must contain more than 8 character'
+                    }));
+
+                    return;
+                }
             }
         } else if (formData.role === "company") {
             if (
@@ -93,15 +96,15 @@ export default function Signup() {
                     ...prevErrors,
                     cpmpanyPassword: 'password and confirm password must be same'
                 }));
-                return;
-            }else {
-                const isVaildPassword=passwordValidation(formData.userPassword);
-                console.log(isVaildPassword);
+            } else {
+                const isVaildPassword = passwordValidation(formData.companyConfirmPassword);
                 setErrors((prevErrors) => ({
                     ...prevErrors,
-                    companyPassword: isVaildPassword ? '' :'password must contain more than 8 character'
+                    companyPassword: isVaildPassword ? '' : 'password must contain more than 8 character'
                 }));
-                return;
+
+                if (!isVaildPassword)
+                    return;
             }
         }
 
@@ -121,7 +124,7 @@ export default function Signup() {
                         ownerName: formData.ownerName,
                         companyAddress: formData.companyAddress,
                         companyEmail: formData.companyEmail,
-                        password: formData.companyPassword, 
+                        password: formData.companyPassword,
                     }
                 );
             }
@@ -214,53 +217,53 @@ export default function Signup() {
 
 function passwordValidation(password) {
     if (password.length < 8) {
-      return false;
+        return false;
     }
     let countUpperCase = 0;
     let countLowerCase = 0;
     let countDigit = 0;
     let countSpecialCharacters = 0;
     const specialChars = [
-      '!',
-      '@',
-      '#',
-      '$',
-      '%',
-      '^',
-      '&',
-      '*',
-      '(',
-      ')',
-      '_',
-      '-',
-      '+',
-      '=',
-      '[',
-      '{',
-      ']',
-      '}',
-      ':',
-      ';',
-      '<',
-      '>',
+        '!',
+        '@',
+        '#',
+        '$',
+        '%',
+        '^',
+        '&',
+        '*',
+        '(',
+        ')',
+        '_',
+        '-',
+        '+',
+        '=',
+        '[',
+        '{',
+        ']',
+        '}',
+        ':',
+        ';',
+        '<',
+        '>',
     ];
     for (let i = 0; i < password.length; i++) {
-      if (specialChars.includes(password[i])) {
-        countSpecialCharacters++
-      } else if (!isNaN(password[i] * 1)) {
-        countDigit++
-      } else {
-        if (password[i] === password[i].toUpperCase()) {
-          countUpperCase++
+        if (specialChars.includes(password[i])) {
+            countSpecialCharacters++
+        } else if (!isNaN(password[i] * 1)) {
+            countDigit++
+        } else {
+            if (password[i] === password[i].toUpperCase()) {
+                countUpperCase++
+            }
+            if (password[i] === password[i].toLowerCase()) {
+                countLowerCase++
+            }
         }
-        if (password[i] === password[i].toLowerCase()) {
-          countLowerCase++
-        }
-      }
     }
-  
+
     if (countLowerCase === 0 || countUpperCase === 0 || countDigit === 0 || countSpecialCharacters === 0) {
-      return false;
+        return false;
     }
     return true;
 }
