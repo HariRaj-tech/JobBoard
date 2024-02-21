@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 
 export default function Login() {
-  // const [role, setRole] = useState('user');
 
   const [loginData, setLoginData] = useState({
     email: "",
@@ -32,7 +31,6 @@ export default function Login() {
     }
 
     try {
-      console.log("request chali ");
       const data = await axios.post("http://localhost:8080/api/user/login", loginData);
 
       if (data.status === 200) {
