@@ -22,3 +22,7 @@ h2 {
 input {
     outline: transparent;
 }
+
+h5,h6 {
+    color: #05264e;
+}

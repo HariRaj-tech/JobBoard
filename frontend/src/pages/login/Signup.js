@@ -4,7 +4,7 @@ import './Login.css';
 import spaceShip from '../../assets/spaceship.svg';
 import bottomimg from '../../assets/loginbottom.svg';
 import googleIcon from '../../assets/icon-google.svg';
-
+import { Link } from "react-router-dom";
 export default function Signup() {
 
     const [errors, setErrors] = useState({});
@@ -41,6 +41,7 @@ export default function Signup() {
     }
     const handleInputChange = (e) => {
         const { name, value } = e.target;
+        
         setFormData({
             ...formData,
             [name]: value,
@@ -200,7 +201,7 @@ export default function Signup() {
                             Sign in
                         </button>
                         <div className="text-center mt-4 text-[#6c757d] text-sm">
-                            Already have an account?<span className="text-[#05264e] hover:text-[#3c65f5]">Sign in</span>
+                            Already have an account?<span className="text-[#05264e] hover:text-[#3c65f5]"><Link to="/login">Sign in</Link></span>
                         </div>
                     </form>
                 </div>

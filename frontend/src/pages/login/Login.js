@@ -4,10 +4,11 @@ import './Login.css';
 import googleIcon from '../../assets/icon-google.svg';
 import airBallon from '../../assets/air-balloon.svg';
 import bottomimg from '../../assets/loginbottom.svg';
-
+import {Link} from 'react-router-dom';
 export default function Login() {
   const [errors,setErrors] = useState({});
   const [loginData, setLoginData] = useState({
+    role: "user",
     email: "",
     password: "",
   });
@@ -24,7 +25,7 @@ export default function Login() {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const isValidEmail = emailRegex.test(value);
 
-      //Username must be at least 3 characters
+      //Username must be at least 5 characters
       const validUsername = value.length >= 5; 
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -34,7 +35,7 @@ export default function Login() {
 
     setLoginData((prevData) => ({
       ...prevData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]:value,
     }));
   };
 
@@ -79,6 +80,31 @@ export default function Login() {
             </div>
           </div>
             <form className="login-form">
+              <div className="from-group">
+                <input
+                  type="radio"
+                  name="role"
+                  value="user"
+                  checked={loginData.role === "user"}
+                  onChange={handleChange}
+                  required
+                />
+                <label className="ml-1.5">
+                  User
+                </label>
+                <input
+                  type="radio"
+                  name="role"
+                  value="company"
+                  onChange={handleChange}
+                  checked={loginData.role === "company"}
+                  required
+                  className="ml-1.5"
+                />
+                <label className="ml-1.5">
+                  Company
+                </label>
+              </div>
               {inputFields.map((field, i) => (
                   <div key={i} className="from-group">
                       <label className="form-label">
@@ -110,7 +136,7 @@ export default function Login() {
                   Sign in
               </button>
               <div className="text-center mt-4 text-[#6c757d] text-sm">
-                  Don't have an Account?<span className="text-[#05264e] hover:text-[#3c65f5]">Sign up</span>
+                  Don't have an Account?<span className="text-[#05264e] hover:text-[#3c65f5]"><Link to="/signup">Sign up</Link></span>
               </div>
           </form>
         </div>

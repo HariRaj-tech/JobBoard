@@ -12,6 +12,8 @@ import Home from './pages/home/Home.js';
 import Companydetails from './pages/recruiters/Companydetails.js';
 import Applyjob from './pages/jobdescription/Applyjob.js';
 import About from './pages/about/About.js';
+import Userprofile from './pages/profile/Userprofile.js';
+
 function App() {
   return (
     <>
@@ -19,16 +21,16 @@ function App() {
         <Navbar />
         <div className="app">
           <Routes>
-            <Route 
-            path="/" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login/> } />
             <Route path="/signup" element={<Signup />} />
             <Route path="/companydetails" element={<Companydetails />} />
             <Route path="/apply" element={<Applyjob />} />
-        </Routes>
-      </div>
+            <Route path="/userprofile" element={<Userprofile />} />
+          </Routes>
+        </div>
     </Router >
     </>
   );
