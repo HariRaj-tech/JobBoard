@@ -79,6 +79,9 @@ exports.signup = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
+
+  console.log('company login request recieved.')
+
   const email = req.body.email;
   const password = req.body.password;
 
@@ -91,13 +94,19 @@ exports.login = async (req, res) => {
   try {
     // Find company in the dummy database based on email and password
     const query =
-      "SELECT * FROM registered_orgs WHERE email = $1 AND password = $2";
+      "SELECT * FROM registered_orgs WHERE company_email = $1 AND password = $2";
     const values = [email, password];
     const result = await pool.query(query, values);
     if (result.rows.length > 0) {
+
+      console.log('company login successfull.')
+
       const org = result.rows[0];
       return res.status(statusCodes.OK).send({ status: true, user: org });
     } else {
+
+      console.log("company doesn't exist.")
+      
       return res
         .status(statusCodes.BAD_REQUEST)
         .send({ status: false, message: "org doesn't exist." });
