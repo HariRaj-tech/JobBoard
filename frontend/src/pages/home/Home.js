@@ -51,8 +51,8 @@ export default function Home(props) {
                         <span className='underline'><a href='#'>Designer</a>, <a href='#'>Developer</a>, <a href='#'>Engineer</a>, <a href='#'>Sales</a>, <a href='#'>Finance</a></span>
                     </div>
                 </div>
-                <div className="container w-9/12">
-                    <img src={banner1} alt="" className="home-image1 h-4/5 object-fit rounded-xl shadow-2xl shadow-blue-700" />
+                <div className="container">
+                    <img src={banner1} alt="" className="home-image1 h-1/2 w-1/2 object-fit rounded-xl shadow-2xl shadow-blue-700" />
                     <img src={banner2} alt="" className="home-image2 z-1 object-fit rounded-xl shadow-2xl shadow-blue-700" />
                 </div>
 

@@ -43,10 +43,10 @@ input {
 
 @keyframes animation-bouncex {
     0% {
-        transform: translateX(30px);
+        transform: translateX(90px);
     }
 
     100% {
-        transform: translateX(90px);
+        transform: translateX(30px);
     }
 }
