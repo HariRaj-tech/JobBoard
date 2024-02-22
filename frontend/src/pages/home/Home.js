@@ -47,7 +47,8 @@ export default function Home(props) {
                         <p>With over number of active job listings, Job Board connects you with a vast pool of talented candidates.</p>
                     </div>
                     <div className='mt-4 '>
-                        <span className='font-bold'>Popular searches: </span><a href='#'>Designer</a>, <a href='#'>Developer</a>, <a href='#'>Engineer</a>, <a href='#'>Sales</a>
+                        <span className='font-bold'>Popular searches: </span>
+                        <span className='underline'><a href='#'>Designer</a>, <a href='#'>Developer</a>, <a href='#'>Engineer</a>, <a href='#'>Sales</a>, <a href='#'>Finance</a></span>
                     </div>
                 </div>
                 <div className="container w-9/12">
