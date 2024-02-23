@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import companyimg from '../../assets/companyimg.png'
 
 export default function Companydetails() {
 
@@ -30,19 +31,24 @@ export default function Companydetails() {
     ]
 
     return (
-        <div className="container mx-auto px-4 bg-[#C6DCBA] h-screen">
+        <div className="container mx-auto px-4 h-screen">
 
-            <div className="flex justify-around items-center py-4 border-b border-gray-200">
-                <h1 className="text-3xl font-bold">{companyData.name}</h1>
+            <div className=' container mt-10'>
+                <img className='rounded-2xl' src={companyimg} alt="" />
+            </div>
+
+            <div className="flex justify-between items-center py-4 border-b border-gray-200">
+                <h1 className="text-3xl font-bold ml-20">{companyData.name}</h1>
                 <div className="flex items-center space-x-4">
-                    <Link className="text-white bg-blue-600 p-2 rounded-lg hover:bg-blue-800">Contact Us</Link>
+                    <Link className="text-white bg-blue-600 p-2 rounded-lg hover:bg-blue-800 mr-20">Contact Us</Link>
                 </div>
             </div>
 
 
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4"> */}
 
-                <div className="bg-gray-100 p-4 rounded shadow-md">
+            <div className='flex'>
+                <div className="bg-white-100 p-4 rounded  w-2/3">
                     <h2 className="text-lg font-bold mb-2">About Us</h2>
                     <p>{companyData.about}</p>
 
@@ -55,7 +61,7 @@ export default function Companydetails() {
                 </div>
 
                 {/* Company Information */}
-                <div className="bg-gray-100 p-4 rounded shadow-md">
+                <div className="bg-white-100 p-4 rounded  w-1/3 border border-gray-200 border-collapse">
                     <h2 className="text-lg font-bold mb-2">Company Information</h2>
                     <dl className="grid grid-cols-2 gap-4">
                         <dt className="font-bold">Name</dt>
@@ -81,8 +87,9 @@ export default function Companydetails() {
                         <dd>{companyData.email}</dd>
                     </dl>
                 </div>
-                
             </div>
+
+            {/* </div> */}
 
 
 
