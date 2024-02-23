@@ -12,6 +12,8 @@ import Home from './pages/home/Home.js';
 import Companydetails from './pages/recruiters/Companydetails.js';
 import Applyjob from './pages/jobdescription/Applyjob.js';
 import About from './pages/about/About.js';
+import Companyhomepage from './pages/recruiters/Companyhomepage.js'
+
 function App() {
   return (
     <>
@@ -27,6 +29,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/companydetails" element={<Companydetails />} />
             <Route path="/apply" element={<Applyjob />} />
+            <Route path="/companyhomepage" element={<Companyhomepage />} />
         </Routes>
       </div>
     </Router >

@@ -38,11 +38,11 @@ export default function Home(props) {
                 <div className="grid grid-cols-1 mt-11 w-9/12">
                     <div className="text-5xl font-bold text-start text-grey-500">The Easiest Way<br />to Get Your New Job</div>
 
-                    <div className="bg-gray-100 p-4 rounded shadow-md">
+                    <div className="p-4">
                         <h3 className="text-lg font-bold mb-2">Job Seekers</h3>
                         <p>Each month, more than 3 million job seekers turn to Job Board in their search for work, making over 140,000 applications every single day.</p>
                     </div>
-                    <div className="bg-gray-100 p-4 rounded shadow-md mt-4">
+                    <div className="p-4">
                         <h3 className="text-lg font-bold mb-2">Employers</h3>
                         <p>With over number of active job listings, Job Board connects you with a vast pool of talented candidates.</p>
                     </div>
@@ -149,7 +149,7 @@ export default function Home(props) {
 
                     <div>
                         <h1 className='font-bold'>Resources</h1>
-                        <ul className='text-md'>
+                        <ul className='text-md list-none'>
                             <li><a href='#'>About us</a></li>
                             <li><a href='#'>Our Team</a></li>
                             <li><a href='#'>Products</a></li>
@@ -160,7 +160,7 @@ export default function Home(props) {
 
                     <div>
                         <h1 className='font-bold'>Community</h1>
-                        <ul className='text-md'>
+                        <ul className='text-md list-none'>
                             <li><a href='#'>Feature</a></li>
                             <li><a href='#'>Pricing</a></li>
                             <li><a href='#'>Credit</a></li>
@@ -170,7 +170,7 @@ export default function Home(props) {
 
                     <div>
                         <h1 className='font-bold'>Quick links</h1>
-                        <ul className='text-md'>
+                        <ul className='text-md list-none'>
                             <li><a href='#'>iOS</a></li>
                             <li><a href='#'>Android</a></li>
                             <li><a href='#'>Microsoft</a></li>
@@ -180,7 +180,7 @@ export default function Home(props) {
 
                     <div>
                         <h1 className='font-bold'>More</h1>
-                        <ul className='text-md'>
+                        <ul className='text-md list-none'>
                             <li><a href='#'>Privacy</a></li>
                             <li><a href='#'>Help</a></li>
                             <li><a href='#'>Terms</a></li>
@@ -188,6 +188,14 @@ export default function Home(props) {
                         </ul>
                     </div>
 
+
+
+                </div>
+
+                <div className='flex justify-center items-center text-2xl'>
+                    <a href="#"><i className="fa-brands fa-facebook mr-3"></i></a>
+                    <a href="#"><i className="fa-brands fa-x-twitter mr-3"></i></a>
+                    <a href="#"><i className="fa-brands fa-linkedin"></i></a>
                 </div>
 
                 <p className='pb-5'>Copyright © 2022. JobBox all right reserved</p>
