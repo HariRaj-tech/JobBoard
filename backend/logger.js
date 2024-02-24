@@ -1,23 +1,23 @@
-module.exports.trace = (...args) => {
-    console.trace(`[${new Date()}] [trace]: ` + args);
-};
+const { transports, createLogger, format, log } = require('winston');
 
-module.exports.debug = (...args) => {
-    console.debug(`[${new Date()}] [debug]: ` + args);
-};
+const logger = createLogger({
+    level: 'debug',
+    format: format.combine(
+        format.timestamp({
+            format: 'YYYY-MM-DD HH:mm:ss',
+        }),
+        format.cli({
+            timestamp: true,
+        }),
+    ),
+    transports: [
+        new transports.Console({
+            level: 'debug',
+            colorize: true,
+            prettyPrint: true,
+            timestamp: true,
+        }),
+    ],
+});
 
-module.exports.info = (...args) => {
-    console.info(`[${new Date()}] [info ]: ` + args);
-};
-
-module.exports.warn = (...args) => {
-    console.warn(`[${new Date()}] [warn ]: ` + args);
-};
-
-module.exports.error = (...args) => {
-    console.error(`[${new Date()}] [error]: ` + args);
-};
-
-module.exports.fatal = (...args) => {
-    console.fatal(`[${new Date()}] [fatal]: ` + args);
-};
+module.exports = logger;

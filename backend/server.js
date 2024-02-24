@@ -2,8 +2,11 @@ const express = require('express');
 const user_routes = require('./routes/user_routes');
 const job_routes = require('./routes/job_routes');
 const company_routes = require('./routes/company_routes');
-require('dotenv').config();
+const logger = require('./logger');
 const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 const port = 8080;
@@ -15,5 +18,5 @@ app.use('/api/company', company_routes.router);
 app.use('/api/job', job_routes);
 
 app.listen(port, () => {
-    console.log(`server listening on port ${port}...`);
+    logger.info(`server listening on port ${port}...`);
 });
