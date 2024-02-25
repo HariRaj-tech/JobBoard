@@ -18,6 +18,7 @@ export default function Companydetails() {
         email: 'contact@Evara.com',
     };
 
+
     const companySkills = [
         "A portfolio demonstrating well thought through and polished end to end customer journeys",
         "5 + years of industry experience in interactive design and / or visual design",
@@ -36,16 +37,16 @@ export default function Companydetails() {
             <div className=' container mt-10'>
                 <img className='rounded-2xl' src={companyimg} alt="" />
             </div>
-
             <div className="flex justify-between items-center py-4 border-b border-gray-200">
                 <h1 className="text-3xl font-bold ml-20">{companyData.name}</h1>
-                <div className="flex items-center space-x-4">
-                    <Link className="text-white text-lg bg-blue-600 p-2 rounded-lg hover:bg-blue-800 mr-20"><i className="fa-solid fa-phone mr-1"></i> Contact Us</Link>
+                <div className="flex items-center">
+                    <Link className="text-white text-lg bg-blue-600 p-2 rounded-lg hover:bg-blue-800 mr-10">View Older Jobs</Link>
+                    <Link className="text-white text-lg bg-blue-600 p-2 rounded-lg hover:bg-blue-800 ">Post New Job</Link>
                 </div>
             </div>
 
 
-            
+
 
             <div className='flex'>
                 <div className="bg-white-100 p-4 rounded  w-2/3">

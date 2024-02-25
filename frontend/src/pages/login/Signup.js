@@ -201,9 +201,8 @@ export default function Signup() {
                   value={formData[field.name]}
                   onChange={handleInputChange}
                   required
-                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${
-                    errors[field.name] ? "border-red-500 " : ""
-                  } `}
+                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors[field.name] ? "border-red-500 " : ""
+                    } `}
                 />
                 {errors[field.name] && (
                   <p className="text-red-500">{errors[field.name]}</p>
@@ -222,7 +221,7 @@ export default function Signup() {
               onClick={handleSubmit}
               className=" w-full  px-4 py-3 bg-[#05264e] text-white font-bold rounded-md hover:bg-[#3c65f5]  focus:ring-4 focus:outline-none focus:ring-blue-300"
             >
-              Sign in
+              Sign up
             </button>
             <div className="text-center mt-4 text-[#6c757d] text-sm">
               Already have an account?
@@ -248,59 +247,59 @@ export default function Signup() {
 }
 
 function passwordValidation(password) {
-//   if (password.length < 8) {
-//     return false;
-//   }
-//   let countUpperCase = 0;
-//   let countLowerCase = 0;
-//   let countDigit = 0;
-//   let countSpecialCharacters = 0;
-//   const specialChars = [
-//     "!",
-//     "@",
-//     "#",
-//     "$",
-//     "%",
-//     "^",
-//     "&",
-//     "*",
-//     "(",
-//     ")",
-//     "_",
-//     "-",
-//     "+",
-//     "=",
-//     "[",
-//     "{",
-//     "]",
-//     "}",
-//     ":",
-//     ";",
-//     "<",
-//     ">",
-//   ];
-//   for (let i = 0; i < password.length; i++) {
-//     if (specialChars.includes(password[i])) {
-//       countSpecialCharacters++;
-//     } else if (!isNaN(password[i] * 1)) {
-//       countDigit++;
-//     } else {
-//       if (password[i] === password[i].toUpperCase()) {
-//         countUpperCase++;
-//       }
-//       if (password[i] === password[i].toLowerCase()) {
-//         countLowerCase++;
-//       }
-//     }
-//   }
+  //   if (password.length < 8) {
+  //     return false;
+  //   }
+  //   let countUpperCase = 0;
+  //   let countLowerCase = 0;
+  //   let countDigit = 0;
+  //   let countSpecialCharacters = 0;
+  //   const specialChars = [
+  //     "!",
+  //     "@",
+  //     "#",
+  //     "$",
+  //     "%",
+  //     "^",
+  //     "&",
+  //     "*",
+  //     "(",
+  //     ")",
+  //     "_",
+  //     "-",
+  //     "+",
+  //     "=",
+  //     "[",
+  //     "{",
+  //     "]",
+  //     "}",
+  //     ":",
+  //     ";",
+  //     "<",
+  //     ">",
+  //   ];
+  //   for (let i = 0; i < password.length; i++) {
+  //     if (specialChars.includes(password[i])) {
+  //       countSpecialCharacters++;
+  //     } else if (!isNaN(password[i] * 1)) {
+  //       countDigit++;
+  //     } else {
+  //       if (password[i] === password[i].toUpperCase()) {
+  //         countUpperCase++;
+  //       }
+  //       if (password[i] === password[i].toLowerCase()) {
+  //         countLowerCase++;
+  //       }
+  //     }
+  //   }
 
-//   if (
-//     countLowerCase === 0 ||
-//     countUpperCase === 0 ||
-//     countDigit === 0 ||
-//     countSpecialCharacters === 0
-//   ) {
-//     return false;
-//   }
+  //   if (
+  //     countLowerCase === 0 ||
+  //     countUpperCase === 0 ||
+  //     countDigit === 0 ||
+  //     countSpecialCharacters === 0
+  //   ) {
+  //     return false;
+  //   }
   return true;
 }
