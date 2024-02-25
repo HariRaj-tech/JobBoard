@@ -1,5 +1,5 @@
 const statusCodes = require('http-status-codes').StatusCodes;
-const pool = require('../modals/user');
+const pool = require('../models/user');
 
 exports.auth = async (req, res) => {
     try {

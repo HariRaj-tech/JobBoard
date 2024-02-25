@@ -1,4 +1,4 @@
-const pool = require('../modals/user');
+const pool = require('../models/user');
 const logger = require('../logger');
 
 exports.post = (req, res) => {
