@@ -1,8 +1,10 @@
+require('app-module-path').addPath(__dirname);
+
 const express = require('express');
 const user_routes = require('./routes/user_routes');
 const job_routes = require('./routes/job_routes');
 const company_routes = require('./routes/company_routes');
-const logger = require('./logger');
+const logger = require('services/logger');
 const cors = require('cors');
 const dotenv = require('dotenv');
 

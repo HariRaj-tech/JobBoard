@@ -1,4 +1,4 @@
-const logger = require('../logger');
+const logger = require('services/logger');
 const { Sequelize, DataTypes, Model } = require('sequelize');
 
 const dbUser = process.env.DB_USER;

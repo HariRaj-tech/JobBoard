@@ -1,5 +1,5 @@
-const pool = require('../models/job');
-const logger = require('../logger');
+const pool = require('models/job');
+const logger = require('services/logger');
 
 exports.post = (req, res) => {
     logger.info('job create request recieved.');
