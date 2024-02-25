@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from "axios";
 
 export default function Postnewjob() {
 
@@ -13,24 +14,24 @@ export default function Postnewjob() {
         skills: [],
     })
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
         setJobDetails({
             ...jobDetails,
             [name]: value,
         });
     };
 
-    const handleSkillsChange = (e) => {
-        const skillsArray = e.target.value.split(',').map((skill) => skill.trim());
+    const handleSkillsChange = (event) => {
+        const skillsArray = event.target.value.split(',').map((skill) => skill.trim());
         setJobDetails({
             ...jobDetails,
             skills: skillsArray
         });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
         if (
             !jobDetails.industry ||
@@ -45,7 +46,27 @@ export default function Postnewjob() {
             return;
         }
 
-        alert("job posted successfully");
+        try
+        {
+            console.log('sending job post request.')
+            const result = await axios.post('http://localhost:8080/api/job', jobDetails);
+
+            if (result.status == 200)
+            {
+                console.log('job posted successfully.');
+                alert("job posted successfully");
+            }
+            else
+            {
+                console.log('job could not be posted.', result);
+                alert('job could not be posted.');
+            }
+        }
+        catch(err)
+        {
+            console.log('unknwon error occured.');
+            alert('unkown error occured.');
+        }
     };
 
     return (
