@@ -81,6 +81,7 @@ exports.login = async (req, res) => {
   }
 
   try {
+    
     const query =
       "SELECT * FROM registered_users WHERE email = $1 AND password = $2";
     const values = [email, password];
