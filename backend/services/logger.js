@@ -1,7 +1,7 @@
 const { transports, createLogger, format, log } = require('winston');
 
 const logger = createLogger({
-    level: 'debug',
+    level: 'info',
     format: format.combine(
         format.timestamp({
             format: 'YYYY-MM-DD HH:mm:ss',
@@ -12,7 +12,7 @@ const logger = createLogger({
     ),
     transports: [
         new transports.Console({
-            level: 'debug',
+            level: 'info',
             colorize: true,
             prettyPrint: true,
             timestamp: true,
