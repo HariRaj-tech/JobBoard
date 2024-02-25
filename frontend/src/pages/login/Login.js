@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icon-google.svg";
 import airBallon from "../../assets/air-balloon.svg";
 import bottomimg from "../../assets/loginbottom.svg";
 
 export default function Login() {
+
+  let navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [loginData, setLoginData] = useState({
     email: "",
@@ -64,6 +67,7 @@ export default function Login() {
 
       if (data.status === 200) {
         alert("Loged in successfully");
+        navigate('/');
         console.log("Loged in");
       } else {
         alert("Put valid data");
@@ -136,9 +140,8 @@ export default function Login() {
                   value={loginData[field.name]}
                   onChange={handleChange}
                   required
-                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${
-                    errors[field.name] ? "border-red-500 " : ""
-                  } `}
+                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors[field.name] ? "border-red-500 " : ""
+                    } `}
                 />
                 {errors[field.name] && (
                   <p className="text-red-500">{errors[field.name]}</p>

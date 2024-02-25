@@ -1,11 +1,14 @@
 import React, { isValidElement, useState } from "react";
 import axios from "axios";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 import spaceShip from "../../assets/spaceship.svg";
 import bottomimg from "../../assets/loginbottom.svg";
 import googleIcon from "../../assets/icon-google.svg";
 
 export default function Signup() {
+
+  let navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     role: "user", // Default role is 'user'
@@ -141,6 +144,7 @@ export default function Signup() {
         );
       }
       console.log("Form data submitted:", response.data);
+      navigate('/login');
     } catch (error) {
       console.error("Error submitting form:", error);
     }

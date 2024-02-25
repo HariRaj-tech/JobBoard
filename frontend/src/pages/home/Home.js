@@ -4,6 +4,8 @@ import image from '../../Jobs-image.png'
 import companies from '../../assets/tempdata'
 import banner1 from '../../assets/banner1.png'
 import banner2 from '../../assets/banner2.png'
+import img1 from '../../assets/img1.png'
+import { Link } from 'react-router-dom';
 
 export default function Home(props) {
 
@@ -139,6 +141,19 @@ export default function Home(props) {
 
             </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-2 justify-items-start gap-4 mb-6">
+                <div className='justify-self-end'>
+                    <img src={img1} alt="" className='ml-11 rounded-3xl w-2/3' />
+                </div>
+                <div className=''>
+                    <h4>Millions Of Jobs.</h4>
+                    <div className='text-6xl font-bold text-start text-grey-500 mb-11'>Find The One That’s<br /> Right For You</div>
+                    <p className=''>
+                        Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 600,000 companies worldwide. The right job is out there.
+                    </p>
+                    <Link className="inline-block mx-auto px-4 py-2 bg-blue-500 text-white font-bold text-center rounded">Search Jobs</Link>
+                </div>
+            </div>
 
             {/* footer */}
             <div className="container mx-auto text-center border-t-2">
