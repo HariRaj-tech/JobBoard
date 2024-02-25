@@ -1,3 +1,4 @@
+require('dotenv').config();
 const logger = require('services/logger');
 const { Sequelize, DataTypes, Model } = require('sequelize');
 
@@ -14,20 +15,22 @@ console.assert(dbPort);
 console.assert(dbDatabase);
 
 const connectionString = `postgres://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbDatabase}`;
+
+logger.info(`connecting to the database at '${connectionString}'...`);
 const sequelize = new Sequelize(connectionString, {
     logging: logger.debug.bind(logger),
 });
 
-try {
-    logger.info(`connecting to the database at '${connectionString}'...`);
-    await sequelize.authenticate();
-    logger.info('connection to the database has been established successfully.');
-} catch (error) {
-    logger.error('unable to connect to the database:', error);
-    process.exit();
+async function check_connection() {
+    try {
+        await sequelize.authenticate();
+        logger.info('connection to the database has been established successfully.');
+    } catch (error) {
+        logger.error('unable to connect to the database:', error);
+        process.exit();
+    }
 }
 
-UserModal.sync({ alter: true });
-logger.info(`table 'Users' is updated to match the model.`);
+check_connection();
 
 module.exports = sequelize;

@@ -1,36 +1,44 @@
-const { Model } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('./index');
+const logger = require('services/logger');
 
-module.exports = (sequelize, DataTypes) => {
-    class Company extends Model {}
+class Company extends Model {}
 
-    Company.init(
-        {
-            id: {
-                type: DataTypes.INTEGER,
-                autoIncrement: true,
-                primaryKey: true,
-            },
-            name: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-            email: {
-                type: DataTypes.STRING,
-                allowNull: false,
-                unique: true,
-            },
-            password: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
+Company.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
         },
-        {
-            sequelize,
-            modelName: 'Company',
-            tableName: 'Companys',
-            underscored: true,
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
         },
-    );
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        address: {
+            type: DataTypes.STRING,
+            unique: true,
+        },
+    },
+    {
+        sequelize,
+        modelName: 'company',
+        tableName: 'companies',
+        underscored: true,
+    },
+);
 
-    return Company;
-};
+Company.sync({ alter: true });
+logger.info(`table 'companies' is updated to match the model.`);
+
+module.exports = Company;

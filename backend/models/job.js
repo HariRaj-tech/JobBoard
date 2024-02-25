@@ -1,27 +1,30 @@
-const { Model } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('./index');
+const logger = require('services/logger');
 
-module.exports = (sequelize, DataTypes) => {
-    class Job extends Model {}
+class Job extends Model {}
 
-    Job.init(
-        {
-            id: {
-                type: DataTypes.INTEGER,
-                autoIncrement: true,
-                primaryKey: true,
-            },
-            title: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
+Job.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
         },
-        {
-            sequelize,
-            modelName: 'Job',
-            tableName: 'Jobs',
-            underscored: true,
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
-    );
+    },
+    {
+        sequelize,
+        modelName: 'job',
+        tableName: 'jobs',
+        underscored: true,
+    },
+);
 
-    return Job;
-};
+Job.sync({ alter: true });
+logger.info(`table 'jobs' is updated to match the model.`);
+
+module.exports = Job;
