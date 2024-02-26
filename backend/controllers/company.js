@@ -7,11 +7,11 @@ exports.signup = async (req, res) => {
         logger.info('company create request recieved.');
 
         const company_details = {
-            name: req.body.name,
-            email: req.body.email,
+            name: req.body.companyName,
+            owner_name: req.body.ownerName,
+            address: req.body.companyAddress,
+            email: req.body.companyEmail,
             password: req.body.password,
-            owner_name: req.body.owner_name,
-            address: req.body.address,
         };
 
         if (!company_details.email) {

@@ -1,7 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 
 export default function Navbar() {
+  let navigate = useNavigate();
+
+  const handleLogoutClick = () => {
+    localStorage.removeItem('email');
+    navigate('/login');
+  }
+
   return (
     <nav className="bg-gray-800 ">
       <div className="container mx-auto px-4 flex items-center justify-between py-4 ">
@@ -13,10 +20,11 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <Link to="/login" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Login</Link>
-          <Link to="/signup" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Signup</Link>
+          {!localStorage.getItem('email') ? <><Link Link to="/login" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Login</Link>
+            <Link to="/signup" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Signup</Link></> :
+            <div><Link to="/signup" onClick={handleLogoutClick} className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Logout</Link></div>}
         </div>
       </div>
-    </nav>
+    </nav >
   )
 }

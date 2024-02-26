@@ -38,7 +38,7 @@ export default function Signup() {
       { name: "companyName", label: "Company Name *" },
       { name: "ownerName", label: "Owner Name *" },
       { name: "companyAddress", label: "Company Address *" },
-      { name: "companyEmail", label: "Company Email Address *" },
+      { name: "companyEmail", label: "Company Email Address *", type: "email" },
       { name: "companyPassword", label: "Password *", type: "password" },
       {
         name: "companyConfirmPassword",

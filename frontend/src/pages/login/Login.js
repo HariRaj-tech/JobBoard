@@ -66,7 +66,9 @@ export default function Login() {
 
       if (data.status === 200) {
         alert("Loged in successfully");
-        navigate("/");
+        localStorage.setItem('email', loginData.email);
+        if (loginData.role === "user") { navigate("/"); }
+        else if (loginData.role === "company") { navigate("/companyhomepage") }
         console.log("Loged in");
       } else {
         alert("Put valid data");
@@ -139,9 +141,8 @@ export default function Login() {
                   value={loginData[field.name]}
                   onChange={handleChange}
                   required
-                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${
-                    errors[field.name] ? "border-red-500 " : ""
-                  } `}
+                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors[field.name] ? "border-red-500 " : ""
+                    } `}
                 />
                 {errors[field.name] && (
                   <p className="text-red-500">{errors[field.name]}</p>

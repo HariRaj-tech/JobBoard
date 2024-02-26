@@ -91,7 +91,11 @@ export default function Companydetails() {
             </div>
 
 
-
+            <div className='flex justify-center items-center text-2xl'>
+                <a href="#"><i className="fa-brands fa-facebook mr-3"></i></a>
+                <a href="#"><i className="fa-brands fa-x-twitter mr-3"></i></a>
+                <a href="#"><i className="fa-brands fa-linkedin"></i></a>
+            </div>
 
 
         </div>

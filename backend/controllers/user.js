@@ -4,7 +4,7 @@ const logger = require('services/logger');
 
 exports.signup = async (req, res) => {
     try {
-        logger.info('user create request recieved.');
+        logger.info('user create request received.');
 
         const user_details = {
             first_name: req.body.name,
@@ -19,7 +19,7 @@ exports.signup = async (req, res) => {
 
         const existing_user = await users.findOne({ where: { email: user_details.email } });
         if (existing_user) {
-            logger.info('request rejected becuase a user with this email already exists.');
+            logger.info('request rejected because a user with this email already exists.');
             return res.status(400).send('this email already exists');
         }
 
@@ -34,7 +34,7 @@ exports.signup = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-    logger.info('user login request recieved.');
+    logger.info('user login request received.');
 
     const user_details = {
         email: req.body.email,
