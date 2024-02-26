@@ -41,7 +41,7 @@ export default function Companydetails() {
                 <h1 className="text-3xl font-bold ml-20">{companyData.name}</h1>
                 <div className="flex items-center">
                     <Link className="text-white text-lg bg-blue-600 p-2 rounded-lg hover:bg-blue-800 mr-10">View Older Jobs</Link>
-                    <Link className="text-white text-lg bg-blue-600 p-2 rounded-lg hover:bg-blue-800 ">Post New Job</Link>
+                    <Link to="/postnewjob" className="text-white text-lg bg-blue-600 p-2 rounded-lg hover:bg-blue-800 ">Post New Job</Link>
                 </div>
             </div>
 

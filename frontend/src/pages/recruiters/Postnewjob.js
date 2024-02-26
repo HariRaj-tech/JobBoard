@@ -46,24 +46,20 @@ export default function Postnewjob() {
             return;
         }
 
-        try
-        {
+        try {
             console.log('sending job post request.')
             const result = await axios.post('http://localhost:8080/api/job', jobDetails);
 
-            if (result.status == 200)
-            {
+            if (result.status == 200) {
                 console.log('job posted successfully.');
                 alert("job posted successfully");
             }
-            else
-            {
+            else {
                 console.log('job could not be posted.', result);
                 alert('job could not be posted.');
             }
         }
-        catch(err)
-        {
+        catch (err) {
             console.log('unknwon error occured.');
             alert('unkown error occured.');
         }

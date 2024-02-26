@@ -8,7 +8,7 @@ export default function Jobcard(props) {
 
     return (
 
-        <div className="container mx-auto p-2 w-80 border-black border-2 bg-[#CDFADB] rounded-xl hover:scale-105 hover:bg-[#A1EEBD] hover:shadow-3xl hover:shadow-emerald-900/100">
+        <div className="container mx-auto p-2 w-80 border-black border-2 bg-[#F3F8FF] rounded-xl hover:scale-105 hover:bg-[#A1EEBD] hover:shadow-3xl hover:shadow-emerald-900/100">
             <div className="flex items-center justify-start mb-4">
                 <img src={image} alt=".." className="object-contain w-14 h-15 border-2 rounded-xl" />
                 <div className='mx-8'>
