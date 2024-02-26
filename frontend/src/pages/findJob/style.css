@@ -1,0 +1,719 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Plus+Jakarta+Sans:wght@400;500&family=Roboto&family=Rubik:ital,wght@0,300;0,500;1,800&display=swap");
+
+:root {
+  ---global-text: #7a7a7a;
+}
+
+body {
+  font-family: Plus Jakarta Sans, sans-serif;
+}
+
+.row {
+  margin-right: 0 !important;
+}
+
+.nav-link {
+  color: #000 !important;
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+}
+
+.color-brand-2 {
+  font-size: 48px;
+  line-height: 60px;
+  color: #3c65f5;
+  position: relative;
+}
+
+h1 {
+  font-family: Plus Jakarta Sans, sans-serif;
+}
+
+.box {
+  border: none;
+}
+
+.box:focus {
+  border: none;
+}
+
+option {
+  border: none;
+}
+
+.input-box {
+  background: url(https://jobbox-nextjs-v3.vercel.app/_next/static/media/key-numbers.3ced82ea.svg)
+    no-repeat left 10px center;
+  position: relative;
+  padding: 15px 0px 10px 34px;
+}
+
+/* form {
+  display: inline-flex;
+  flex-wrap: wrap;
+} */
+
+.button-box {
+  height: 40px;
+  border-radius: 8px;
+  position: relative;
+  min-width: 100px;
+  padding-left: 30px;
+  background: url(https://jobbox-nextjs-v3.vercel.app/_next/static/media/search-icon.80f090b3.svg);
+  background-repeat: no-repeat;
+  background-position: left 12px top 12px;
+  background-color: #0d6efd;
+  color: white;
+}
+
+.mr-10 {
+  margin-right: 10px !important;
+}
+
+/* images */
+
+.heroRow {
+  gap: 200px;
+}
+@media (max-width: 1200px) {
+  .images {
+    display: none !important;
+  }
+}
+
+.shape-1 {
+  animation: hero-thumb-animation 2s linear infinite alternate;
+}
+
+.banner-image {
+  padding: 65px 0 0;
+  position: relative;
+  height: 100%;
+  min-height: 540px;
+  top: 10%;
+  right: 150px;
+}
+
+/* section1 */
+
+.section1 {
+  width: 100%;
+  padding-right: var(--bs-gutter-x, 0.75rem);
+  padding-left: var(--bs-gutter-x, 0.75rem);
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10%;
+}
+
+.section-title {
+  font-weight: bold;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+
+h2,
+h3 {
+  font-family: Plus Jakarta Sans, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  color: #05264e;
+}
+
+.color-text-paragraph-2 {
+  color: #66789c;
+}
+
+.mt-50 {
+  margin-top: 50px !important;
+}
+
+.box-swiper {
+  position: relative;
+}
+
+.pb-70 {
+  padding-bottom: 70px !important;
+}
+.pt-5 {
+  padding-top: 5px !important;
+}
+
+h4 {
+  font-weight: 700 !important;
+  font-size: 16px !important;
+}
+
+:hover {
+  transition-duration: 0.2s !important;
+}
+
+.category-col:hover {
+  transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+  transform: translateY(-3px);
+  border: 1px solid #b4c0e0;
+  box-shadow: 0 10px 20px -5px rgba(10, 42, 105, 0.06);
+}
+
+.category {
+  margin-top: 150px;
+  margin-bottom: 30px;
+}
+.category h2 {
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.category p {
+  color: #66789c;
+  font-size: 16px;
+  font-weight: bold !important;
+}
+.category-col {
+  border: 1px solid rgba(6, 18, 36, 0.1);
+  padding: 22px 18px;
+  width: 14rem !important;
+  border-radius: 12px;
+}
+
+.category-content {
+  font-family: Plus Jakarta Sans, sans-serif;
+  font-size: normal;
+  margin-left: 10px;
+}
+
+.category-content p {
+  line-height: 18px;
+  font-size: 12px;
+  font-weight: normal !important;
+  margin-bottom: 0px !important;
+}
+
+.category-content :hover {
+  color: #3c65f5;
+}
+
+/* box-hiring  */
+
+.box-hiring {
+  max-width: 85%;
+  border: 1px solid #e0e6f7;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  box-shadow: 0 10px 20px -5px rgba(10, 42, 105, 0.06);
+  padding: 20px 250px 20px 100px;
+  margin: 100px auto;
+  width: auto;
+}
+
+.text-we-are {
+  font-size: 16px;
+  color: #a0abb8;
+  font-weight: 700;
+  letter-spacing: 2px;
+  display: block;
+}
+
+.text-hiring {
+  font-size: 49px;
+  color: #05264e;
+  letter-spacing: 1px;
+  font-weight: 700;
+  line-height: 50px;
+}
+.text-1 {
+  padding-left: 10px;
+}
+.text-2 {
+  color: #05264e;
+  letter-spacing: 1px;
+  font-size: 18px;
+  padding: 30px 20px 0;
+  font-weight: 500;
+  line-height: 23px;
+}
+.text-3 {
+  padding: 34px 0 0 20px;
+}
+
+@media (max-width: 575.98px) {
+  .text-2 {
+    padding: 15px 0 10px;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .box-hiring {
+    padding: 20px 25px;
+    flex-wrap: wrap;
+    width: auto;
+    max-width: max-content;
+  }
+  .search-job-image {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .box-hiring::after {
+    right: -5px;
+    width: 200px;
+    background: url("https://jobbox-nextjs-v3.vercel.app/_next/static/media/bg-right-hiring.0dfda9a2.svg")
+      no-repeat 0 0;
+    background-size: contain;
+    content: "";
+    bottom: 15px;
+    position: absolute;
+    height: 125px;
+  }
+  .box-hiring::before {
+    content: "";
+    bottom: 15px;
+    width: 150px;
+    height: 120px;
+    background: url("https://jobbox-nextjs-v3.vercel.app/_next/static/media/bg-left-hiring.cc0e2e85.svg")
+      no-repeat;
+    background-size: contain;
+  }
+}
+
+.job-category {
+  margin: 50px auto;
+}
+
+.job-category-col {
+  border: 1px solid rgba(6, 18, 36, 0.1);
+  padding: 10px;
+  width: auto !important;
+  border-radius: 12px;
+  height: 3rem !important;
+  line-height: 18px;
+}
+
+.job-category-content h4 {
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  padding: 5px 5px 0px 0px;
+}
+
+.job-category-image img {
+  width: auto;
+  height: 24px;
+  margin: 0px 10px 6px 10px;
+}
+
+.job-category h2 {
+  font-weight: bold;
+  font-size: 36px;
+}
+
+.job-category p {
+  color: #66789c;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.job-category-col:hover {
+  color: #3c65f5;
+  border-color: #3c65f5;
+  box-shadow: 0 2px 4px -5px #0a2a69;
+}
+
+.card {
+  border: none !important;
+}
+
+.card-body {
+  border-radius: 8px;
+  border: 1px solid #e0e6f7;
+  margin-bottom: 24px;
+  position: relative;
+  background: #f8faff;
+}
+
+.hover-up:hover {
+  transform: translateY(-3px);
+}
+
+.card-body:hover {
+  border-color: #b4c0e0;
+  background-color: #fff;
+}
+
+.flash {
+  background: url("https://jobbox-nextjs-v3.vercel.app/_next/static/media/flash.aea6c8a8.svg")
+    no-repeat 0 0;
+  width: 25px;
+  top: 15px;
+  right: 15px;
+  height: 25px;
+  position: absolute;
+}
+
+.card-header {
+  background: none !important;
+  border: none !important;
+  font-family: Plus Jakarta Sans, sans-serif !important;
+  display: flex;
+}
+
+.job-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 1rem;
+}
+
+.location-content {
+  font-size: 12px;
+  color: #a0abb8;
+  padding-left: 20px;
+  margin: 1rem;
+  background: url("https://jobbox-nextjs-v3.vercel.app/_next/static/media/location.dac4c399.svg")
+    no-repeat;
+}
+
+.card-content {
+  padding: 15px 10px 20px;
+  font-family: Plus Jakarta Sans, sans-serif;
+}
+
+.p-card {
+  color: #4f5e64;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-grey-small {
+  background-color: #eff3fc !important;
+  font-size: 12px !important;
+  padding: 7px 15px !important;
+  border-radius: 5px;
+  color: #4f5e64 !important;
+}
+
+.card-text-price {
+  color: #3c65f5;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.card-text-muted {
+  font-size: 9px;
+  color: #6c757d !important;
+}
+
+.btn-apply {
+  background-color: #e0e6f7 !important;
+  color: #3c65f5 !important;
+  padding: 12px 10px !important;
+  min-width: 95px !important;
+  border-radius: 4px !important;
+  border: none !important;
+  font-size: 12px !important;
+  text-transform: capitalize !important;
+}
+
+.btn-apply:hover {
+  background-color: #3c65f5 !important;
+  color: #fff !important;
+}
+
+@media screen and (max-width: 800px) {
+  .card-body {
+    width: fit-content !important;
+  }
+  .img-job-1 {
+    display: none;
+  }
+  .img-job-2 {
+    display: none;
+  }
+  .left-content {
+    padding: 10px !important;
+    margin-top: 65px !important;
+  }
+}
+
+.search-job-image {
+  position: relative;
+}
+
+.img-job-1 {
+  position: absolute;
+  top: -70px;
+  left: -120px;
+  z-index: -1;
+}
+
+.img-job-2 {
+  position: absolute;
+  bottom: -170px;
+  right: -80px;
+  z-index: -1;
+}
+
+.img-job-3 {
+  max-width: 80%;
+  border-radius: 32px;
+}
+
+.left-content {
+  padding: 0 0 0 60px;
+}
+.text-left-1 {
+  font-size: 32px;
+  line-height: 60px;
+  font-weight: bold;
+  color: #a0abb8;
+}
+
+.text-left-2 {
+  font-size: 52px;
+  line-height: 66px;
+  font-weight: 700;
+  color: #05264e;
+}
+
+.text-p {
+  color: #05264e !important;
+  margin-top: 40px;
+  padding-right: 50px;
+}
+
+.text-right {
+  color: #3c65f5;
+}
+
+.buttons {
+  margin-top: 40px !important;
+  font-family: Plus Jakarta Sans, sans-serif;
+  font-size: 14px;
+}
+
+.btn {
+  border-radius: 8px !important;
+}
+
+.btn-search:hover {
+  background-color: #05264e !important;
+  transform: translateY(-2px) !important;
+  transition: 0.2s !important;
+}
+
+.btn-link {
+  color: #05264e !important;
+  font-size: 14px !important;
+  font-family: Plus Jakarta Sans, sans-serif !important;
+}
+
+.btn-link:hover {
+  color: #3c65f5 !important;
+}
+
+.mt-100 {
+  margin-top: 10% !important;
+}
+
+.mb-50 {
+  margin-bottom: 50px !important;
+}
+
+h5 {
+  font-family: Plus Jakarta Sans, sans-serif;
+  font-style: normal;
+  font-weight: 700 !important;
+  line-height: 26px !important;
+}
+.count-h1 {
+  color: #3c65f5;
+  font-size: 56px;
+  font-weight: 800;
+  font-size: 56px;
+  line-height: 71px;
+}
+
+.count-p {
+  font-weight: 500;
+  font-size: 14px !important;
+  line-height: 22px !important;
+  color: #4f5e64;
+}
+
+/* Footer */
+
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.first-info img {
+  width: 140px;
+  height: auto;
+}
+.contact-info h4 {
+  color: #212529;
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.contact-info p {
+  color: #565656;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: capitalize;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.42s;
+}
+.social-icon i {
+  color: #565656;
+  margin-right: 10px;
+  font-size: 20px;
+  transition: all 0.42s;
+}
+.social-icon i:hover {
+  transform: scale(1.3);
+}
+.end-text {
+  text-align: center;
+}
+.end-text p {
+  color: #111;
+  text-transform: capitalize;
+}
+
+body {
+  color: #05264e;
+  font-family: Plus Jakarta Sans, sans-serif;
+  font-style: normal;
+}
+
+.main-banner {
+  background-image: url("https://jobbox-nextjs-v3.vercel.app/_next/static/media/img-about.0287ca62.png");
+  position: relative;
+  background-size: cover;
+}
+
+.section-box {
+  display: inline-block;
+  width: 100%;
+  /* overflow: visible; */
+}
+.main-banner-text {
+  z-index: 2;
+  color: #fff;
+  padding: 20px 0;
+}
+.main-banner p {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.main-banner h2 {
+  color: #fff;
+}
+
+.main-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  background: url("https://jobbox-nextjs-v3.vercel.app/_next/static/media/bg-black-trans.c550ad77.png")
+    repeat-x 0 100%;
+}
+
+.about-h5 {
+  color: #a0abb8;
+  font-weight: 700;
+}
+
+.about-p {
+  color: #4f5e64;
+  font-weight: 500;
+  font-size: 14px;
+  width: 50%;
+}
+
+.mainBody-p {
+  color: #4f5e64;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.card-grid-4 {
+  background-color: #fff;
+  padding: 40px 30px 35px;
+  border-radius: 10px;
+  border: thin solid #e0e6f7;
+}
+
+.card-grid-4 .img-grid {
+  height: 125px;
+  border-radius: 50%;
+  width: 125px;
+}
+.card-grid-info p {
+  font-size: 12px;
+  font-weight: 500;
+  color: #66789c;
+}
+.card-grid-info-location {
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+  color: #a0abb8;
+}
+
+.card-grid-info-location img {
+  padding-right: 5px;
+}
+
+@media screen and (max-width: 800px) {
+  .image-about-banner {
+    display: none;
+  }
+}
+
+.login-register-cover {
+  color: #05264e !important;
+}
+
+.pt-100 {
+  padding-top: 100px !important;
+}
+
+.login-text-p {
+  color: #6c757d !important;
+  font-size: 14px;
+  font-weight: 500;
+}
+/* 
+.form-group {
+  display: flex;
+  flex-direction: column;
+} */
+
+.form-group input {
+  border-radius: 4px;
+  border: 1px solid #a0abb8;
+}
+
+.form-label {
+  font-weight: 400 !important;
+}
+
+.login-footer {
+  font-size: 12px;
+  justify-content: space-between;
+}

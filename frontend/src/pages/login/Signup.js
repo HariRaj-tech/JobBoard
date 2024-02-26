@@ -7,7 +7,6 @@ import bottomimg from "../../assets/loginbottom.svg";
 import googleIcon from "../../assets/icon-google.svg";
 
 export default function Signup() {
-
   let navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
@@ -144,7 +143,7 @@ export default function Signup() {
         );
       }
       console.log("Form data submitted:", response.data);
-      navigate('/login');
+      navigate("/login");
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -165,13 +164,13 @@ export default function Signup() {
             >
               Access to all features. No credit card required.
             </p>
-            <button className="google-login">
+            {/* <button className="google-login">
               <img src={googleIcon} alt="google-icon" />
               <strong>Sign in with Google</strong>
             </button>
             <div className="divider">
               <span>Or continue with</span>
-            </div>
+            </div> */}
           </div>
           <form className="login-form">
             <div className="from-group">
@@ -191,7 +190,7 @@ export default function Signup() {
                 onChange={handleInputChange}
                 checked={formData.role === "company"}
                 required
-                className="ml-1.5"
+                className="ml-5"
               />
               <label className="ml-1.5">Company</label>
             </div>
@@ -205,8 +204,9 @@ export default function Signup() {
                   value={formData[field.name]}
                   onChange={handleInputChange}
                   required
-                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors[field.name] ? "border-red-500 " : ""
-                    } `}
+                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${
+                    errors[field.name] ? "border-red-500 " : ""
+                  } `}
                 />
                 {errors[field.name] && (
                   <p className="text-red-500">{errors[field.name]}</p>

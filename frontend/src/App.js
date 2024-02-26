@@ -14,6 +14,7 @@ import Applyjob from './pages/jobdescription/Applyjob.js';
 import About from './pages/about/About.js';
 import Companyhomepage from './pages/recruiters/Companyhomepage.js'
 import Postnewjob from './pages/recruiters/Postnewjob.js';
+import FindJob from './pages/findJob/findJob.js';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/apply" element={<Applyjob />} />
             <Route path="/companyhomepage" element={<Companyhomepage />} />
             <Route path="/postnewjob" element={<Postnewjob />} />
+            <Route path="/findJob" element={<FindJob />} />
           </Routes>
         </div>
       </Router >

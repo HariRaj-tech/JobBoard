@@ -7,7 +7,6 @@ import airBallon from "../../assets/air-balloon.svg";
 import bottomimg from "../../assets/loginbottom.svg";
 
 export default function Login() {
-
   let navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [loginData, setLoginData] = useState({
@@ -67,7 +66,7 @@ export default function Login() {
 
       if (data.status === 200) {
         alert("Loged in successfully");
-        navigate('/');
+        navigate("/");
         console.log("Loged in");
       } else {
         alert("Put valid data");
@@ -94,17 +93,17 @@ export default function Login() {
             >
               Access to all features. No credit card required.
             </p>
-            <button className="google-login">
+            {/* <button className="google-login">
               <img src={googleIcon} alt="google-icon" />
               <strong>Sign in with Google</strong>
             </button>
             <div className="divider">
               <span>Or continue with</span>
-            </div>
+            </div> */}
           </div>
 
           <form className="login-form">
-            <div className="flex items-center mt-2 mb-5 p-5">
+            <div className="flex items-center mt-2 mb-5">
               <input
                 type="radio"
                 id="user"
@@ -140,8 +139,9 @@ export default function Login() {
                   value={loginData[field.name]}
                   onChange={handleChange}
                   required
-                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors[field.name] ? "border-red-500 " : ""
-                    } `}
+                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${
+                    errors[field.name] ? "border-red-500 " : ""
+                  } `}
                 />
                 {errors[field.name] && (
                   <p className="text-red-500">{errors[field.name]}</p>
