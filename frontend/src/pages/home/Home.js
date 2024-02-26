@@ -151,7 +151,7 @@ export default function Home(props) {
                     <p className=''>
                         Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 600,000 companies worldwide. The right job is out there.
                     </p>
-                    <Link className="inline-block mx-auto px-4 py-2 bg-blue-500 text-white font-bold text-center rounded">Search Jobs</Link>
+                    <Link to="/findjob" className="inline-block mx-auto px-4 py-2 bg-blue-500 text-white font-bold text-center rounded">Search Jobs</Link>
                 </div>
             </div>
 
