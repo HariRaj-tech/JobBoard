@@ -1,12 +1,14 @@
-import React, { isValidElement, useState } from "react";
+import React, { isValidElement, useState, useContext } from "react";
 import axios from "axios";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import spaceShip from "../../assets/spaceship.svg";
 import bottomimg from "../../assets/loginbottom.svg";
 import googleIcon from "../../assets/icon-google.svg";
+import { alertContext } from "../../components/context/Context";
 
 export default function Signup() {
+  const { showAlert } = useContext(alertContext);
   let navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
@@ -142,6 +144,7 @@ export default function Signup() {
           }
         );
       }
+      showAlert("Account created successfully");
       console.log("Form data submitted:", response.data);
       navigate("/login");
     } catch (error) {
@@ -204,9 +207,8 @@ export default function Signup() {
                   value={formData[field.name]}
                   onChange={handleInputChange}
                   required
-                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${
-                    errors[field.name] ? "border-red-500 " : ""
-                  } `}
+                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors[field.name] ? "border-red-500 " : ""
+                    } `}
                 />
                 {errors[field.name] && (
                   <p className="text-red-500">{errors[field.name]}</p>

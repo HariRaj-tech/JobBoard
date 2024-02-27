@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createContext } from 'react'
 import Jobcard from '../../components/Jobcard'
 import image from '../../Jobs-image.png'
 import companies from '../../assets/tempdata'
@@ -11,7 +11,7 @@ export default function Home(props) {
 
     const [field, setField] = useState(null);
     const [filteredCompanies, setFilteredCompanies] = useState([]);
-
+    
     const filterCompanies = (field) => {
         if (!field) return companies;
         return companies.filter((company) => company.field === field);
