@@ -15,13 +15,14 @@ import About from './pages/about/About.js';
 import Companyhomepage from './pages/recruiters/Companyhomepage.js'
 import Postnewjob from './pages/recruiters/Postnewjob.js';
 import FindJob from './pages/findJob/findJob.js';
-
+import Footer from './components/Footer.js';
 function App() {
   return (
     <>
       <Router>
-        <Navbar />
+        
         <div className="app">
+          <Navbar/>
           <Routes>
             <Route
               path="/" element={<Home />} />
@@ -35,7 +36,9 @@ function App() {
             <Route path="/postnewjob" element={<Postnewjob />} />
             <Route path="/findJob" element={<FindJob />} />
           </Routes>
+          <Footer/>
         </div>
+       
       </Router >
     </>
   );
