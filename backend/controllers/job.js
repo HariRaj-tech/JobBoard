@@ -6,9 +6,8 @@ exports.post = async (req, res) => {
     logger.info('job create request recieved.');
 
     const job_details = {
-        title: 'job-title',
+        title: req.body.title,
         industry: req.body.industry,
-        designation: req.body.designation,
         experience: req.body.experience,
         salary: req.body.salary,
         location: req.body.location,

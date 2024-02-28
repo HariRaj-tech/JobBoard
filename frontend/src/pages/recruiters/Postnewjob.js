@@ -6,7 +6,7 @@ export default function Postnewjob() {
 
     const [jobDetails, setJobDetails] = useState({
         industry: '',
-        designation: '',
+        title: '',
         experience: '',
         salary: '',
         location: '',
@@ -35,7 +35,7 @@ export default function Postnewjob() {
 
         if (
             !jobDetails.industry ||
-            !jobDetails.designation ||
+            !jobDetails.title ||
             !jobDetails.experience ||
             !jobDetails.salary ||
             !jobDetails.location ||
@@ -72,12 +72,12 @@ export default function Postnewjob() {
                 <form className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4' onSubmit={handleSubmit}>
 
                     <div className=''>
-                        <label htmlFor="industry" className='block text-gray-700 text-sm font-bold mb-2'>Industry *</label>
-                        <input type="text" name="industry" id="industry" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" />
+                        <label htmlFor="title" className='block text-gray-700 text-sm font-bold mb-2'>Title *</label>
+                        <input type="text" name="title" id="title" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" />
                     </div>
                     <div className=''>
-                        <label htmlFor="designation" className='block text-gray-700 text-sm font-bold mb-2'>Designation *</label>
-                        <input type="text" name="designation" id="designation" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" />
+                        <label htmlFor="industry" className='block text-gray-700 text-sm font-bold mb-2'>Industry *</label>
+                        <input type="text" name="industry" id="industry" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" />
                     </div>
                     <div className="">
                         <label htmlFor="skills" className="block text-gray-700 text-sm font-bold mb-2">
