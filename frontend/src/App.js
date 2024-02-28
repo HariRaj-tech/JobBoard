@@ -54,7 +54,7 @@ function App() {
               <Route path="/postnewjob" element={<Postnewjob />} />
               <Route path="/findJob" element={<FindJob />} />
             </Routes>
-            <Footer/>
+            {/* <Footer/> */}
           </div>
         </alertContext.Provider>
       </Router >
