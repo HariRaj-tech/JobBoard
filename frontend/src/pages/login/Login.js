@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icon-google.svg";
 import airBallon from "../../assets/air-balloon.svg";
+import { alertContext } from "../../components/context/Context";
 import bottomimg from "../../assets/loginbottom.svg";
 
 export default function Login() {
+  const { showAlert } = useContext(alertContext);
   let navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [loginData, setLoginData] = useState({
@@ -65,7 +67,8 @@ export default function Login() {
       const data = await axios.post(apiUrl, loginData);
 
       if (data.status === 200) {
-        alert("Loged in successfully");
+        // alert("Loged in successfully");
+        showAlert("Log in successfull");
         localStorage.setItem('email', loginData.email);
         if (loginData.role === "user") { navigate("/"); }
         else if (loginData.role === "company") { navigate("/companyhomepage") }
