@@ -65,5 +65,24 @@ exports.login = async (req, res) => {
     }
 
     logger.info('user login succesfull.');
-    return res.status(statusCodes.OK).send({ status: true, user: user.toJSON() });
+    return res.status(statusCodes.OK).send({ id: user.id });
+};
+
+exports.getById = async (req, res) => {
+    logger.info('user get request recieved.');
+
+    const userId = req.body.id;
+
+    if (!userId) {
+        logger.info('user id is null.');
+        return res.status(statusCodes.BAD_REQUEST).send('provide user id.');
+    }
+
+    const user = users.findOne({ where: { id: userId } });
+    if (!user) {
+        logger.info(`user for id '${userId}' not found.`);
+        return res.status(statusCodes.BAD_REQUEST).send('user not found.');
+    }
+
+    return res.status(statusCodes.OK).send(user.toJSON());
 };
