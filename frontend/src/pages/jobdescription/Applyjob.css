@@ -174,7 +174,7 @@
 .address-location{
     display:flex;
     align-items: center;
-    gap:10px;
+    /* gap:10px; */
 }
 .address-title div span {
     min-width: 120px;

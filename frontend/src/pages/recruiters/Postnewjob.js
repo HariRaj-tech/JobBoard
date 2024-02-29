@@ -61,7 +61,7 @@ export default function Postnewjob() {
             console.log('sending job post request.')
             const result = await axios.post('http://localhost:8080/api/job', jobDetails);
 
-            if (result.status == 200) {
+            if (result.status === 200) {
                 console.log('job posted successfully.');
                 // alert("job posted successfully");
                 navigate("/companyhomepage");

@@ -16,15 +16,46 @@ import reddit from '../../assets/rd.svg';
 import wa from '../../assets/wa.svg';
 import brandimg from '../../assets/brand.png';
 import './Applyjob.css';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { alertContext } from '../../components/context/Context';
+
 function Applyjob() {
-    const data = [
-        [brandimg, "UI / UX Designer fulltime"],
-        [brandimg, "UI / UX Designer fulltime"],
-        [brandimg, "UI / UX Designer fulltime"],
-        [brandimg, "UI / UX Designer fulltime"],
-        [brandimg, "UI / UX Designer fulltime"],
-        [brandimg, "UI / UX Designer fulltime"]
-    ]
+    // const data = [
+    //     [brandimg, "UI / UX Designer fulltime"],
+    //     [brandimg, "UI / UX Designer fulltime"],
+    //     [brandimg, "UI / UX Designer fulltime"],
+    //     [brandimg, "UI / UX Designer fulltime"],
+    //     [brandimg, "UI / UX Designer fulltime"],
+    //     [brandimg, "UI / UX Designer fulltime"]
+    // ]
+
+    const navigate = useNavigate();
+    const { showAlert } = useContext(alertContext);
+
+    const jobData = {
+        company: "AliThemes",
+        title: "Senior Full Stack Engineer, Creator Success Full Time",
+        type: "Fulltime",
+        industry: "Mechanical / Auto / Automotive, Civil / Construction",
+        level: "Experienced (Non - Manager)",
+        salary: "$800 - $1000",
+        experience: "1 - 2 years",
+        deadline: "1/2/2024",
+        skills: ["React js", "Node js", "python"],
+        location: "Dallas, Texas",
+        address: "205 North Michigan Avenue, Suite 810 Chicago, 60601, USA",
+        phone: "(123) 456-7890",
+        email: "contact@Evara.com",
+        jobDescription: "A portfolio demonstrating well thought through and polished end to end customer journeys. 5+ years of industry experience in interactive design and / or visual design. Excellent interpersonal skills. Aware of trends inmobile, communications, and collaboration. Ability to create highly polished design prototypes, mockups, and other communication artifacts. The ability to scope and estimate efforts accurately and prioritize tasks and goals independently. History of impacting shipping products with your work. A Bachelor's Degree in Design (or related field) or equivalent professional experience. Proficiency in a variety of design tools such as Figma, Photoshop, Illustrator, and Sketch."
+    }
+
+    const handleApplyClick = async (e) => {
+        e.preventDefault();
+        showAlert("Job applied successfully");
+        navigate("/home");
+    }
+
     return (
         <div className="applyjob">
             <div className="header">
@@ -33,15 +64,15 @@ function Applyjob() {
                 </div>
                 <div className="title-container">
                     <div className="title">
-                        <h3>Senior Full Stack Engineer, Creator Success Full Time</h3>
+                        <h3>{jobData.title}</h3>
                         <div>
-                            <span style={{ 'background': `url(${briefcaseimg}) no-repeat 0 2px` }} className="briefcase">Fulltime</span>
-                            <span style={{ 'background': `url(${timeimg}) no-repeat 0 2px` }} className="time">3 mins ago</span>
+                            <span style={{ 'background': `url(${briefcaseimg}) no-repeat 0 2px` }} className="briefcase">{jobData.type}</span>
+                            {/* <span style={{ 'background': `url(${timeimg}) no-repeat 0 2px` }} className="time">3 mins ago</span> */}
                         </div>
                     </div>
                     <div className="btn-container">
                         <button className="apply-btn" style={{ "margin-right": "10px", "background": "#ffff", "border": "1px solid #b4c0e0", "color": "#4f5e64", "fontSize": "16px", "lineHeight": "26px", "fontWeight": "700" }}>Save job</button>
-                        <button className="apply-btn">Apply now</button>
+                        <button className="apply-btn" onClick={handleApplyClick}>Apply now</button>
 
                     </div>
                 </div>
@@ -59,7 +90,7 @@ function Applyjob() {
                                     <div className="content">
                                         <span>Industry</span>
                                         <strong>
-                                            Mechanical / Auto / Automotive, Civil / Construction
+                                            {jobData.industry}
                                         </strong>
                                     </div>
                                 </div>
@@ -70,7 +101,7 @@ function Applyjob() {
                                     <div className="content">
                                         <span>Job level</span>
                                         <strong>
-                                            Experienced (Non - Manager)
+                                            {jobData.level}
                                         </strong>
                                     </div>
                                 </div>
@@ -83,7 +114,7 @@ function Applyjob() {
                                     <div className="content">
                                         <span>Salary</span>
                                         <strong>
-                                            $800 - $1000
+                                            {jobData.salary}
                                         </strong>
                                     </div>
                                 </div>
@@ -94,7 +125,7 @@ function Applyjob() {
                                     <div className="content">
                                         <span>Experience</span>
                                         <strong>
-                                            1 - 2 years
+                                            {jobData.experience}
                                         </strong>
                                     </div>
                                 </div>
@@ -107,7 +138,7 @@ function Applyjob() {
                                     <div className="content">
                                         <span>Job type</span>
                                         <strong>
-                                            Permanent
+                                            {jobData.type}
                                         </strong>
                                     </div>
                                 </div>
@@ -118,7 +149,7 @@ function Applyjob() {
                                     <div className="content">
                                         <span>Deadline</span>
                                         <strong>
-                                            1/2/2024
+                                            {jobData.deadline}
                                         </strong>
                                     </div>
                                 </div>
@@ -129,9 +160,9 @@ function Applyjob() {
                                         <img src={updateimg} alt="image not found" />
                                     </div>
                                     <div className="content">
-                                        <span>Updated</span>
+                                        <span>Skills</span>
                                         <strong>
-                                            10/2/2024
+                                            {jobData.skills.map((skill) => { return <span>{skill}, </span> })}
                                         </strong>
                                     </div>
                                 </div>
@@ -142,14 +173,16 @@ function Applyjob() {
                                     <div className="content">
                                         <span>Location</span>
                                         <strong>
-                                            Dallas, Texas Remote Friendly
+                                            {jobData.location}
                                         </strong>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="about-company">
-                            <h4>Welcome to AliStudio Team</h4>
+                            <h3 className='text-xl'>Job description</h3>
+                            <p>{jobData.jobDescription}</p>
+                            {/* <h4>Welcome to AliStudio Team</h4>
                             <p>The AliStudio Design team has a vision to establish a trusted platform that enables productive and healthy enterprises in a world of digital and remote everything, constantly changing work patterns and norms, and the need for organizational resiliency.</p>
                             <p>The ideal candidate will have strong creative skills and a portfolio of work which demonstrates their passion for illustrative design and typography. This candidate will have experiences in working with numerous different design platforms such as digital and print forms.</p>
                             <h4>Essential Knowledge, Skills, and Experience</h4>
@@ -174,7 +207,7 @@ function Applyjob() {
                             <p><strong>Product knowledge: </strong>Deeply understand the technology and features of the product area to which you are assigned.</p>
                             <p><strong>Research: </strong>Provide human and business impact and insights for products.</p>
                             <p><strong>Deliverables: </strong>Create deliverables for your product area (for example competitive analyses, user flows, low fidelity wireframes, high fidelity mockups, prototypes, etc.) that solve real user problems through the user experience.</p>
-                            <p><strong>Communication: </strong>Communicate the results of UX activities within your product area to the design team department, cross-functional partners within your product area, and other interested Superformula team members using clear language that simplifies complexity.</p>
+                            <p><strong>Communication: </strong>Communicate the results of UX activities within your product area to the design team department, cross-functional partners within your product area, and other interested Superformula team members using clear language that simplifies complexity.</p> */}
                         </div>
                         <div className="col1-footer">
                             <span>AliThemes</span>
@@ -202,8 +235,8 @@ function Applyjob() {
                                     <img src={companylogo} alt="image not found" />
                                 </div>
                                 <div >
-                                    <span>AliThemes</span>
-                                    <span className="address-location"><img src={locationimg} alt="image not found" /> New York,Us.</span>
+                                    <span>{jobData.company}</span>
+                                    <span className="address-location"><img src={locationimg} alt="image not found" /> {jobData.location}</span>
                                 </div>
                             </div>
                             <div className="address-container">
@@ -221,16 +254,16 @@ function Applyjob() {
                                     ></iframe>
                                 </div>
                                 <ul>
-                                    <li>205 North Michigan Avenue, Suite 810 Chicago, 60601, USA</li>
-                                    <li>Phone: (123) 456-7890</li>
-                                    <li>Email: contact@Evara.com</li>
+                                    <li>{jobData.address}</li>
+                                    <li>Phone: {jobData.phone}</li>
+                                    <li>Email: {jobData.email}</li>
                                 </ul>
                             </div>
                         </div>
-                        <div className="jobs-card">
+                        {/* <div className="jobs-card">
                             <h5 style={{ "fontSize": "18px" }}>Similar jobs</h5>
                             <Card data={data} />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
@@ -238,34 +271,34 @@ function Applyjob() {
     );
 }
 
-function Card({ data }) {
-    const style = {
-        "display": "inline-block",
-        "width": " 100%",
-        "paddingBottom": "20px"
-    };
-    return (
-        <ul style={{ "listStyle": "none" }}>
-            {data.map((value, i) => <li key={i} style={style}>
-                <div className="jobcard-container" >
-                    <div className="jobimage-1"><img style={{ "maxWidth": "100%" }} src={value[0]} alt="image" /></div>
-                    <div className="jobcard-2">
-                        <h5>{value[1]}</h5>
-                        <div>
-                            <span style={{ 'background': `url(${briefcaseimg}) no-repeat 0 10px` }} className="briefcase">Fulltime</span>
-                            <span style={{ 'background': `url(${timeimg}) no-repeat 0 10px` }} className="time">3 mins ago</span>
-                        </div>
-                        <div className="jobinfo">
-                            <div style={{ "display": "flex", "gap": "10px" }}>
-                                <div><h6>$200/Hour</h6></div>
-                                <div><span style={{ 'background': `url(${briefcaseimg}) no-repeat 0 10px` }} className="briefcase">Fulltime</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>)}
-        </ul>
-    );
+// function Card({ data }) {
+//     const style = {
+//         "display": "inline-block",
+//         "width": " 100%",
+//         "paddingBottom": "20px"
+//     };
+//     return (
+//         <ul style={{ "listStyle": "none" }}>
+//             {data.map((value, i) => <li key={i} style={style}>
+//                 <div className="jobcard-container" >
+//                     <div className="jobimage-1"><img style={{ "maxWidth": "100%" }} src={value[0]} alt="image" /></div>
+//                     <div className="jobcard-2">
+//                         <h5>{value[1]}</h5>
+//                         <div>
+//                             <span style={{ 'background': `url(${briefcaseimg}) no-repeat 0 10px` }} className="briefcase">Fulltime</span>
+//                             <span style={{ 'background': `url(${timeimg}) no-repeat 0 10px` }} className="time">3 mins ago</span>
+//                         </div>
+//                         <div className="jobinfo">
+//                             <div style={{ "display": "flex", "gap": "10px" }}>
+//                                 <div><h6>$200/Hour</h6></div>
+//                                 <div><span style={{ 'background': `url(${briefcaseimg}) no-repeat 0 10px` }} className="briefcase">Fulltime</span></div>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </li>)}
+//         </ul>
+//     );
 
-}
+// }
 export default Applyjob;
