@@ -7,6 +7,7 @@ exports.post = async (req, res) => {
 
     const jobDetails = {
         title: req.body.title,
+        company: req.body.company,
         type: req.body.type,
         level: req.body.level,
         industry: req.body.industry,
@@ -19,6 +20,7 @@ exports.post = async (req, res) => {
     };
 
     console.assert(jobDetails.title);
+    console.assert(jobDetails.company);
     console.assert(jobDetails.type);
     console.assert(jobDetails.level);
     console.assert(jobDetails.industry);
