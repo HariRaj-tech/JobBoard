@@ -68,5 +68,5 @@ exports.login = async (req, res) => {
     }
 
     logger.info('company login successfull.');
-    return res.status(status_codes.OK).send({ id: company.id });
+    return res.status(status_codes.OK).send({ id: company.id }); 
 };
