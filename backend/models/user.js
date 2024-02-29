@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define(
-        'User',
+        'users',
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -32,7 +32,9 @@ module.exports = (sequelize, DataTypes) => {
         },
     );
 
-    User.associate = (models) => {};
+    User.associate = (models) => {
+        User.belongsToMany(models.jobs, { through: 'users_and_jobs' });
+    };
 
     return User;
 };

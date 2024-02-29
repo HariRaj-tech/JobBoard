@@ -38,16 +38,21 @@ async function check_connection() {
 check_connection();
 
 const companies = CompanyModel(sequelize, DataTypes);
-companies.associate(sequelize.models);
-logger.info(`table 'companies' is updated to match the model.`);
-
 const users = UserModel(sequelize, DataTypes);
-users.associate(sequelize.models);
-logger.info(`table 'users' is updated to match the model.`);
-
 const jobs = JobModel(sequelize, DataTypes);
+
+companies.associate(sequelize.models);
+users.associate(sequelize.models);
 jobs.associate(sequelize.models);
-logger.info(`table 'jobs' is updated to match the model.`);
+
+logger.info(`updating table 'companies' to match the model.`);
+companies.sync({ alter: true });
+
+logger.info(`updating table 'users' to match the model.`);
+users.sync({ alter: true });
+
+logger.info(`updating table 'jobs' to match the model.`);
+jobs.sync({ alter: true });
 
 module.exports.Sequelize = Sequelize;
 module.exports.sequelize = sequelize;

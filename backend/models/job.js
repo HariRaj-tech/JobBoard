@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const Job = sequelize.define(
-        'Job',
+        'jobs',
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -19,7 +19,10 @@ module.exports = (sequelize, DataTypes) => {
         },
     );
 
-    Job.associate = (models) => {};
+    Job.associate = (models) => {
+        // Job.hasOne(models.companies);
+        // Job.hasMany(models.users);
+    };
 
     return Job;
 };
