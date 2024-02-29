@@ -1,44 +1,39 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('./index');
-const logger = require('services/logger');
+module.exports = (sequelize, DataTypes) => {
+    const Company = sequelize.define(
+        'Company',
+        {
+            id: {
+                type: DataTypes.INTEGER,
+                autoIncrement: true,
+                primaryKey: true,
+            },
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: true,
+            },
+            email: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: true,
+            },
+            password: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            address: {
+                type: DataTypes.STRING,
+                unique: true,
+            },
+        },
+        {
+            modelName: 'company',
+            tableName: 'companies',
+            underscored: true,
+        },
+    );
 
-class Company extends Model {}
+    Company.associate = (models) => {};
 
-Company.init(
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-        },
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-        },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        address: {
-            type: DataTypes.STRING,
-            unique: true,
-        },
-    },
-    {
-        sequelize,
-        modelName: 'company',
-        tableName: 'companies',
-        underscored: true,
-    },
-);
-
-Company.sync({ alter: true });
-logger.info(`table 'companies' is updated to match the model.`);
-
-module.exports = Company;
+    return Company;
+};

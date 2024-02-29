@@ -1,4 +1,4 @@
-const jobs = require('models/job');
+const jobs = require('models/index').jobs;
 const logger = require('services/logger');
 const statusCodes = require('http-status-codes').StatusCodes;
 

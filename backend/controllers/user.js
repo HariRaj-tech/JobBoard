@@ -1,5 +1,5 @@
 const statusCodes = require('http-status-codes').StatusCodes;
-const users = require('models/user');
+const users = require('models/index').users;
 const logger = require('services/logger');
 
 exports.signup = async (req, res) => {
