@@ -20,8 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     Job.associate = (models) => {
-        // Job.hasOne(models.companies);
-        // Job.hasMany(models.users);
+        Job.belongsTo(models.companies, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
     };
 
     return Job;

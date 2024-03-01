@@ -1,13 +1,14 @@
-const jobs = require('models/index').jobs;
-const logger = require('services/logger');
 const statusCodes = require('http-status-codes').StatusCodes;
+const logger = require('services/logger');
+const jobs = require('models/index').jobs;
+const companies = require('models/index').companies;
 
 exports.post = async (req, res) => {
     logger.info('job create request recieved.');
 
     const jobDetails = {
         title: req.body.title,
-        company: req.body.company,
+        companyId: req.body.company_id,
         type: req.body.type,
         level: req.body.level,
         industry: req.body.industry,
@@ -20,7 +21,7 @@ exports.post = async (req, res) => {
     };
 
     console.assert(jobDetails.title);
-    console.assert(jobDetails.company);
+    console.assert(jobDetails.companyId);
     console.assert(jobDetails.type);
     console.assert(jobDetails.level);
     console.assert(jobDetails.industry);
@@ -29,6 +30,12 @@ exports.post = async (req, res) => {
     console.assert(jobDetails.location);
     console.assert(jobDetails.deadline);
     console.assert(jobDetails.skills);
+
+    const company = await companies.findByPk(jobDetails.companyId);
+    if (!company) {
+        logger.error(`company doesn't exist.`);
+        return res.status(statusCodes.BAD_REQUEST).send(`company doesn't exist`);
+    }
 
     const job = await jobs.create(jobDetails);
     logger.info('job created successfully.', job.toJSON());
