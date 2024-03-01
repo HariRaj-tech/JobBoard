@@ -658,6 +658,10 @@ body {
   border: thin solid #e0e6f7;
 }
 
+.card-grid-4 img {
+  display: inline;
+}
+
 .card-grid-4 .img-grid {
   height: 125px;
   border-radius: 50%;
