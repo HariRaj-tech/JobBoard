@@ -259,7 +259,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="row py-5 px-5">
+      <div className="row py-5">
         <div className="col-xl-3 col-lg-4 pb-2 col-md-6 col-sm-12 col-12">
           <div className="card">
             <div className="card-body hover-up">
@@ -631,7 +631,7 @@ const Home = () => {
         </div>
       </div>
       <div className="container">
-        <div className="row">
+        <div className="row px-5">
           <div className="col-md-6">
             <div className="search-job-image">
               <img
@@ -656,7 +656,7 @@ const Home = () => {
               <span className="text-left-1">Millions Of Jobs.</span>
               <h2 className="text-left-2">
                 Find The One That's
-                <span className="text-right">Right</span> For You
+                <span className="text-right"> Right</span> For You
               </h2>
               <p className="text-p">
                 Search all the open positions on the web. Get your own
@@ -679,7 +679,7 @@ const Home = () => {
         </div>
       </div>
       <div className="container mt-100 mb-50">
-        <div className="row">
+        <div className="row px-5">
           <div className="col-md-6 col-lg-3">
             <div className="text-center">
               <h1 className="count-h1">
@@ -687,7 +687,7 @@ const Home = () => {
                 <span>K+</span>
               </h1>
               <h5>Completed Cases</h5>
-              <p className="font-sm mt-10 count-p">
+              <p className="font-sm count-p">
                 We always provide people a complete solution upon focused of any
                 business
               </p>

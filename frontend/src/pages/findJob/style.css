@@ -85,6 +85,31 @@ option {
   animation: hero-thumb-animation 2s linear infinite alternate;
 }
 
+.heading-banner {
+  font-size: 40px;
+  line-height: 60px;
+  font-weight: bold;
+  color: #05264e;
+}
+
+.banner {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 450px) {
+  .heading-banner {
+    font-size: 20px;
+    line-height: 40px;
+  }
+  .banner {
+    font-weight: bold;
+  }
+  .color-brand-2 {
+    font-size: 24px;
+    line-height: 30px;
+  }
+}
+
 .banner-image {
   padding: 65px 0 0;
   position: relative;
@@ -528,13 +553,13 @@ h4 {
 h5 {
   font-family: Plus Jakarta Sans, sans-serif;
   font-style: normal;
+  font-size: 1.25 rem !important;
   font-weight: 700 !important;
-  line-height: 26px !important;
 }
 .count-h1 {
   color: #3c65f5;
   font-size: 56px;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 56px;
   line-height: 71px;
 }
@@ -544,6 +569,7 @@ h5 {
   font-size: 14px !important;
   line-height: 22px !important;
   color: #4f5e64;
+  margin-top: 5px;
 }
 
 /* Footer */
