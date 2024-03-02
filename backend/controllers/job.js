@@ -58,3 +58,13 @@ exports.getById = async (req, res) => {
     logger.info('job details sent back.');
     return res.status(statusCodes.OK).send(job.toJSON());
 };
+
+exports.getJobs = async (req, res) => {
+    try {
+        const Jobs = await jobs.findAll();
+        res.status(200).json(Jobs);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal server error');
+    }
+};
