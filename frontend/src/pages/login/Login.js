@@ -69,9 +69,16 @@ export default function Login() {
       if (data.status === 200) {
         // alert("Loged in successfully");
         showAlert("Log in successfull");
-        localStorage.setItem('email', loginData.email);
-        if (loginData.role === "user") { navigate("/"); }
-        else if (loginData.role === "company") { navigate("/companyhomepage") }
+        console.log(data);
+
+        if (loginData.role === "user") {
+          localStorage.setItem('id', data.data.id);
+          navigate("/");
+        }
+        else if (loginData.role === "company") {
+          localStorage.setItem('id', data.data.id);
+          navigate("/companyhomepage");
+        }
         console.log("Loged in");
       } else {
         alert("Put valid data");

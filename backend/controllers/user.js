@@ -71,7 +71,7 @@ exports.login = async (req, res) => {
 exports.getById = async (req, res) => {
     logger.info('user get request recieved.');
 
-    const userId = req.body.id;
+    const userId = req.params.id;
 
     if (!userId) {
         logger.info('user id is null.');

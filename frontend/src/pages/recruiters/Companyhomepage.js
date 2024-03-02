@@ -38,7 +38,7 @@ export default function Companydetails() {
                 <img className='rounded-2xl' src={companyimg} alt="" />
             </div>
             <div className="flex justify-between items-center py-4 border-b border-gray-200">
-                <h1 className="text-3xl font-bold ml-20">{companyData.name}</h1>
+                <h1 className="text-3xl font-bold">{companyData.name}</h1>
                 <div className="flex items-center">
                     <Link className="text-white text-lg bg-blue-600 p-2 rounded-lg hover:bg-blue-800 mr-10">View Older Jobs</Link>
                     <Link to="/postnewjob" className="text-white text-lg bg-blue-600 p-2 rounded-lg hover:bg-blue-800 ">Post New Job</Link>
