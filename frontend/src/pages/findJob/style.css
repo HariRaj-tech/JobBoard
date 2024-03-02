@@ -71,10 +71,10 @@ option {
 }
 
 /* images */
-
-.heroRow {
-  gap: 200px;
+.container {
+  width: auto !important;
 }
+
 @media (max-width: 1200px) {
   .images {
     display: none !important;
