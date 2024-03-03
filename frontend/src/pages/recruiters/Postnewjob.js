@@ -12,12 +12,12 @@ export default function Postnewjob() {
 
         title: '',
         industry: '',
-        joblevel: '',
+        level: '',
         experience: '',
         salary: '',
         location: '',
         deadline: '',
-        jobtype: 'permanent',
+        type: 'permanent',
         about: '',
         skills: [],
     })
@@ -42,14 +42,14 @@ export default function Postnewjob() {
         event.preventDefault();
 
         if (
-            !jobDetails.industry ||
             !jobDetails.title ||
-            !jobDetails.experience ||
-            !jobDetails.joblevel ||
-            !jobDetails.salary ||
+            !jobDetails.type ||
+            !jobDetails.level ||
+            !jobDetails.industry ||
             !jobDetails.location ||
+            !jobDetails.experience ||
+            !jobDetails.salary ||
             !jobDetails.deadline ||
-            !jobDetails.jobtype ||
             !jobDetails.about ||
             jobDetails.skills.length === 0
         ) {
@@ -113,8 +113,8 @@ export default function Postnewjob() {
                         />
                     </div>
                     <div className=''>
-                        <label htmlFor="joblevel" className='block text-gray-700 text-sm font-bold mb-2'>JobLevel *</label>
-                        <input type="text" name="joblevel" id="joblevel" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" />
+                        <label htmlFor="level" className='block text-gray-700 text-sm font-bold mb-2'>JobLevel *</label>
+                        <input type="text" name="level" id="level" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" />
                     </div>
                     <div className=''>
                         <label htmlFor="experience" className='block text-gray-700 text-sm font-bold mb-2'>Experience *</label>
@@ -125,8 +125,8 @@ export default function Postnewjob() {
                         <input type="text" name="salary" id="salary" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" />
                     </div>
                     <div className=''>
-                        <label htmlFor="jobtype" className='block text-gray-700 text-sm font-bold mb-2'>JobType *</label>
-                        <select name="jobtype" id="jobtype" onChange={handleInputChange} required className="shadow  border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8">
+                        <label htmlFor="type" className='block text-gray-700 text-sm font-bold mb-2'>JobType *</label>
+                        <select name="type" id="type" onChange={handleInputChange} required className="shadow  border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8">
                             <option value="permanent">Permanent</option>
                             <option value="internship">Internship</option>
                             <option value="fulltime">Fulltime</option>

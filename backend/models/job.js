@@ -7,7 +7,19 @@ module.exports = (sequelize, DataTypes) => {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            companyName: {
+            title: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            type: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            level: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            industry: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
@@ -15,39 +27,27 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            jobTitle: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-            description: {
-                type: DataTypes.STRING,
-            },
-            salary: {
-                type: DataTypes.FLOAT,
-                allowNull: false,
-            },
-            email: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
             experience: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            jobSkills: {
+            skills: {
                 type: DataTypes.ARRAY(DataTypes.STRING),
             },
-            logoUrl: {
+            salary: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
+            deadline: {
+                type: DataTypes.DATE,
+                allowNull: false,
+            },
+            logo_url: {
                 type: DataTypes.STRING,
                 defaultValue: 'https://jobbox-nextjs-v3.vercel.app/assets/imgs/brands/brand-1.png',
             },
-            jobType: {
+            about: {
                 type: DataTypes.STRING,
-                allowNull: false,
-            },
-            industry: {
-                type: DataTypes.STRING,
-                allowNull: false,
             },
         },
         {
@@ -58,7 +58,10 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     Job.associate = (models) => {
-        Job.belongsTo(models.companies, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
+        Job.belongsTo(models.companies, {
+            foreignKey: { name: 'company_id', allowNull: false },
+            onDelete: 'CASCADE',
+        });
     };
 
     return Job;

@@ -1,37 +1,38 @@
 const statusCodes = require('http-status-codes').StatusCodes;
 const logger = require('services/logger');
-const jobs = require('models/index').jobs;
 const companies = require('models/index').companies;
+const jobs = require('models/index').jobs;
 
 exports.post = async (req, res) => {
     logger.info('job create request recieved.');
 
     const jobDetails = {
+        company_id: req.body.companyId,
         title: req.body.title,
-        companyId: req.body.company_id,
         type: req.body.type,
         level: req.body.level,
         industry: req.body.industry,
-        experience: req.body.experience,
-        salary: req.body.salary,
         location: req.body.location,
-        deadline: req.body.deadline,
+        experience: req.body.experience,
         skills: req.body.skills,
+        salary: req.body.salary,
+        deadline: req.body.deadline,
         about: req.body.about,
     };
 
-    console.assert(jobDetails.title);
-    console.assert(jobDetails.companyId);
-    console.assert(jobDetails.type);
-    console.assert(jobDetails.level);
-    console.assert(jobDetails.industry);
-    console.assert(jobDetails.experience);
-    console.assert(jobDetails.salary);
-    console.assert(jobDetails.location);
-    console.assert(jobDetails.deadline);
-    console.assert(jobDetails.skills);
+    console.assert(jobDetails.company_id, 'company_id not provided.');
+    console.assert(jobDetails.title, 'title not provided.');
+    console.assert(jobDetails.type, 'type not provided.');
+    console.assert(jobDetails.level, 'level not provided.');
+    console.assert(jobDetails.industry, 'industry not provided.');
+    console.assert(jobDetails.location, 'location not provided.');
+    console.assert(jobDetails.experience, 'experience not provided.');
+    console.assert(jobDetails.skills, 'skills not provided.');
+    console.assert(jobDetails.salary, 'salary not provided.');
+    console.assert(jobDetails.deadline, 'deadline not provided.');
+    console.assert(jobDetails.about, 'about not provided.');
 
-    const company = await companies.findByPk(jobDetails.companyId);
+    const company = await companies.findByPk(jobDetails.company_id);
     if (!company) {
         logger.error(`company doesn't exist.`);
         return res.status(statusCodes.BAD_REQUEST).send(`company doesn't exist`);
@@ -61,10 +62,13 @@ exports.getById = async (req, res) => {
 
 exports.getJobs = async (req, res) => {
     try {
-        const Jobs = await jobs.findAll();
+        logger.info('job get all request recieved.');
+
+        const Jobs = await jobs.findAll({ include: companies });
+        logger.info('all jobs returned.');
         res.status(200).json(Jobs);
     } catch (err) {
-        console.error(err);
-        res.status(500).send('Internal server error');
+        logger.error('internal server error.', err);
+        res.status(500).send('internal server error');
     }
 };
