@@ -18,6 +18,7 @@ import Postnewjob from './pages/recruiters/Postnewjob.js';
 import FindJob from './pages/findJob/findJob.js';
 import Alert from './pages/about/Alert.js';
 import { alertContext } from './components/context/Context.js';
+import CompanyNavbar from './components/CompanyNavbar.js';
 
 function App() {
 
@@ -30,14 +31,14 @@ function App() {
     }, 1500);
   }
 
-
+  const [userRole, setUserRole] = useState("user");
 
 
   return (
     <>
       <Router>
         <alertContext.Provider value={{ alert, showAlert }}>
-          <Navbar />
+          {userRole === "user" ? <Navbar /> : <CompanyNavbar setUserRole={setUserRole} />}
           <div className="app">
             <Alert />
             <Routes>
@@ -45,7 +46,7 @@ function App() {
                 path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<Login setUserRole={setUserRole} />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/companydetails" element={<Companydetails />} />
               <Route path="/apply" element={<Applyjob />} />

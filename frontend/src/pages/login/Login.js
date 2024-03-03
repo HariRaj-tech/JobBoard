@@ -7,8 +7,11 @@ import airBallon from "../../assets/air-balloon.svg";
 import { alertContext } from "../../components/context/Context";
 import bottomimg from "../../assets/loginbottom.svg";
 
-export default function Login() {
+export default function Login({setUserRole}) {
   const { showAlert } = useContext(alertContext);
+
+  
+
   let navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [loginData, setLoginData] = useState({
@@ -68,10 +71,12 @@ export default function Login() {
 
       if (data.status === 200) {
         // alert("Loged in successfully");
+        
         showAlert("Log in successfull");
         console.log(data);
-
+        setUserRole(loginData.role);
         if (loginData.role === "user") {
+          
           localStorage.setItem('id', data.data.id);
           navigate("/");
         }
