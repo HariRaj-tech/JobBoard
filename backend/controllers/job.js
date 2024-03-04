@@ -10,7 +10,6 @@ exports.post = async (req, res) => {
         company_id: req.body.companyId,
         title: req.body.title,
         type: req.body.type,
-        level: req.body.level,
         industry: req.body.industry,
         location: req.body.location,
         experience: req.body.experience,

@@ -136,10 +136,10 @@ export default function Signup() {
         response = await axios.post(
           "http://localhost:8080/api/company/signup",
           {
-            companyName: formData.companyName,
+            name: formData.companyName,
             ownerName: formData.ownerName,
-            companyAddress: formData.companyAddress,
-            companyEmail: formData.companyEmail,
+            address: formData.companyAddress,
+            email: formData.companyEmail,
             password: formData.companyPassword,
           }
         );
@@ -207,8 +207,9 @@ export default function Signup() {
                   value={formData[field.name]}
                   onChange={handleInputChange}
                   required
-                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors[field.name] ? "border-red-500 " : ""
-                    } `}
+                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${
+                    errors[field.name] ? "border-red-500 " : ""
+                  } `}
                 />
                 {errors[field.name] && (
                   <p className="text-red-500">{errors[field.name]}</p>

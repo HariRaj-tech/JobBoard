@@ -79,7 +79,7 @@ const FindJob = () => {
 
         if (typeFilter) {
           response = response.filter(
-            (job) => job.jobType.toLowerCase() === typeFilter.toLowerCase()
+            (job) => job.type.toLowerCase() === typeFilter.toLowerCase()
           );
         }
 
@@ -929,13 +929,13 @@ const FindJob = () => {
                       </div>
                       <div className="card-content ">
                         <h6 style={{ fontWeight: 600, fontSize: 16 }}>
-                          {job.jobTitle}
+                          {job.title}
                         </h6>
-                        <span className="p-card mx-2">{job.jobType}</span>
+                        <span className="p-card mx-2">{job.type}</span>
                         <span className="p-card mx-4">{job.experience}</span>
                         <p className=" py-3 p-card ">{job.description}</p>
                         <div className="mt-30">
-                          {job.jobSkills.map((skill, index) => (
+                          {job.skills.map((skill, index) => (
                             <a
                               key={index}
                               href="/"

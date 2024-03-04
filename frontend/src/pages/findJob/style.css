@@ -564,6 +564,10 @@ h5 {
   line-height: 71px;
 }
 
+.mx-50 {
+  margin-left: 25%;
+}
+
 .count-p {
   font-weight: 500;
   font-size: 14px !important;
@@ -715,8 +719,13 @@ body {
   }
 }
 
+.login-register {
+  display: inline-block;
+}
+
 .login-register-cover {
   color: #05264e !important;
+  justify-content: center !important;
 }
 
 .pt-100 {
