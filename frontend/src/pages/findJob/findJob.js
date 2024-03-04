@@ -53,7 +53,9 @@ const FindJob = () => {
           );
           response = locationResponse.data.jobs;
         } else {
-          const allJobsResponse = await axios.get("/jobs/allJobs");
+          const allJobsResponse = await axios.get(
+            "http://localhost:8080/api/job/getJobs"
+          );
           response = allJobsResponse.data;
         }
 
@@ -915,12 +917,12 @@ const FindJob = () => {
                         <span className="flash" />
                         <div className="image-left">
                           <img
-                            src={job.logoUrl}
-                            alt={`logo for {job.companyName}`}
+                            src={job.logo_url}
+                            alt={`logo for job`}
                           />
                         </div>
                         <div className="left-info-card">
-                          <span className="job-name">{job.companyName}</span>
+                          <span className="job-name">{job.company.name}</span>
                           <br />
                           <span className="location-content">
                             {job.location}
