@@ -58,6 +58,8 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: { name: 'company_id', allowNull: false },
             onDelete: 'CASCADE',
         });
+
+        Job.belongsToMany(models.users, { through: 'users_and_jobs' });
     };
 
     return Job;

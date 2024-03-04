@@ -42,11 +42,14 @@ exports.post = async (req, res) => {
     return res.status(statusCodes.OK).send({ id: job.id });
 };
 
-exports.getById = async (req, res) => {
+exports.get = async (req, res) => {
     logger.info('job get request recieved.');
-    const jobId = req.body.jobId;
 
-    console.assert(jobId);
+    const jobId = req.body.jobId;
+    const userId = req.body.userId;
+    const companyId = req.body.companyId;
+
+    console.assert(jobId, 'jobId not provided.');
 
     const job = await jobs.findOne({ where: { id: jobId } });
     if (!job) {
@@ -54,8 +57,16 @@ exports.getById = async (req, res) => {
         return res.status(statusCodes.BAD_REQUEST).send({ message: 'job not found.' });
     }
 
+    let result = job.toJSON();
+
+    if (userId) {
+        const has = await job.hasUser(userId);
+        result['applied'] = has;
+
+        logger.info('added user relation info.');
+    }
     logger.info('job details sent back.');
-    return res.status(statusCodes.OK).send(job.toJSON());
+    return res.status(statusCodes.OK).send(result);
 };
 
 exports.getJobs = async (req, res) => {
@@ -69,4 +80,53 @@ exports.getJobs = async (req, res) => {
         logger.error('internal server error.', err);
         res.status(500).send('internal server error');
     }
+};
+
+exports.apply = async (req, res) => {
+    try {
+        logger.info('user job apply request recieved.');
+
+        const userId = req.body.userId;
+        const jobId = req.body.jobId;
+
+        console.assert(userId, 'userId not provided.');
+        console.assert(jobId, 'jobId not provided.');
+
+        const job = await jobs.findByPk(jobId);
+        if (!job) {
+            logger.info(`job doesn't exists.`);
+            return res.status(statusCodes.BAD_REQUEST).send(`job doesn't exists.`);
+        }
+
+        const alreadyApplied = await job.hasUser(userId);
+        if (alreadyApplied) {
+            logger.info('user has already applied for the job.');
+            return res.status(statusCodes.CONTINUE).send('user has already applied for the job.');
+        }
+
+        await job.addUser(userId);
+        logger.info('user successfully applied for the job.');
+        return res.status(statusCodes.OK).send('user successfully applied for the job.');
+    } catch (err) {
+        logger.error('internal server error.', err);
+        return res.status(statusCodes.INTERNAL_SERVER_ERROR);
+    }
+};
+
+exports.getApplications = async (req, res) => {
+    logger.info('get job applications request recieved.');
+
+    const jobId = req.body.jobId;
+    console.assert(jobId, 'jobId not provided.');
+
+    const job = await jobs.findByPk(jobId);
+    if (!job) {
+        logger.info(`job doesn't exists.`);
+        return res.status(statusCodes.BAD_REQUEST).send(`job doesn't exists.`);
+    }
+
+    const applications = await job.getUsers();
+
+    logger.info('returned applications.');
+    return res.status(statusCodes.OK).send(applications);
 };

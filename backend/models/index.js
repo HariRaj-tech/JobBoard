@@ -45,14 +45,8 @@ companies.associate(sequelize.models);
 users.associate(sequelize.models);
 jobs.associate(sequelize.models);
 
-logger.info(`updating table 'companies' to match the model.`);
-companies.sync({ alter: true });
-
-logger.info(`updating table 'users' to match the model.`);
-users.sync({ alter: true });
-
-logger.info(`updating table 'jobs' to match the model.`);
-jobs.sync({ alter: true });
+logger.info(`updating database schema...`);
+sequelize.sync({ alter: true });
 
 module.exports.Sequelize = Sequelize;
 module.exports.sequelize = sequelize;
