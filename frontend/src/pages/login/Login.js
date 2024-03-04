@@ -7,10 +7,10 @@ import airBallon from "../../assets/air-balloon.svg";
 import { alertContext } from "../../components/context/Context";
 import bottomimg from "../../assets/loginbottom.svg";
 
-export default function Login({setUserRole}) {
+export default function Login({ setUserRole }) {
   const { showAlert } = useContext(alertContext);
 
-  
+
 
   let navigate = useNavigate();
   const [errors, setErrors] = useState({});
@@ -55,6 +55,8 @@ export default function Login({setUserRole}) {
 
     for (const field of requiredFields) {
       if (!loginData[field]) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        showAlert("Please fill in all fields");
         return;
       }
     }
@@ -71,12 +73,12 @@ export default function Login({setUserRole}) {
 
       if (data.status === 200) {
         // alert("Loged in successfully");
-        
+
         showAlert("Log in successfull");
         console.log(data);
         setUserRole(loginData.role);
         if (loginData.role === "user") {
-          
+
           localStorage.setItem('id', data.data.id);
           navigate("/");
         }
@@ -85,13 +87,16 @@ export default function Login({setUserRole}) {
           navigate("/companyhomepage");
         }
         console.log("Loged in");
-      } else {
-        alert("Put valid data");
-        console.log("Login failed:", data.statusText);
       }
+      //  else {
+      //   alert("Put valid data");
+      //   console.log("Login failed:", data.statusText);
+      // }
     } catch (err) {
-      console.log("An error occured", err);
-      alert("Put Valid Data");
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      showAlert(err.response.data);
+      // console.log("An error occured", err.response.data.message);
+      // alert("Put Valid Data");
     }
   };
 

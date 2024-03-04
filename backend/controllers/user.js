@@ -46,7 +46,7 @@ exports.login = async (req, res) => {
 
         return res
             .status(statusCodes.BAD_REQUEST)
-            .send({ status: false, message: 'email and password are required.' });
+            .send('email and password are required.');
     }
 
     const user = await users.findOne({ where: { email: user_details.email } });
@@ -54,14 +54,14 @@ exports.login = async (req, res) => {
         logger.info(`user doesn't exists`);
         return res
             .status(statusCodes.BAD_REQUEST)
-            .send({ status: false, message: "user doesn't exist." });
+            .send("user doesn't exist.");
     }
 
     if (user_details.password != user.password) {
         logger.info(`user password doesn't match.`);
         return res
             .status(statusCodes.BAD_REQUEST)
-            .send({ status: false, message: "user password doesn't match" });
+            .send("user password doesn't match");
     }
 
     logger.info('user login succesfull.');

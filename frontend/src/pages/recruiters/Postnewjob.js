@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { alertContext } from "../../components/context/Context";
 import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css";
 import Button from "react-bootstrap/Button";
@@ -8,7 +9,9 @@ import "../findJob/findJob.css";
 import { useNavigate } from "react-router-dom";
 
 const Postnewjob = () => {
- 
+
+  const { showAlert } = useContext(alertContext);
+
   const companyId = localStorage.getItem("id");
   let navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -51,9 +54,10 @@ const Postnewjob = () => {
 
     for (const field of requiredFields) {
       if (!formData[field]) {
-        alert(
+        showAlert(
           `Please fill in ${field.replace(/([A-Z])/g, " $1").toLowerCase()}`
         );
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
         return;
       }
     }
@@ -66,7 +70,8 @@ const Postnewjob = () => {
       );
 
       if (response.status === 200) {
-        alert("Successfully registered your job");
+        showAlert("Successfully registered your job");
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
         navigate("/companyhomepage");
         console.log("Registration Complete");
       } else {

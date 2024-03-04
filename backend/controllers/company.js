@@ -65,7 +65,7 @@ exports.login = async (req, res) => {
 
     if (company_details.password != company.password) {
         logger.info("company login request rejected, password doesn't match.");
-        return res.status(statusCodes.BAD_REQUEST).send("company doesn't exist.");
+        return res.status(statusCodes.BAD_REQUEST).send("password doesn't match");
     }
 
     logger.info('company login successfull.');

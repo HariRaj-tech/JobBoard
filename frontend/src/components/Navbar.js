@@ -8,8 +8,8 @@ export default function Navbar() {
 
   const handleLogoutClick = () => {
     localStorage.removeItem('id');
-    navigate('/login');
-    showAlert("Logout successfull")
+    navigate("/login");
+    showAlert("Logout successful")
 
   }
 

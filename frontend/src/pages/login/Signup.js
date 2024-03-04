@@ -68,7 +68,8 @@ export default function Signup() {
         !formData.userPassword ||
         !formData.userConfirmPassword
       ) {
-        alert("Please fill in all fields");
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        showAlert("Please fill in all fields");
         return;
       }
       if (formData.userPassword !== formData.userConfirmPassword) {
@@ -101,7 +102,8 @@ export default function Signup() {
         !formData.companyPassword ||
         !formData.companyConfirmPassword
       ) {
-        alert("Please fill in all fields");
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        showAlert("Please fill in all fields");
         return;
       }
       if (formData.companyPassword !== formData.companyConfirmPassword) {
@@ -144,10 +146,14 @@ export default function Signup() {
           }
         );
       }
+
       showAlert("Account created successfully");
       console.log("Form data submitted:", response.data);
       navigate("/login");
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     } catch (error) {
+      showAlert(error.response.data);
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
       console.error("Error submitting form:", error);
     }
   };
@@ -207,9 +213,8 @@ export default function Signup() {
                   value={formData[field.name]}
                   onChange={handleInputChange}
                   required
-                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${
-                    errors[field.name] ? "border-red-500 " : ""
-                  } `}
+                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors[field.name] ? "border-red-500 " : ""
+                    } `}
                 />
                 {errors[field.name] && (
                   <p className="text-red-500">{errors[field.name]}</p>

@@ -28,7 +28,7 @@ function App() {
     setAlert(message);
     setTimeout(() => {
       setAlert(null)
-    }, 1500);
+    }, 3000);
   }
 
   const [userRole, setUserRole] = useState("user");

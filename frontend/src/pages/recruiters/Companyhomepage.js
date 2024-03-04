@@ -6,10 +6,11 @@ export default function Companydetails() {
 
     const companyData = {
         name: 'AliThemes',
-        field: 'Finance',
+        // field: 'Finance',
         about: "The AliStudio Design team has a vision to establish a trusted platform that enables productive and healthy enterprises in a world of digital and remote everything, constantly changing work patterns and norms, and the need for organizational resiliency.The ideal candidate will have strong creative skills and a portfolio of work which demonstrates their passion for illustrative design and typography.This candidate will have experiences in working with numerous different design platforms such as digital and print forms.",
-        location: 'Chicago, US',
-        isRemoteFriendly: true,
+        // location: 'Chicago, US',
+        ownerName:"lovish",
+        // isRemoteFriendly: true,
         salaryRange: '$35k-$45k',
         memberSince: 'Jul 2012',
         lastJobsPosted: '4 days',
@@ -53,12 +54,12 @@ export default function Companydetails() {
                     <h2 className="text-lg font-bold mb-2">About Us</h2>
                     <p>{companyData.about}</p>
 
-                    <h2 className="text-lg font-bold mb-2 mt-6">Essential Knowledge, Skills, and Experience</h2>
+                    {/* <h2 className="text-lg font-bold mb-2 mt-6">Essential Knowledge, Skills, and Experience</h2>
                     <ul className="list-disc ml-4 list-outside">
                         {companySkills.map((skill) => {
                             return <li>{skill}</li>
                         })}
-                    </ul>
+                    </ul> */}
                 </div>
 
                 {/* Company Information */}
@@ -67,19 +68,19 @@ export default function Companydetails() {
                     <dl className="grid grid-cols-2 gap-4">
                         <dt className="font-bold"><i className="fa-solid fa-tag mr-2"></i>Name</dt>
                         <dd>{companyData.name}</dd>
-                        <dt className="font-bold"><i className="fa-solid fa-briefcase mr-2"></i>Field</dt>
-                        <dd>{companyData.field}</dd>
+                        {/* <dt className="font-bold"><i className="fa-solid fa-briefcase mr-2"></i>Field</dt>
+                        <dd>{companyData.field}</dd> */}
                         <dt className="font-bold"><i className="fa-solid fa-location-dot mr-2"></i>Location</dt>
                         <dd>
                             {companyData.location},
                             {companyData.isRemoteFriendly && ' Remote Friendly'}
                         </dd>
-                        <dt className="font-bold"><i className="fa-solid fa-dollar-sign mr-2"></i>Salary</dt>
-                        <dd>{companyData.salaryRange}</dd>
+                        {/* <dt className="font-bold"><i className="fa-solid fa-dollar-sign mr-2"></i>Salary</dt>
+                        <dd>{companyData.salaryRange}</dd> */}
                         <dt className="font-bold"><i className="fa-solid fa-clock mr-2"></i>Member since</dt>
                         <dd>{companyData.memberSince}</dd>
-                        <dt className="font-bold"><i class="fa-solid fa-clock-rotate-left mr-2"></i>Last Jobs Posted</dt>
-                        <dd>{companyData.lastJobsPosted}</dd>
+                        {/* <dt className="font-bold"><i class="fa-solid fa-clock-rotate-left mr-2"></i>Last Jobs Posted</dt>
+                        <dd>{companyData.lastJobsPosted}</dd> */}
                         <dt className="font-bold"><i class="fa-solid fa-map-location-dot mr-2"></i>Address</dt>
                         <dd>{companyData.address}</dd>
                         <dt className="font-bold"><i className="fa-solid fa-phone mr-2"></i>Phone</dt>
