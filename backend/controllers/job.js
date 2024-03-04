@@ -22,7 +22,6 @@ exports.post = async (req, res) => {
     console.assert(jobDetails.company_id, 'company_id not provided.');
     console.assert(jobDetails.title, 'title not provided.');
     console.assert(jobDetails.type, 'type not provided.');
-    console.assert(jobDetails.level, 'level not provided.');
     console.assert(jobDetails.industry, 'industry not provided.');
     console.assert(jobDetails.location, 'location not provided.');
     console.assert(jobDetails.experience, 'experience not provided.');
