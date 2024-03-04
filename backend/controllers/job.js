@@ -93,8 +93,7 @@ exports.apply = async (req, res) => {
         console.assert(jobId, 'jobId not provided.');
 
         const job = await jobs.findByPk(jobId);
-        if (!job)
-        {
+        if (!job) {
             logger.info(`job doesn't exists.`);
             return res.status(statusCodes.BAD_REQUEST).send(`job doesn't exists.`);
         }
@@ -112,4 +111,22 @@ exports.apply = async (req, res) => {
         logger.error('internal server error.', err);
         return res.status(statusCodes.INTERNAL_SERVER_ERROR);
     }
+};
+
+exports.getApplications = async (req, res) => {
+    logger.info('get job applications request recieved.');
+
+    const jobId = req.body.jobId;
+    console.assert(jobId, 'jobId not provided.');
+
+    const job = await jobs.findByPk(jobId);
+    if (!job) {
+        logger.info(`job doesn't exists.`);
+        return res.status(statusCodes.BAD_REQUEST).send(`job doesn't exists.`);
+    }
+
+    const applications = await job.getUsers();
+
+    logger.info('returned applications.');
+    return res.status(statusCodes.OK).send(applications);
 };

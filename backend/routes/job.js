@@ -6,5 +6,6 @@ router.post('/postJob', controller.post)
 router.get('/', controller.get)
 router.get('/getJobs', controller.getJobs);
 router.post('/apply', controller.apply);
+router.get('/applications', controller.getApplications);
 
 module.exports = router;
