@@ -5,11 +5,12 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import "../findJob/style.css";
 import "../findJob/findJob.css";
-import FindJob from "../findJob/findJob";
+import { useNavigate } from "react-router-dom";
 
 const Postnewjob = () => {
-  const [registrationComplete, setRegistrationComplete] = useState(false);
+ 
   const companyId = localStorage.getItem("id");
+  let navigate = useNavigate();
   const [formData, setFormData] = useState({
     location: "",
     title: "",
@@ -64,9 +65,9 @@ const Postnewjob = () => {
         formData
       );
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         alert("Successfully registered your job");
-        setRegistrationComplete(true);
+        navigate("/");
         console.log("Registration Complete");
       } else {
         console.error("Registration failed:", response.statusText);
