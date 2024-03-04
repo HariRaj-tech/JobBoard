@@ -67,7 +67,7 @@ const Postnewjob = () => {
 
       if (response.status === 200) {
         alert("Successfully registered your job");
-        navigate("/");
+        navigate("/companyhomepage");
         console.log("Registration Complete");
       } else {
         console.error("Registration failed:", response.statusText);
