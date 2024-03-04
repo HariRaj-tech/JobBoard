@@ -3,7 +3,7 @@ const router = express.Router();
 const controller = require('../controllers/job');
 
 router
-    .post('/', controller.post)
+    .post('/postJob', controller.post)
     .get('/', controller.getById)
     .get('/getJobs', controller.getJobs);
 

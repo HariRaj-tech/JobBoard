@@ -16,7 +16,7 @@ exports.post = async (req, res) => {
         skills: req.body.skills,
         salary: req.body.salary,
         deadline: req.body.deadline,
-        about: req.body.about,
+        description: req.body.description,
     };
 
     console.assert(jobDetails.company_id, 'company_id not provided.');
@@ -29,7 +29,7 @@ exports.post = async (req, res) => {
     console.assert(jobDetails.skills, 'skills not provided.');
     console.assert(jobDetails.salary, 'salary not provided.');
     console.assert(jobDetails.deadline, 'deadline not provided.');
-    console.assert(jobDetails.about, 'about not provided.');
+    console.assert(jobDetails.description, 'description not provided.');
 
     const company = await companies.findByPk(jobDetails.company_id);
     if (!company) {
