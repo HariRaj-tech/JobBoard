@@ -45,9 +45,8 @@ exports.post = async (req, res) => {
 exports.get = async (req, res) => {
     logger.info('job get request recieved.');
 
-    const jobId = req.body.jobId;
-    const userId = req.body.userId;
-    const companyId = req.body.companyId;
+    const jobId = req.params.jobId;
+    const userId = req.query.userId;
 
     console.assert(jobId, 'jobId not provided.');
 
@@ -73,7 +72,13 @@ exports.getJobs = async (req, res) => {
     try {
         logger.info('job get all request recieved.');
 
-        const Jobs = await jobs.findAll({ include: companies });
+        let query = { include: companies };
+
+        if (req.query.userId) {
+
+        }
+
+        const Jobs = await jobs.findAll(query);
         logger.info('all jobs returned.');
         res.status(200).json(Jobs);
     } catch (err) {
