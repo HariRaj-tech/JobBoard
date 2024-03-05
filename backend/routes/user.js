@@ -8,7 +8,7 @@ const upload = multer({ storage: storage });
 
 router.post('/signup', controller.signup);
 router.post('/login', controller.login);
-router.get('/', controller.get);
+router.get('/:id', controller.get);
 router.post('/resume', upload.single('resume'), controller.postResume);
 router.get('/resume', controller.getResume);
 

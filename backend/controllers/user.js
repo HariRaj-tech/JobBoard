@@ -68,7 +68,7 @@ exports.get = async (req, res) => {
     const userId = req.params.id;
 
     if (!userId) {
-        logger.info('user id is null.');
+        logger.info('userId is null.');
         return res.status(statusCodes.BAD_REQUEST).send('provide user id.');
     }
 
