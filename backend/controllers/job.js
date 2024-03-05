@@ -90,7 +90,7 @@ exports.getJobs = async (req, res) => {
         res.status(200).json(Jobs);
     } catch (err) {
         logger.error('internal server error.', err);
-        res.status(500).send('internal server error');
+        res.status(statusCodes.INTERNAL_SERVER_ERROR).send();
     }
 };
 
