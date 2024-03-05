@@ -7,21 +7,24 @@ exports.signup = async (req, res) => {
     try {
         logger.info('company create request recieved.');
 
-        const company_details = {
+        const companyDetails = {
             name: req.body.name,
-            owner_name: req.body.ownerName,
-            address: req.body.address,
             email: req.body.email,
             password: req.body.password,
+            address: req.body.address,
+            owner_name: req.body.ownerName,
+            contact_number: req.body.contactNumber,
+            contact_email: req.body.contactEmail,
+            about: req.body.about,
         };
 
-        if (!company_details.email) {
-            logger.info('company create request rejected, email not provided.', company_details);
+        if (!companyDetails.email) {
+            logger.info('company create request rejected, email not provided.', companyDetails);
             return res.status(statusCodes.BAD_REQUEST).send('invalid company request.');
         }
 
         const existing_company = await companies.findOne({
-            where: { email: company_details.email },
+            where: { email: companyDetails.email },
         });
 
         if (existing_company) {
@@ -29,7 +32,7 @@ exports.signup = async (req, res) => {
             return res.status(400).send('a company with this email already exists');
         }
 
-        const company = await companies.create(company_details);
+        const company = await companies.create(companyDetails);
         logger.info('company created successfully.', company.toJSON());
 
         return res.status(statusCodes.OK).send({ status: true, company: company.toJSON() });
@@ -42,28 +45,28 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
     logger.info('company login request recieved.');
 
-    const company_details = {
+    const companyDetails = {
         email: req.body.email,
         password: req.body.password,
     };
 
-    if (!company_details.email) {
+    if (!companyDetails.email) {
         logger.info('company login request rejected, email not provided.');
         return res.status(statusCodes.BAD_REQUEST).send('email not provided.');
     }
 
-    if (!company_details.password) {
+    if (!companyDetails.password) {
         logger.info('company login request rejected, password not provided.');
         return res.status(statusCodes.BAD_REQUEST).send('password not provided.');
     }
 
-    const company = await companies.findOne({ where: { email: company_details.email } });
+    const company = await companies.findOne({ where: { email: companyDetails.email } });
     if (!company) {
         logger.info("company login request rejected, company doesn't exist.");
         return res.status(statusCodes.BAD_REQUEST).send("company doesn't exist.");
     }
 
-    if (company_details.password != company.password) {
+    if (companyDetails.password != company.password) {
         logger.info("company login request rejected, password doesn't match.");
         return res.status(statusCodes.BAD_REQUEST).send("password doesn't match");
     }
