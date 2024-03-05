@@ -25,6 +25,12 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 unique: true,
             },
+            contact_number: {
+                type: DataTypes.INTEGER,
+            },
+            contact_email: {
+                type: DataTypes.STRING,
+            },
         },
         {
             modelName: 'company',
