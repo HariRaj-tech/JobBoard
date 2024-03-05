@@ -54,7 +54,7 @@ const FindJob = () => {
           response = locationResponse.data.jobs;
         } else {
           const allJobsResponse = await axios.get(
-            "http://localhost:8080/api/job/getJobs"
+            "http://localhost:8080/api/job"
           );
           response = allJobsResponse.data;
         }
