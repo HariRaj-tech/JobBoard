@@ -76,7 +76,7 @@ exports.get = async (req, res) => {
     try {
         logger.info('company get request recieved.');
 
-        const companyId = req.body.companyId;
+        const companyId = req.params.id;
         console.assert(companyId, 'companyId not provided.');
 
         const company = await companies.findByPk(companyId);
