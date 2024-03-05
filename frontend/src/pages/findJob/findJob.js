@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./findJob.css";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
 
 const FindJob = () => {
   const [jobData, setJobdata] = useState([]);
@@ -10,11 +11,13 @@ const FindJob = () => {
   const [typeFilter, setTypeFilter] = useState("");
   const [salaryFilter, setSalaryFilter] = useState(null);
   const [locationFilter, setLocationFilter] = useState("");
-
+  let navigate = useNavigate();
   const [searchParams, setSearchParams] = useState({
     industry: 0,
     location: 0,
   });
+
+  
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -54,7 +57,7 @@ const FindJob = () => {
           response = locationResponse.data.jobs;
         } else {
           const allJobsResponse = await axios.get(
-            "http://localhost:8080/api/job"
+            "http://localhost:8080/api/job/getJobs"
           );
           response = allJobsResponse.data;
         }
@@ -99,6 +102,10 @@ const FindJob = () => {
     experienceFilter,
     typeFilter,
   ]);
+
+  const handleClick = (jobId)=>{
+    navigate(`/jobinfo?jobId=${jobId}`);
+  };
 
   return (
     <>
@@ -916,10 +923,7 @@ const FindJob = () => {
                       <div className="card-header d-flex">
                         <span className="flash" />
                         <div className="image-left">
-                          <img
-                            src={job.logo_url}
-                            alt={`logo for job`}
-                          />
+                          <img src={job.logo_url} alt={`logo for job`} />
                         </div>
                         <div className="left-info-card">
                           <span className="job-name">{job.company.name}</span>
@@ -958,8 +962,8 @@ const FindJob = () => {
                               </span>
                             </div>
                             <div className="col-6 col-lg-6">
-                              <div className="btn btn-apply mx-4">
-                                Apply Now
+                              <div className="btn btn-apply mx-4 " onClick = {()=> handleClick(job.id)}>
+                                View Details
                               </div>
                             </div>
                           </div>
