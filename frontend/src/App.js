@@ -20,6 +20,8 @@ import Alert from './pages/about/Alert.js';
 import { alertContext } from './components/context/Context.js';
 import CompanyNavbar from './components/CompanyNavbar.js';
 
+import Temppage from './pages/recruiters/Temppage.js';
+
 function App() {
 
   const [alert, setAlert] = useState(null);
@@ -53,6 +55,7 @@ function App() {
               <Route path="/companyhomepage" element={<Companyhomepage />} />
               <Route path="/postnewjob" element={<Postnewjob />} />
               <Route path="/findJob" element={<FindJob />} />
+              <Route path="/temppage" element={<Temppage/>} />
             </Routes>
           </div>
         </alertContext.Provider>
