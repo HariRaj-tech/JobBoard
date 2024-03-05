@@ -81,9 +81,9 @@ exports.get = async (req, res) => {
     return res.status(statusCodes.OK).send(user.toJSON());
 };
 
-exports.uploadResume = async (req, res) => {
+exports.postResume = async (req, res) => {
     try {
-        logger.info('upload resume request recieved.');
+        logger.info('resume post request recieved.');
 
         const userId = req.body.userId;
         const resume = req.file;
@@ -97,26 +97,45 @@ exports.uploadResume = async (req, res) => {
             return res.status(statusCodes.BAD_REQUEST).send('user not found.');
         }
 
-        user.resume = resume.buffer;
-        user.save();
+        if (user.resume) {
+            user.resume = resume.buffer;
+            user.save();
 
-        logger.info('resume uploaded successfully.');
-        return res.status(statusCodes.OK).send('resume uploaded successfully.');
+            logger.info('resume updated successfully.');
+            return res.status(statusCodes.OK).send('resume updated successfully.');
+        } else {
+            user.resume = resume.buffer;
+            user.save();
+
+            logger.info('resume posted successfully.');
+            return res.status(statusCodes.OK).send('resume posted successfully.');
+        }
     } catch (error) {
         logger.info('internal server error.', error);
         return res.status(statusCodes.INTERNAL_SERVER_ERROR).send();
     }
 };
 
-exports.downloadResume = async (req, res) => {
+exports.getResume = async (req, res) => {
     try {
-        logger.info('download resume request recieved.');
+        logger.info('resume get request recieved.');
 
         const userId = req.body.userId;
         console.assert(userId, 'userId not provided.');
 
-        logger.info('resume downloaded successfully.');
-        return res.status(statusCodes.OK).send('resume downloaded successfully.');
+        const user = await users.findByPk(userId);
+        if (!user) {
+            logger.info('user not found.');
+            return res.status(statusCodes.BAD_REQUEST).send('user not found.');
+        }
+
+        if (!user.resume) {
+            logger.info('no resume was posted.');
+            return res.status(statusCodes.CONTINUE).send('no resume was posted.');
+        }
+
+        logger.info('resume sent successfully.');
+        return res.status(statusCodes.OK).send({ buffer: user.resume });
     } catch (error) {
         logger.info('internal server error.');
         return res.status(statusCodes.INTERNAL_SERVER_ERROR).send();
