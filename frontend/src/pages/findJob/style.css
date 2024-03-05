@@ -71,10 +71,10 @@ option {
 }
 
 /* images */
-
-.heroRow {
-  gap: 200px;
+.container {
+  width: auto !important;
 }
+
 @media (max-width: 1200px) {
   .images {
     display: none !important;
@@ -83,6 +83,31 @@ option {
 
 .shape-1 {
   animation: hero-thumb-animation 2s linear infinite alternate;
+}
+
+.heading-banner {
+  font-size: 40px;
+  line-height: 60px;
+  font-weight: bold;
+  color: #05264e;
+}
+
+.banner {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 450px) {
+  .heading-banner {
+    font-size: 20px;
+    line-height: 40px;
+  }
+  .banner {
+    font-weight: bold;
+  }
+  .color-brand-2 {
+    font-size: 24px;
+    line-height: 30px;
+  }
 }
 
 .banner-image {
@@ -528,15 +553,19 @@ h4 {
 h5 {
   font-family: Plus Jakarta Sans, sans-serif;
   font-style: normal;
+  font-size: 1.25 rem !important;
   font-weight: 700 !important;
-  line-height: 26px !important;
 }
 .count-h1 {
   color: #3c65f5;
   font-size: 56px;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 56px;
   line-height: 71px;
+}
+
+.mx-50 {
+  margin-left: 25%;
 }
 
 .count-p {
@@ -544,6 +573,7 @@ h5 {
   font-size: 14px !important;
   line-height: 22px !important;
   color: #4f5e64;
+  margin-top: 5px;
 }
 
 /* Footer */
@@ -658,6 +688,10 @@ body {
   border: thin solid #e0e6f7;
 }
 
+.card-grid-4 img {
+  display: inline;
+}
+
 .card-grid-4 .img-grid {
   height: 125px;
   border-radius: 50%;
@@ -685,8 +719,13 @@ body {
   }
 }
 
+.login-register {
+  display: inline-block;
+}
+
 .login-register-cover {
   color: #05264e !important;
+  justify-content: center !important;
 }
 
 .pt-100 {

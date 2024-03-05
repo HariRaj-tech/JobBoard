@@ -7,9 +7,10 @@ export default function Navbar() {
   let navigate = useNavigate();
 
   const handleLogoutClick = () => {
-    localStorage.removeItem('email');
-    showAlert("Logout successfull")
+    localStorage.removeItem('id');
     navigate('/login');
+    showAlert("Logout successfull")
+
   }
 
   return (
@@ -23,7 +24,7 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center space-x-4">
-          {!localStorage.getItem('email') ? <><Link Link to="/login" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Login</Link>
+          {!localStorage.getItem('id') ? <><Link Link to="/login" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Login</Link>
             <Link to="/signup" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Signup</Link></> :
             <div><Link to="/signup" onClick={handleLogoutClick} className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Logout</Link></div>}
         </div>

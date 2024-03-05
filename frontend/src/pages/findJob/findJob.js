@@ -53,7 +53,9 @@ const FindJob = () => {
           );
           response = locationResponse.data.jobs;
         } else {
-          const allJobsResponse = await axios.get("/jobs/allJobs");
+          const allJobsResponse = await axios.get(
+            "http://localhost:8080/api/job/getJobs"
+          );
           response = allJobsResponse.data;
         }
 
@@ -79,7 +81,7 @@ const FindJob = () => {
 
         if (typeFilter) {
           response = response.filter(
-            (job) => job.jobType.toLowerCase() === typeFilter.toLowerCase()
+            (job) => job.type.toLowerCase() === typeFilter.toLowerCase()
           );
         }
 
@@ -915,12 +917,12 @@ const FindJob = () => {
                         <span className="flash" />
                         <div className="image-left">
                           <img
-                            src={job.logoUrl}
-                            alt={`logo for {job.companyName}`}
+                            src={job.logo_url}
+                            alt={`logo for job`}
                           />
                         </div>
                         <div className="left-info-card">
-                          <span className="job-name">{job.companyName}</span>
+                          <span className="job-name">{job.company.name}</span>
                           <br />
                           <span className="location-content">
                             {job.location}
@@ -929,13 +931,13 @@ const FindJob = () => {
                       </div>
                       <div className="card-content ">
                         <h6 style={{ fontWeight: 600, fontSize: 16 }}>
-                          {job.jobTitle}
+                          {job.title}
                         </h6>
-                        <span className="p-card mx-2">{job.jobType}</span>
+                        <span className="p-card mx-2">{job.type}</span>
                         <span className="p-card mx-4">{job.experience}</span>
                         <p className=" py-3 p-card ">{job.description}</p>
                         <div className="mt-30">
-                          {job.jobSkills.map((skill, index) => (
+                          {job.skills.map((skill, index) => (
                             <a
                               key={index}
                               href="/"

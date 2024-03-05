@@ -1,5 +1,5 @@
 const statusCodes = require('http-status-codes').StatusCodes;
-const users = require('models/user');
+const users = require('models/index').users;
 const logger = require('services/logger');
 
 exports.signup = async (req, res) => {
@@ -65,5 +65,24 @@ exports.login = async (req, res) => {
     }
 
     logger.info('user login succesfull.');
-    return res.status(statusCodes.OK).send({ status: true, user: user.toJSON() });
+    return res.status(statusCodes.OK).send({ id: user.id });
+};
+
+exports.getById = async (req, res) => {
+    logger.info('user get request recieved.');
+
+    const userId = req.params.id;
+
+    if (!userId) {
+        logger.info('user id is null.');
+        return res.status(statusCodes.BAD_REQUEST).send('provide user id.');
+    }
+
+    const user = await users.findOne({ where: { id: userId } });
+    if (!user) {
+        logger.info(`user for id '${userId}' not found.`);
+        return res.status(statusCodes.BAD_REQUEST).send('user not found.');
+    }
+
+    return res.status(statusCodes.OK).send(user.toJSON());
 };

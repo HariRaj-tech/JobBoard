@@ -1,30 +1,66 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('./index');
-const logger = require('services/logger');
-
-class Job extends Model {}
-
-Job.init(
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
+module.exports = (sequelize, DataTypes) => {
+    const Job = sequelize.define(
+        'jobs',
+        {
+            id: {
+                type: DataTypes.INTEGER,
+                autoIncrement: true,
+                primaryKey: true,
+            },
+            title: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            type: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            industry: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            location: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            experience: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            skills: {
+                type: DataTypes.ARRAY(DataTypes.STRING),
+            },
+            salary: {
+                type: DataTypes.FLOAT,
+                allowNull: false,
+            },
+            deadline: {
+                type: DataTypes.DATE,
+                allowNull: false,
+            },
+            logo_url: {
+                type: DataTypes.STRING,
+                defaultValue: 'https://jobbox-nextjs-v3.vercel.app/assets/imgs/brands/brand-1.png',
+            },
+            description: {
+                type: DataTypes.STRING,
+            },
         },
-        title: {
-            type: DataTypes.STRING,
-            allowNull: false,
+        {
+            modelName: 'job',
+            tableName: 'jobs',
+            underscored: true,
         },
-    },
-    {
-        sequelize,
-        modelName: 'job',
-        tableName: 'jobs',
-        underscored: true,
-    },
-);
+    );
 
-Job.sync({ alter: true });
-logger.info(`table 'jobs' is updated to match the model.`);
+    Job.associate = (models) => {
+        Job.belongsTo(models.companies, {
+            foreignKey: { name: 'company_id', allowNull: false },
+            onDelete: 'CASCADE',
+        });
 
-module.exports = Job;
+        Job.belongsToMany(models.users, { through: 'users_and_jobs' });
+    };
+
+    return Job;
+};

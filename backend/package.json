@@ -17,6 +17,7 @@
         "winston": "^3.11.0"
     },
     "devDependencies": {
+        "@types/cors": "^2.8.17",
         "nodemon": "^2.0.22",
         "prettier": "^3.2.5"
     }

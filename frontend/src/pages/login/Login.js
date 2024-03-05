@@ -7,8 +7,11 @@ import airBallon from "../../assets/air-balloon.svg";
 import { alertContext } from "../../components/context/Context";
 import bottomimg from "../../assets/loginbottom.svg";
 
-export default function Login() {
+export default function Login({setUserRole}) {
   const { showAlert } = useContext(alertContext);
+
+  
+
   let navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [loginData, setLoginData] = useState({
@@ -29,7 +32,7 @@ export default function Login() {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const isValidEmail = emailRegex.test(value);
 
-      //Username must be at least 3 characters
+      //Username must be at least 5 characters
       const validUsername = value.length >= 5;
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -68,10 +71,19 @@ export default function Login() {
 
       if (data.status === 200) {
         // alert("Loged in successfully");
+        
         showAlert("Log in successfull");
-        localStorage.setItem('email', loginData.email);
-        if (loginData.role === "user") { navigate("/"); }
-        else if (loginData.role === "company") { navigate("/companyhomepage") }
+        console.log(data);
+        setUserRole(loginData.role);
+        if (loginData.role === "user") {
+          
+          localStorage.setItem('id', data.data.id);
+          navigate("/");
+        }
+        else if (loginData.role === "company") {
+          localStorage.setItem('id', data.data.id);
+          navigate("/companyhomepage");
+        }
         console.log("Loged in");
       } else {
         alert("Put valid data");

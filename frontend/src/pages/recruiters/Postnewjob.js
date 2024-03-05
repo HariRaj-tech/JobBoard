@@ -1,158 +1,245 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from "react";
+import TagsInput from "react-tagsinput";
+import "react-tagsinput/react-tagsinput.css";
+import Button from "react-bootstrap/Button";
 import axios from "axios";
-import { alertContext } from '../../components/context/Context';
-import { useNavigate } from 'react-router-dom';
+import "../findJob/style.css";
+import "../findJob/findJob.css";
+import { useNavigate } from "react-router-dom";
 
-export default function Postnewjob() {
+const Postnewjob = () => {
+ 
+  const companyId = localStorage.getItem("id");
+  let navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    location: "",
+    title: "",
+    description: "",
+    experience: "",
+    type: "",
+    industry: "",
+    salary: "",
+    deadline: "",
+    skills: [],
+    companyId: companyId,
+  });
 
-    const { showAlert } = useContext(alertContext);
-    let navigate = useNavigate();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
-    const [jobDetails, setJobDetails] = useState({
-        name: '',
-        title: '',
-        industry: '',
-        joblevel: '',
-        experience: '',
-        salary: '',
-        location: '',
-        deadline: '',
-        jobtype: 'permanent',
-        about: '',
-        skills: [],
-    })
+  const handleSkillsChange = (tags) => {
+    setFormData((prevData) => ({ ...prevData, skills: tags }));
+  };
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setJobDetails({
-            ...jobDetails,
-            [name]: value,
-        });
-    };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    const handleSkillsChange = (event) => {
-        const skillsArray = event.target.value.split(',').map((skill) => skill.trim());
-        setJobDetails({
-            ...jobDetails,
-            skills: skillsArray
-        });
-    };
+    // Validate required fields
+    const requiredFields = [
+      "location",
+      "title",
+      "description",
+      "experience",
+      "type",
+      "deadline",
+      "industry",
+      "salary",
+      "skills",
+    ];
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    for (const field of requiredFields) {
+      if (!formData[field]) {
+        alert(
+          `Please fill in ${field.replace(/([A-Z])/g, " $1").toLowerCase()}`
+        );
+        return;
+      }
+    }
 
-        if (
-            !jobDetails.name ||
-            !jobDetails.industry ||
-            !jobDetails.title ||
-            !jobDetails.experience ||
-            !jobDetails.joblevel ||
-            !jobDetails.salary ||
-            !jobDetails.location ||
-            !jobDetails.deadline ||
-            !jobDetails.jobtype ||
-            !jobDetails.about ||
-            jobDetails.skills.length === 0
-        ) {
-            alert('Please fill in all required fields and enter at least one skill.');
-            return;
-        }
+    try {
+      console.log(formData.companyId);
+      const response = await axios.post(
+        "http://localhost:8080/api/job/postJob",
+        formData
+      );
 
-        try {
-            console.log('sending job post request.')
-            const result = await axios.post('http://localhost:8080/api/job', jobDetails);
+      if (response.status === 200) {
+        alert("Successfully registered your job");
+        navigate("/companyhomepage");
+        console.log("Registration Complete");
+      } else {
+        console.error("Registration failed:", response.statusText);
+      }
+    } catch (err) {
+      console.log("An error occured:", err);
+    }
+    // Add your form submission logic here
+  };
 
-            if (result.status == 200) {
-                console.log('job posted successfully.');
-                // alert("job posted successfully");
-                navigate("/companyhomepage");
-                showAlert("job posted successfully");
-                
-            }
-            else {
-                console.log('job could not be posted.', result);
-                // alert('job could not be posted.');
-                showAlert('job could not be posted');
-            }
-        }
-        catch (err) {
-            console.log('unknwon error occured.');
-            alert('unkown error occured.');
-        }
-    };
+  return (
+    <>
+      <section className="pt-100">
+        <div className="container">
+          <div className="login-register-cover justify-content-center">
+            <div className="text-center">
+              <div className="text-center">
+                <p className="font-sm">Post The Job</p>
+                <h2 className="mt-10">Make Hiring Effortless</h2>
+                <p className="login-text-p">
+                  Access to all features. No credit card required.
+                </p>
+              </div>
 
-    return (
-        <div className='container mx-auto px-4 py-8 h-screen'>
-            <div className="max-w-md mx-auto">
-                <h4 className='text-center'>Post New Job</h4>
-                <form className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4' onSubmit={handleSubmit}>
+              <form className="mt-50 login-register mx-auto justify-content-center">
+                <div className="row">
+                  <div className="mb-3 col-lg-4 col-md-6 col-sm-12 form-group">
+                    <label className=" form-label text-start">Job Title</label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      placeholder="Full Stack Developer"
+                      name="title"
+                      value={formData.title}
+                      onChange={handleChange}
+                    ></input>
+                  </div>
+                  <div className="mb-3 mx-auto col-lg-4 col-md-6 col-sm-12 form-group">
+                    <label className=" form-label text-start">Location</label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      placeholder="New York, US"
+                      name="location"
+                      value={formData.location}
+                      onChange={handleChange}
+                    ></input>
+                  </div>
+                </div>
+                {/* <div className="row">
+                  
+                </div> */}
+                <div className="row">
+                  <div className="mb-3 col-lg-4 col-md-6 col-sm-12 form-group">
+                    <label className=" form-label text-start">Experience</label>
+                    <select
+                      className="form-control"
+                      name="experience"
+                      value={formData.experience}
+                      onChange={handleChange}
+                    >
+                      <option>Select Experience</option>
+                      <option>Entry Level</option>
+                      <option>Internship</option>
+                      <option>Associate</option>
+                      <option>Mid Level</option>
+                      <option>Director</option>
+                      <option>Executive</option>
+                    </select>
+                  </div>
+                  <div className="mb-3 mx-auto col-lg-4 col-md-6 col-sm-12 form-group">
+                    <label className=" form-label text-start">Job Type</label>
+                    <select
+                      className="form-control"
+                      name="type"
+                      value={formData.type}
+                      onChange={handleChange}
+                    >
+                      <option>Select Job Type</option>
+                      <option>Full Time</option>
+                      <option>Part Time</option>
+                      <option>Remote</option>
+                      <option>Freelance</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="mb-3 col-lg-4 col-md-6 col-sm-12 form-group">
+                    <label className=" form-label text-start">Industry</label>
+                    <select
+                      className="form-control"
+                      name="industry"
+                      value={formData.industry}
+                      onChange={handleChange}
+                    >
+                      <option>Select Industry</option>
+                      <option>Software</option>
+                      <option>Management</option>
+                      <option>Finance</option>
+                      <option>Recruiting</option>
+                      <option>Marketing</option>
+                    </select>
+                  </div>
+                  <div className="mb-3 mx-auto col-lg-4 col-md-6 col-sm-12 form-group">
+                    <label className=" form-label text-start">Salary</label>
+                    <input
+                      className="form-control"
+                      type="number"
+                      step="0.1"
+                      placeholder="Write in LPA"
+                      name="salary"
+                      value={formData.salary}
+                      onChange={handleChange}
+                    ></input>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="mb-3 col-lg-4 col-md-6 col-sm-12 form-group">
+                    <label className="form-label text-start">Job Skills*</label>
+                    <TagsInput
+                      className="form-control"
+                      value={formData.skills}
+                      name="skills"
+                      onChange={handleSkillsChange}
+                      inputProps={{
+                        placeholder: "Enter skills",
+                        style: { width: "240px" },
+                      }}
+                    />
+                  </div>
+                  <div className="mb-3 mx-auto col-lg-4 col-md-6 col-sm-12 form-group">
+                    <label className=" form-label text-start">Deadline*</label>
+                    <input
+                      className="form-control"
+                      type="date"
+                      placeholder="24/01/2024"
+                      name="deadline"
+                      value={formData.deadline}
+                      onChange={handleChange}
+                    ></input>
+                  </div>
+                </div>
 
-                    <div className=''>
-                        <label htmlFor="name" className='block text-gray-700 text-sm font-bold mb-2'>Company Name *</label>
-                        <input type="text" name="name" id="name" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" />
-                    </div>
-                    <div className=''>
-                        <label htmlFor="title" className='block text-gray-700 text-sm font-bold mb-2'>Title *</label>
-                        <input type="text" name="title" id="title" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" />
-                    </div>
-                    <div className=''>
-                        <label htmlFor="industry" className='block text-gray-700 text-sm font-bold mb-2'>Industry *</label>
-                        <input type="text" name="industry" id="industry" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" />
-                    </div>
+                <div className="row">
+                  <div className="mb-3 w-full form-group">
+                    <label className=" form-label text-start">
+                      Job Description
+                    </label>
+                    <textarea
+                      className="form-control w-full"
+                      placeholder="Describe your job in detail..."
+                      name="description"
+                      value={formData.description}
+                      onChange={handleChange}
+                    ></textarea>
+                  </div>
+                </div>
 
-                    <div className="">
-                        <label htmlFor="skills" className="block text-gray-700 text-sm font-bold mb-2">
-                            Skills required * (comma-separated)
-                        </label>
-                        <input
-                            type="text"
-                            name="skills"
-                            id="skills"
-                            onChange={handleSkillsChange}
-                            required
-                            className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8"
-                        />
-                    </div>
-                    <div className=''>
-                        <label htmlFor="joblevel" className='block text-gray-700 text-sm font-bold mb-2'>JobLevel *</label>
-                        <input type="text" name="joblevel" id="joblevel" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" />
-                    </div>
-                    <div className=''>
-                        <label htmlFor="experience" className='block text-gray-700 text-sm font-bold mb-2'>Experience *</label>
-                        <input type="text" name="experience" id="experience" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" />
-                    </div>
-                    <div className=''>
-                        <label htmlFor="salary" className='block text-gray-700 text-sm font-bold mb-2'>Salary (in lakhs) *</label>
-                        <input type="text" name="salary" id="salary" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" />
-                    </div>
-                    <div className=''>
-                        <label htmlFor="jobtype" className='block text-gray-700 text-sm font-bold mb-2'>JobType *</label>
-                        <select name="jobtype" id="jobtype" onChange={handleInputChange} required className="shadow  border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8">
-                            <option value="permanent">Permanent</option>
-                            <option value="internship">Internship</option>
-                            <option value="fulltime">Fulltime</option>
-                            <option value="parttime">Parttime</option>
-                        </select>
-                    </div>
-                    <div className=''>
-                        <label htmlFor="location" className='block text-gray-700 text-sm font-bold mb-2'>Location *</label>
-                        <input type="text" name="location" id="location" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" />
-                    </div>
-                    <div className=''>
-                        <label htmlFor="about" className='block text-gray-700 text-sm font-bold mb-2'>About the company *</label>
-                        <textarea type="text" name="about" id="about" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" rows="4" />
-                    </div>
-
-                    <div className=''>
-                        <label htmlFor="deadline" className='block text-gray-700 text-sm font-bold mb-2'>Deadline *</label>
-                        <input type="date" name="deadline" id="deadline" onChange={handleInputChange} required className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" />
-                    </div>
-
-                    <div className='text-center'>
-                        <input type="submit" name="post" value="submit" id="post" className="text-white text-lg bg-blue-600 p-2 rounded-lg hover:bg-blue-800 hover:cursor-pointer " />
-                    </div>
-                </form>
+                <Button
+                  className="px-5 mb-50 mt-10 py-3 bg-[#3c65f5] text-white  rounded-md hover:bg-[#05264e]  focus:ring-4 focus:outline-none focus:ring-blue-300"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  Post Job
+                </Button>
+              </form>
             </div>
+          </div>
         </div>
-    )
-}
+      </section>
+    </>
+  );
+};
+
+export default Postnewjob;

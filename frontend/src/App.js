@@ -16,9 +16,10 @@ import About from './pages/about/About.js';
 import Companyhomepage from './pages/recruiters/Companyhomepage.js'
 import Postnewjob from './pages/recruiters/Postnewjob.js';
 import FindJob from './pages/findJob/findJob.js';
-import Footer from './components/Footer.js';
+import Userprofile from './pages/profile/Userprofile.js';
 import Alert from './pages/about/Alert.js';
 import { alertContext } from './components/context/Context.js';
+import CompanyNavbar from './components/CompanyNavbar.js';
 
 function App() {
 
@@ -31,28 +32,29 @@ function App() {
     }, 1500);
   }
 
-
+  const [userRole, setUserRole] = useState("user");
 
 
   return (
     <>
       <Router>
         <alertContext.Provider value={{ alert, showAlert }}>
+          {userRole === "user" ? <Navbar /> : <CompanyNavbar setUserRole={setUserRole} />}
           <div className="app">
-            <Navbar />
             <Alert />
             <Routes>
               <Route
                 path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<Login setUserRole={setUserRole} />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/companydetails" element={<Companydetails />} />
-              <Route path="/apply" element={<Applyjob />} />
+              <Route path="/jobinfo" element={<Applyjob />} />
               <Route path="/companyhomepage" element={<Companyhomepage />} />
               <Route path="/postnewjob" element={<Postnewjob />} />
               <Route path="/findJob" element={<FindJob />} />
+              <Route path="/userprofile" element={<Userprofile />} />
             </Routes>
             {/* <Footer/> */}
           </div>
