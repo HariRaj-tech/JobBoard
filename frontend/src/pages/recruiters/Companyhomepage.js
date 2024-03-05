@@ -6,15 +6,7 @@ import brand from '../../assets/brand.png'
 
 export default function Temppage() {
 
-    const [companyData, setCompanyData] = useState({
-        // name: "AliThemes",
-        // ownerName: "Sai Vikas",
-        // about: "The AliStudio Design team has a vision to establish a trusted platform that enables productive and healthy enterprises in a world of digital and remote everything, constantly changing work patterns and norms, and the need for organizational resiliency.The ideal candidate will have strong creative skills and a portfolio of work which demonstrates their passion for illustrative design and typography.This candidate will have experiences in working with numerous different design platforms such as digital and print forms.",
-        // memberSince: 'Jul 2012',
-        // address: '205 North Michigan Avenue, Suite 810 Chicago. 60601, USA',
-        // phone: '(123) 456-7890',
-        // email: 'contact@Evara.com',
-    });
+    const [companyData, setCompanyData] = useState({});
 
     const jobCard = {
         title: "Full Stack developer",
@@ -27,19 +19,25 @@ export default function Temppage() {
 
 
     useEffect(() => {
-        if (localStorage.getItem('id')) {
-            const id = localStorage.getItem('id');
-            axios.get(`http://localhost:8080/api/company/${id}`)
-                .then(response => {
-                    const data = response.data;
-                    setCompanyData(data);
-                    console.log(data);
-                })
-                .catch(error => {
-                    console.error('Error fetching user details:', error);
-                })
+        async function fetchData() {
+            try {
+                if (localStorage.getItem('id')) {
+                    const id = localStorage.getItem('id');
+                    const response = await axios.get(`http://localhost:8080/api/company/${id}`);
+                        if(response.status===200) {
+                            const data = response.data;
+                            setCompanyData(data);
+                            console.log(data);
+                        }
+                }
+            }catch (error) {
+                console.error('Error fetching Company details:', error);
+            }
         }
+        fetchData();
     }, [])
+
+    
 
     const date = new Date(companyData.createdAt);
     const memberSince = date.toLocaleString('default', { month: 'long', year: 'numeric' });
