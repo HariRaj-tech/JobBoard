@@ -35,7 +35,7 @@ exports.signup = async (req, res) => {
         const company = await companies.create(companyDetails);
         logger.info('company created successfully.', company.toJSON());
 
-        return res.status(statusCodes.OK).send({ status: true, company: company.toJSON() });
+        return res.status(statusCodes.OK).send(company.id);
     } catch (err) {
         logger.error(err);
         return res.status(statusCodes.INTERNAL_SERVER_ERROR).send('internal server error');
