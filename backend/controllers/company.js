@@ -72,6 +72,27 @@ exports.login = async (req, res) => {
     return res.status(statusCodes.OK).send({ id: company.id });
 };
 
+exports.get = async (req, res) => {
+    try {
+        logger.info('company get request recieved.');
+
+        const companyId = req.body.companyId;
+        console.assert(companyId, 'companyId not provided.');
+
+        const company = await companies.findByPk(companyId);
+        if (!company) {
+            logger.info('company not found.');
+            return res.status(statusCodes.BAD_REQUEST).send('company not found.');
+        }
+
+        logger.info('company details sent.');
+        return res.status(statusCodes.OK).send(company.toJSON());
+    } catch (error) {
+        logger.info('internal server error.', error);
+        return res.status(statusCodes.INTERNAL_SERVER_ERROR).send();
+    }
+};
+
 exports.getAllJobs = async (req, res) => {
     logger.info('get all jobs request recieved.');
 
