@@ -17,8 +17,6 @@ const FindJob = () => {
     location: 0,
   });
 
-  
-
   const handleSearch = async (e) => {
     e.preventDefault();
 
@@ -57,7 +55,7 @@ const FindJob = () => {
           response = locationResponse.data.jobs;
         } else {
           const allJobsResponse = await axios.get(
-            "http://localhost:8080/api/job/getJobs"
+            "http://localhost:8080/api/job/"
           );
           response = allJobsResponse.data;
         }
@@ -103,7 +101,7 @@ const FindJob = () => {
     typeFilter,
   ]);
 
-  const handleClick = (jobId)=>{
+  const handleClick = (jobId) => {
     navigate(`/jobinfo?jobId=${jobId}`);
   };
 
@@ -962,7 +960,10 @@ const FindJob = () => {
                               </span>
                             </div>
                             <div className="col-6 col-lg-6">
-                              <div className="btn btn-apply mx-4 " onClick = {()=> handleClick(job.id)}>
+                              <div
+                                className="btn btn-apply mx-4 "
+                                onClick={() => handleClick(job.id)}
+                              >
                                 View Details
                               </div>
                             </div>
