@@ -45,6 +45,7 @@ function Applyjob() {
     const handleApplyClick = async () => {
         setLoading(true); // Show loading UI
         setTimeout(() => {
+            
             setLoading(false); // Hide loading UI after a delay
             setApplied(true); // Mark the job as applied
             showAlert("Job applied successfully");

@@ -21,6 +21,8 @@ import Alert from './pages/about/Alert.js';
 import { alertContext } from './components/context/Context.js';
 import CompanyNavbar from './components/CompanyNavbar.js';
 
+
+
 function App() {
 
   const [alert, setAlert] = useState(null);
@@ -29,7 +31,7 @@ function App() {
     setAlert(message);
     setTimeout(() => {
       setAlert(null)
-    }, 1500);
+    }, 3000);
   }
 
   const [userRole, setUserRole] = useState("user");

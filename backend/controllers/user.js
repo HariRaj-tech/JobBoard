@@ -44,37 +44,31 @@ exports.login = async (req, res) => {
     if (!user_details.email || !user_details.password) {
         logger.info('invalid request.', user_details);
 
-        return res
-            .status(statusCodes.BAD_REQUEST)
-            .send({ status: false, message: 'email and password are required.' });
+        return res.status(statusCodes.BAD_REQUEST).send('email and password are required.');
     }
 
     const user = await users.findOne({ where: { email: user_details.email } });
     if (!user) {
         logger.info(`user doesn't exists`);
-        return res
-            .status(statusCodes.BAD_REQUEST)
-            .send({ status: false, message: "user doesn't exist." });
+        return res.status(statusCodes.BAD_REQUEST).send("user doesn't exist.");
     }
 
     if (user_details.password != user.password) {
         logger.info(`user password doesn't match.`);
-        return res
-            .status(statusCodes.BAD_REQUEST)
-            .send({ status: false, message: "user password doesn't match" });
+        return res.status(statusCodes.BAD_REQUEST).send("user password doesn't match");
     }
 
     logger.info('user login succesfull.');
     return res.status(statusCodes.OK).send({ id: user.id });
 };
 
-exports.getById = async (req, res) => {
+exports.get = async (req, res) => {
     logger.info('user get request recieved.');
 
     const userId = req.params.id;
 
     if (!userId) {
-        logger.info('user id is null.');
+        logger.info('userId is null.');
         return res.status(statusCodes.BAD_REQUEST).send('provide user id.');
     }
 
@@ -85,4 +79,65 @@ exports.getById = async (req, res) => {
     }
 
     return res.status(statusCodes.OK).send(user.toJSON());
+};
+
+exports.postResume = async (req, res) => {
+    try {
+        logger.info('resume post request recieved.');
+
+        const userId = req.body.userId;
+        const resume = req.file;
+
+        console.assert(userId, 'userId not provided.');
+        console.assert(resume, 'resume not provided.');
+
+        const user = await users.findByPk(userId);
+        if (!user) {
+            logger.info('user not found.');
+            return res.status(statusCodes.BAD_REQUEST).send('user not found.');
+        }
+
+        if (user.resume) {
+            user.resume = resume.buffer;
+            user.save();
+
+            logger.info('resume updated successfully.');
+            return res.status(statusCodes.OK).send('resume updated successfully.');
+        } else {
+            user.resume = resume.buffer;
+            user.save();
+
+            logger.info('resume posted successfully.');
+            return res.status(statusCodes.OK).send('resume posted successfully.');
+        }
+    } catch (error) {
+        logger.info('internal server error.', error);
+        return res.status(statusCodes.INTERNAL_SERVER_ERROR).send();
+    }
+};
+
+exports.getResume = async (req, res) => {
+    try {
+        logger.info('resume get request recieved.');
+
+        const userId = req.body.userId;
+        console.assert(userId, 'userId not provided.');
+
+        const user = await users.findByPk(userId);
+        if (!user) {
+            logger.info('user not found.');
+            return res.status(statusCodes.BAD_REQUEST).send('user not found.');
+        }
+
+        if (!user.resume) {
+            logger.info('no resume was posted.');
+            return res.status(statusCodes.CONTINUE).send('no resume was posted.');
+        }
+
+        logger.info('resume sent successfully.');
+        return res.status(statusCodes.OK).send({ buffer: user.resume });
+    } catch (error) {
+        logger.info('internal server error.');
+        return res.status(statusCodes.INTERNAL_SERVER_ERROR).send();
+    }
 };

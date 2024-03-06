@@ -7,8 +7,13 @@ export default function Alert() {
 
     return (
         alert && (
-            <div className='mx-96 flex justify-center justify-self-center text-xl px-4 py-3 rounded-lg bg-blue-100 text-black font-bold text-center'>
-                {alert}
+            // <div className='mx-96 flex justify-center justify-self-center text-xl px-4 py-3 rounded-lg bg-blue-100 text-black font-bold text-center'>
+            //     {alert}
+            // </div>
+            <div className='flex justify-center items-center'>
+                <div className='w-1/2 text-xl bg-blue-300 text-black font-bold rounded-lg py-3 text-center'>
+                    {alert}
+                </div>
             </div>
         )
     );

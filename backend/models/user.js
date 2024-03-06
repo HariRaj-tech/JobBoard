@@ -24,6 +24,9 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            resume: {
+                type: DataTypes.BLOB,
+            },
         },
         {
             modelName: 'user',
