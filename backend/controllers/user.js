@@ -16,8 +16,8 @@ exports.signup = async (req, res) => {
             languages: req.body.userLanguages,
             skills: req.body.userSkills,
             about: req.body.userAbout,
-            image: req.files[0].buffer,
-            resume: req.files[1].buffer,
+            image: req.files && req.files[0].buffer,
+            resume: req.files && req.files[1].buffer,
         };
 
         if (!user_details.email) {
@@ -30,11 +30,10 @@ exports.signup = async (req, res) => {
             return res.status(400).send('this email already exists');
         }
 
-        const user = await users.create(user_details);
-        const userId = user.id;
-        logger.info('user created successfully.', userId);
-
-        return res.status(statusCodes.OK).send(userId);
+        users.create(user_details).then((user) => {
+            logger.info('user created successfully.', user.userId);
+            return res.status(statusCodes.ACCEPTED).json({ user: user.userId });
+        });
     } catch (err) {
         logger.error(err);
         return res.status(statusCodes.INTERNAL_SERVER_ERROR).send();

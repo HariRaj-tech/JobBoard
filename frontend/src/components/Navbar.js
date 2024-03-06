@@ -40,7 +40,6 @@ export default function Navbar() {
           {!localStorage.getItem("id") ? (
             <>
               <Link
-                Link
                 to="/login"
                 className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
               >
@@ -54,7 +53,13 @@ export default function Navbar() {
               </Link>
             </>
           ) : (
-            <div>
+            <>
+              <Link
+                to="/userprofile"
+                className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+              >
+                Profile
+              </Link>
               <Link
                 to="/signup"
                 onClick={handleLogoutClick}
@@ -62,7 +67,7 @@ export default function Navbar() {
               >
                 Logout
               </Link>
-            </div>
+            </>
           )}
         </div>
       </div>

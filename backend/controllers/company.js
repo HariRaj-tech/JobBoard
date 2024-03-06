@@ -1,5 +1,4 @@
 const statusCodes = require('http-status-codes').StatusCodes;
-const { BAD_REQUEST } = require('http-status-codes');
 const logger = require('services/logger');
 const companies = require('models/index').companies;
 const jobs = require('models/index').jobs;

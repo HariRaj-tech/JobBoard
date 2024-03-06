@@ -52,7 +52,12 @@ function Applyjob() {
     fetchData();
   }, [userId, jobId]);
 
-  console.log(jobInfo);
+  // console.log(jobInfo);
+  let deadline;
+
+  if (jobInfo.deadline && !isNaN(new Date(jobInfo.deadline))) {
+    deadline = jobInfo.deadline.substring(0, 10);
+  }
 
   const [loading, setLoading] = useState(false); // State to track loading status
   const [applied, setApplied] = useState(false); // State to track if job is applied
@@ -126,8 +131,13 @@ function Applyjob() {
               onClick={handleApplyClick}
               disabled={loading || applied} // Disable button during loading or after job is applied
             >
-              {jobInfo.applied ? "Applied" : (loading ? "Applying.." : (applied ? "Applied" : "Apply now"))}
-
+              {jobInfo.applied
+                ? "Applied"
+                : loading
+                ? "Applying.."
+                : applied
+                ? "Applied"
+                : "Apply now"}
             </button>
           </div>
         </div>
@@ -195,7 +205,7 @@ function Applyjob() {
                   </div>
                   <div className="content">
                     <span>Deadline</span>
-                    <strong>{jobInfo.deadline}</strong>
+                    <strong>{deadline}</strong>
                   </div>
                 </div>
               </div>
@@ -269,7 +279,7 @@ function Applyjob() {
               <div className="address-container">
                 <ul>
                   <li>Address: {jobInfo.company && jobInfo.company.address}</li>
-                  <li>Phone: {jobInfo.company && jobInfo.company.phone}</li>
+                  <li>Phone: {jobInfo.company && jobInfo.company.contact_number}</li>
                   <li>Email: {jobInfo.company && jobInfo.company.email}</li>
                 </ul>
               </div>
