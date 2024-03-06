@@ -86,7 +86,7 @@ function Userprofile() {
                         <div className="md:flex items-center justify-between">
                             <div className="md:w-[66.6%]">
                                 <div className="flex gap-3">
-                                    <h5 className="text-[18px]">{userInfo.first_name} </h5>
+                                    <h5 className="text-[18px]">{userInfo.first_name + ('' && userInfo.last_name)} </h5>
                                     {userInfo.location && <span style={{ 'background': `url(${locationicon}) no-repeat 0 3px` }} className="inline-block px-4 ">
                                         {userInfo.location}
                                     </span>}
@@ -114,16 +114,7 @@ function Userprofile() {
                                 <p className="mb-4 text-[16px] leading-8">
                                     {userInfo.about}
                                 </p>
-                                <h4 className="mb-4">Skills</h4>
-                                <ul className="flex gap-[10%] mb-4">
-                                    <div className="">
-                                        {userInfo.skills?.map((skill, index) => {
-                                            return (
-                                                <li key={index}>{skill}</li>
-                                            )
-                                        })}
-                                    </div>
-                                </ul>
+
                                 {/* <h4 className="mb-4">Work Experience</h4>
                                 <ul className="pl-3 mb-4">
                                     <li>A portfolio demonstrating well thought through and polished end to end customer journeys</li>
@@ -166,6 +157,14 @@ function Userprofile() {
                                             </span>
                                             <span className='block font-bold'>{userInfo.languages?.join(', ')}</span>
                                         </div>
+                                        <br></br>
+                                        <div>
+                                            <span className='block text-[16px]'>
+                                                Skills
+                                            </span>
+                                            <span className='block font-bold'>{userInfo.skills?.join(', ')}</span>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div className='mt-3'>
