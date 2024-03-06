@@ -7,5 +7,6 @@ router.get('/', controller.getJobs);
 router.get('/:userId/:jobId', controller.get)
 router.post('/apply/:userId/:jobId', controller.apply);
 router.get('/applications', controller.getApplications);
+router.get('/search', controller.searchJob);
 
 module.exports = router;

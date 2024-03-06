@@ -147,3 +147,37 @@ exports.getApplications = async (req, res) => {
         return res.status(statusCodes.INTERNAL_SERVER_ERROR);
     }
 };
+
+exports.searchJob = async (req, res) => {
+    try {
+        logger.info('search recieved');
+        const { industry, location } = req.query;
+
+        if (!industry && !location) {
+            return res.status(400).send('Industry or location is required');
+        }
+
+        if (!location) {
+            const Jobs = await jobs.findAll({
+                where: { industry },
+                include: [companies],
+            });
+            res.status(201).send({ status: true, Jobs });
+        } else if (!industry) {
+            const Jobs = await jobs.findAll({
+                where: { location },
+                include: [companies],
+            });
+            res.status(201).send({ status: true, Jobs });
+        } else {
+            const Jobs = await jobs.findAll({
+                where: { industry, location },
+                include: [companies],
+            });
+            res.status(201).send({ status: true, Jobs });
+        }
+    } catch (err) {
+        console.error('Error executing searchJob:', err);
+        res.status(500).send({ error: 'Internal Server Error' });
+    }
+};
