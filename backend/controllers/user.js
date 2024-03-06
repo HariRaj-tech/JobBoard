@@ -72,7 +72,9 @@ exports.get = async (req, res) => {
         return res.status(statusCodes.BAD_REQUEST).send('provide user id.');
     }
 
-    const user = await users.findOne({ where: { id: userId } });
+    const user = await users.findByPk(userId, {
+        attributes: { exclude: ['password', 'resume'] },
+    });
     if (!user) {
         logger.info(`user for id '${userId}' not found.`);
         return res.status(statusCodes.BAD_REQUEST).send('user not found.');

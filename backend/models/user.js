@@ -24,6 +24,15 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            languages: {
+                type: DataTypes.ARRAY(DataTypes.STRING),
+            },
+            skills: {
+                type: DataTypes.ARRAY(DataTypes.STRING),
+            },
+            about: {
+                type: DataTypes.STRING,
+            },
             resume: {
                 type: DataTypes.BLOB,
             },
