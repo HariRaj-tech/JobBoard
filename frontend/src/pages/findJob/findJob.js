@@ -21,26 +21,30 @@ const FindJob = () => {
     e.preventDefault();
 
     try {
-      const searchResponse = await axios.get("/search", {
-        params: {
-          industry:
-            searchParams.industry === 0
-              ? ""
-              : e.target[0].options[searchParams.industry].text,
-          location:
-            searchParams.location === 0
-              ? ""
-              : e.target[1].options[searchParams.location].text,
-        },
-      });
-
+      const searchResponse = await axios.get(
+        "http://localhost:8080/api/job/search",
+        {
+          params: {
+            industry:
+              searchParams.industry === 0
+                ? ""
+                : e.target[0].options[searchParams.industry].text,
+            location:
+              searchParams.location === 0
+                ? ""
+                : e.target[1].options[searchParams.location].text,
+          },
+        }
+      );
       // Handle the response data, e.g., update state with the fetched jobs
-      let response = searchResponse.data.jobs;
+      let response = searchResponse.data.Jobs;
+      // console.log("response", response);
       setJobdata(Array.isArray(response) ? response : []);
     } catch (error) {
       console.error("Error fetching jobs:", error);
     }
   };
+  // console.log(jobData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -193,7 +197,7 @@ const FindJob = () => {
                   </h5>
                 </div>
                 <div className="filter-block mb-30">
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <select
                       className="form-control form-icons"
                       onChange={(e) => setLocationFilter(e.target.value)}
@@ -212,7 +216,7 @@ const FindJob = () => {
                       src="https://img.icons8.com/?size=512&id=3723&format=png"
                       alt=""
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="filter-block mb-20">
                   <h5 className="mt-5">Industry</h5>
@@ -229,7 +233,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">All</span>
-                          <span className="number-item">180</span>
                         </label>
                       </li>
                       <li>
@@ -244,7 +247,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Software</span>
-                          <span className="number-item">12</span>
                         </label>
                       </li>
                       <li>
@@ -259,7 +261,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Management</span>
-                          <span className="number-item">10</span>
                         </label>
                       </li>
                       <li>
@@ -274,7 +275,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Finance</span>
-                          <span className="number-item">23</span>
                         </label>
                       </li>
                       <li>
@@ -289,7 +289,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Human Resource</span>
-                          <span className="number-item">43</span>
                         </label>
                       </li>
                       <li>
@@ -304,7 +303,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Marketing</span>
-                          <span className="number-item">76</span>
                         </label>
                       </li>
                       <li>
@@ -319,7 +317,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Technology</span>
-                          <span className="number-item">46</span>
                         </label>
                       </li>
                     </ul>
@@ -337,7 +334,6 @@ const FindJob = () => {
                             onChange={() => setSalaryFilter(null)}
                           />
                           <span className="text-small">All</span>
-                          <span className="number-item">140</span>
                         </label>
                       </li>
                       <li>
@@ -352,7 +348,6 @@ const FindJob = () => {
                             onChange={() => setSalaryFilter({ min: 0, max: 5 })}
                           />
                           <span className="text-small">Upto 5LPA</span>
-                          <span className="number-item">10</span>
                         </label>
                       </li>
                       <li>
@@ -369,7 +364,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">5LPA - 10LPA</span>
-                          <span className="number-item">24</span>
                         </label>
                       </li>
                       <li>
@@ -386,7 +380,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">10LPA - 30LPA</span>
-                          <span className="number-item">44</span>
                         </label>
                       </li>
                       <li>
@@ -403,7 +396,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">30LPA - 50 LPA</span>
-                          <span className="number-item">67</span>
                         </label>
                       </li>
                     </ul>
@@ -424,7 +416,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">All</span>
-                          <span className="number-item">140</span>
                         </label>
                       </li>
                       <li>
@@ -439,7 +430,7 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Internship</span>
-                          <span className="number-item">100</span>
+                          <span className="">100</span>
                         </label>
                       </li>
                       <li>
@@ -454,7 +445,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Entry Level</span>
-                          <span className="number-item">60</span>
                         </label>
                       </li>
                       <li>
@@ -469,7 +459,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Associate</span>
-                          <span className="number-item">34</span>
                         </label>
                       </li>
                       <li>
@@ -484,7 +473,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Mid Level</span>
-                          <span className="number-item">54</span>
                         </label>
                       </li>
                       <li>
@@ -499,7 +487,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Director</span>
-                          <span className="number-item">7</span>
                         </label>
                       </li>
                       <li>
@@ -514,7 +501,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Executive</span>
-                          <span className="number-item">57</span>
                         </label>
                       </li>
                     </ul>
@@ -535,7 +521,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">All</span>
-                          <span className="number-item">123</span>
                         </label>
                       </li>
                       <li>
@@ -548,7 +533,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Full Time</span>
-                          <span className="number-item">67</span>
                         </label>
                       </li>
                       <li>
@@ -561,7 +545,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Part Time</span>
-                          <span className="number-item">90</span>
                         </label>
                       </li>
                       <li>
@@ -576,7 +559,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Remote Jobs</span>
-                          <span className="number-item">54</span>
                         </label>
                       </li>
                       <li>
@@ -591,7 +573,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Freelancer</span>
-                          <span className="number-item">78</span>
                         </label>
                       </li>
                     </ul>
@@ -612,7 +593,9 @@ const FindJob = () => {
                           <img src={job.logo_url} alt={`logo for job`} />
                         </div>
                         <div className="left-info-card">
-                          <span className="job-name">{job.company.name}</span>
+                          <span className="job-name">
+                            {job.company && job.company.name}
+                          </span>
                           <br />
                           <span className="location-content">
                             {job.location}
