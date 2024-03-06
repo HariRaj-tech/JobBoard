@@ -21,8 +21,11 @@ export default function Signup() {
     ownerName: "",
     companyAddress: "",
     companyEmail: "",
+    contactEmail: "",
+    contactNumber: "",
     companyPassword: "",
     companyConfirmPassword: "",
+    about: "",
   });
 
   var inputFields = [
@@ -41,12 +44,15 @@ export default function Signup() {
       { name: "ownerName", label: "Owner Name *" },
       { name: "companyAddress", label: "Company Address *" },
       { name: "companyEmail", label: "Company Email Address *", type: "email" },
+      { name: "contactNumber", label: "Contact Number *" },
+      { name: "contactEmail", label: "Contact Email *" },
       { name: "companyPassword", label: "Password *", type: "password" },
       {
         name: "companyConfirmPassword",
         label: "confirmPassword *",
         type: "password",
       },
+
     ];
   }
   const handleInputChange = (e) => {
@@ -101,7 +107,10 @@ export default function Signup() {
         !formData.companyAddress ||
         !formData.companyEmail ||
         !formData.companyPassword ||
-        !formData.companyConfirmPassword
+        !formData.companyConfirmPassword ||
+        !formData.contactNumber ||
+        !formData.contactEmail ||
+        !formData.about
       ) {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
         showAlert("Please fill in all fields");
@@ -144,6 +153,9 @@ export default function Signup() {
             address: formData.companyAddress,
             email: formData.companyEmail,
             password: formData.companyPassword,
+            contactNumber: formData.contactNumber,
+            contactEmail: formData.contactEmail,
+            about: formData.about,
           }
         );
       }
@@ -220,8 +232,17 @@ export default function Signup() {
                 {errors[field.name] && (
                   <p className="text-red-500">{errors[field.name]}</p>
                 )}
+
               </div>
             ))}
+            {formData.role === 'company' && <div className="form-group mb-6">
+              <label className="form-label">About Company *</label>
+              <textarea name="about" value={formData["about"]} onChange={handleInputChange} required className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors["about"] ? "border-red-500 " : ""
+                } `} cols="30" rows="5" />
+              {errors["about"] && (
+                <p className="text-red-500">{errors["about"]}</p>
+              )}
+            </div>}
             <div className="form-group flex justify-between font-sm">
               <label className="form-label cursor-pointer">
                 <input type="checkbox" className="form-input cursor-pointer" />

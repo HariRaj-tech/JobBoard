@@ -1,19 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import companyimg from '../../assets/companyimg.png'
+import companyimg from '../../assets/companyimg.png';
+import axios from "axios";
 import brand from '../../assets/brand.png'
 
 export default function Temppage() {
 
-    const companyData = {
-        name: "AliThemes",
-        ownerName: "Vikas",
-        about: "The AliStudio Design team has a vision to establish a trusted platform that enables productive and healthy enterprises in a world of digital and remote everything, constantly changing work patterns and norms, and the need for organizational resiliency.The ideal candidate will have strong creative skills and a portfolio of work which demonstrates their passion for illustrative design and typography.This candidate will have experiences in working with numerous different design platforms such as digital and print forms.",
-        memberSince: 'Jul 2012',
-        address: '205 North Michigan Avenue, Suite 810 Chicago. 60601, USA',
-        phone: '(123) 456-7890',
-        email: 'contact@Evara.com',
-    };
+    const [companyData, setCompanyData] = useState({});
 
     const jobCard = {
         title: "Full Stack developer",
@@ -22,9 +15,32 @@ export default function Temppage() {
         skills: ["nodejs", "Reactjs", "python"],
         desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae similique incidunt quaerat ea reiciendis assumenda fugit harum adipisci eaque fuga porro veniam ullam nobis molestiae possimus hic, perferendis velit architecto!",
         salary: "500000"
-    }
+    };
 
 
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                if (localStorage.getItem('id')) {
+                    const id = localStorage.getItem('id');
+                    const response = await axios.get(`http://localhost:8080/api/company/${id}`);
+                        if(response.status===200) {
+                            const data = response.data;
+                            setCompanyData(data);
+                            console.log(data);
+                        }
+                }
+            }catch (error) {
+                console.error('Error fetching Company details:', error);
+            }
+        }
+        fetchData();
+    }, [])
+
+    
+
+    const date = new Date(companyData.createdAt);
+    const memberSince = date.toLocaleString('default', { month: 'long', year: 'numeric' });
 
     return (
         <div className='container'>
@@ -152,11 +168,11 @@ export default function Temppage() {
                     </div>
                     <div className='row'>
                         <div className='font-bold'><i className="fa-solid fa-user-tag mr-2"></i>Owner Name</div>
-                        <div className='ml-7'>{companyData.ownerName}</div>
+                        <div className='ml-7'>{companyData.owner_name}</div>
                     </div>
                     <div className='row'>
                         <div className='font-bold'><i className="fa-solid fa-clock mr-2"></i>Member Since</div>
-                        <div className='ml-6'>{companyData.memberSince}</div>
+                        <div className='ml-6'>{memberSince}</div>
                     </div>
                     <div className='row'>
                         <div className='font-bold'><i className="fa-solid fa-map-location-dot mr-2"></i>Address</div>
@@ -164,11 +180,11 @@ export default function Temppage() {
                     </div>
                     <div className='row'>
                         <div className='font-bold'><i className="fa-solid fa-phone mr-2"></i>Phone</div>
-                        <div className='ml-6'>{companyData.phone}</div>
+                        <div className='ml-6'>{companyData.contact_number}</div>
                     </div>
                     <div className='row'>
                         <div className='font-bold'><i className="fa-solid fa-envelope mr-2"></i>Email</div>
-                        <div className='ml-6'>{companyData.email}</div>
+                        <div className='ml-6'>{companyData.contact_email}</div>
                     </div>
                 </div>
             </div>

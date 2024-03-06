@@ -4,7 +4,7 @@ const controller = require('../controllers/job');
 
 router.post('/postJob', controller.post)
 router.get('/', controller.getJobs);
-router.get('/:id', controller.get)
+router.get('/:userId/:jobId', controller.get)
 router.post('/apply', controller.apply);
 router.get('/applications', controller.getApplications);
 

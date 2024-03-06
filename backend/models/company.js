@@ -21,14 +21,20 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            owner_name: {
+                type: DataTypes.STRING,
+            },
+            contact_number: {
+                type: DataTypes.STRING,
+            },
+            contact_email: {
+                type: DataTypes.STRING,
+            },
             address: {
                 type: DataTypes.STRING,
                 unique: true,
             },
-            contact_number: {
-                type: DataTypes.INTEGER,
-            },
-            contact_email: {
+            about: {
                 type: DataTypes.STRING,
             },
         },

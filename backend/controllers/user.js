@@ -29,7 +29,7 @@ exports.signup = async (req, res) => {
         return res.status(200).send({ status: true, user: user.toJSON() });
     } catch (err) {
         logger.error(err);
-        return res.status(statusCodes.INTERNAL_SERVER_ERROR).send('internal server error');
+        return res.status(statusCodes.INTERNAL_SERVER_ERROR).send();
     }
 };
 

@@ -18,19 +18,22 @@ const Home = () => {
     };
 
     useEffect(() => {
-        if (localStorage.getItem('id')) {
-            const id = localStorage.getItem('id');
-            axios.get(`http://localhost:8080/api/user/${id}`)
-                .then(response => {
-                    const data = response.data;
-                    setUserDetails(data);
-                    // console.log(data.first_name);
-                    console.log(data);
-                })
-                .catch(error => {
-                    console.error('Error fetching user details:', error);
-                })
+        async function fetchData() {
+            try {
+                if (localStorage.getItem('id')) {
+                    const id = localStorage.getItem('id');
+                    const response = await axios.get(`http://localhost:8080/api/user/${id}`);
+                    if (response.status === 200) {
+                        const data = response.data;
+                        setUserDetails(data);
+                        console.log(data);
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching user details:', error);
+            }
         }
+        fetchData();
     }, [])
 
     return (
