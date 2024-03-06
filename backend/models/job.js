@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
                 defaultValue: 'https://jobbox-nextjs-v3.vercel.app/assets/imgs/brands/brand-1.png',
             },
             description: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(2000),
             },
         },
         {
