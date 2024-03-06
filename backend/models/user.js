@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
             },
             contact_no: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.STRING,
             },
             location: {
                 type: DataTypes.STRING,
