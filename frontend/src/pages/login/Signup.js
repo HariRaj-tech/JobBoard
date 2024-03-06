@@ -170,11 +170,11 @@ export default function Signup() {
           userLocation: formData.userLocation,
           userLanguages: formData.userLanguages,
           userSkills: formData.userSkills,
-          userAbout:formData.userAbout,
+          userAbout: formData.userAbout,
         });
       } else if (formData.role === "company") {
-        response = await axios.post(
-          "http://localhost:8080/api/company/signup",
+        axios.post(
+          "http://localhost:8080/api/company/signup/",
           {
             name: formData.companyName,
             ownerName: formData.ownerName,
@@ -185,7 +185,9 @@ export default function Signup() {
             contactEmail: formData.contactEmail,
             about: formData.about,
           }
-        );
+        ).then((response) => {
+          console.log("Created");
+        });
       }
 
       showAlert("Account created successfully");
@@ -199,7 +201,7 @@ export default function Signup() {
     }
   };
 
-  
+
   return (
     <div className="main-container">
       <div className="login-container">
@@ -285,40 +287,40 @@ export default function Signup() {
               </div>
 
                 <div className="form-group mb-6">
-                <label className="form-label">Skills *</label>
-                <TagsInput
-                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors["userSkills"] ? "border-red-500 " : ""} `}
-                  value={formData.userSkills}
-                  name="userSkills"
-                  onChange={handleSkillsChange}
-                  inputProps={{
-                    placeholder: "Enter skills",
-                    style: { width: "240px" },
-                  }}
-                  required
-                />
-                {errors["userSkills"] && (
-                  <p className="text-red-500">{errors["userSkills"]}</p>
-                )}
-              </div>
-              
-              <div className="form-group mb-6">
-                <label className="form-label">Languages *</label>
-                <TagsInput
-                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors["userLanguages"] ? "border-red-500 " : ""} `}
-                  value={formData.userLanguages}
-                  name="userLanguages"
-                  onChange={handleLanguagesChange}
-                  inputProps={{
-                    placeholder: "Enter Languages",
-                    style: { width: "240px" },
-                  }}
-                  required
-                />
-                {errors["userLanguages"] && (
-                  <p className="text-red-500">{errors["userLanguages"]}</p>
-                )}
-              </div>
+                  <label className="form-label">Skills *</label>
+                  <TagsInput
+                    className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors["userSkills"] ? "border-red-500 " : ""} `}
+                    value={formData.userSkills}
+                    name="userSkills"
+                    onChange={handleSkillsChange}
+                    inputProps={{
+                      placeholder: "Enter skills",
+                      style: { width: "240px" },
+                    }}
+                    required
+                  />
+                  {errors["userSkills"] && (
+                    <p className="text-red-500">{errors["userSkills"]}</p>
+                  )}
+                </div>
+
+                <div className="form-group mb-6">
+                  <label className="form-label">Languages *</label>
+                  <TagsInput
+                    className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors["userLanguages"] ? "border-red-500 " : ""} `}
+                    value={formData.userLanguages}
+                    name="userLanguages"
+                    onChange={handleLanguagesChange}
+                    inputProps={{
+                      placeholder: "Enter Languages",
+                      style: { width: "240px" },
+                    }}
+                    required
+                  />
+                  {errors["userLanguages"] && (
+                    <p className="text-red-500">{errors["userLanguages"]}</p>
+                  )}
+                </div>
               </>}
             <div className="form-group flex justify-between font-sm">
               <label className="form-label cursor-pointer">
