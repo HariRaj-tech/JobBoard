@@ -25,6 +25,7 @@ export default function Signup() {
     userAbout: "",
     userPassword: "",
     userConfirmPassword: "",
+    resume: "",
     companyName: "",
     ownerName: "",
     companyAddress: "",
@@ -43,7 +44,11 @@ export default function Signup() {
     { name: "userLocation", label: "Location *" },
     { name: "userContactNumber", label: "Contact Number *" },
     { name: "userPassword", label: "Password *", type: "password" },
-    { name: "userConfirmPassword", label: "confirmPassword *", type: "password" },
+    {
+      name: "userConfirmPassword",
+      label: "confirmPassword *",
+      type: "password",
+    },
   ];
   if (formData.role === "company") {
     inputFields = [
@@ -59,7 +64,6 @@ export default function Signup() {
         label: "confirmPassword *",
         type: "password",
       },
-
     ];
   }
   const handleInputChange = (e) => {
@@ -79,6 +83,13 @@ export default function Signup() {
     setFormData((formData) => ({ ...formData, userLanguages: tags }));
   };
 
+  const handleResumeChange = (e) => {
+    const file = e.target.files[0];
+    setFormData({
+      ...formData,
+      resume: file,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,9 +106,10 @@ export default function Signup() {
         !formData.userContactNumber ||
         !formData.userAbout ||
         !formData.userSkills.length > 0 ||
-        !formData.userLanguages.length > 0
+        !formData.userLanguages.length > 0 ||
+        !formData.resume
       ) {
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         showAlert("Please fill in all fields");
         return;
       }
@@ -134,7 +146,7 @@ export default function Signup() {
         !formData.contactEmail ||
         !formData.about
       ) {
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         showAlert("Please fill in all fields");
         return;
       }
@@ -171,11 +183,11 @@ export default function Signup() {
           userLanguages: formData.userLanguages,
           userSkills: formData.userSkills,
           userAbout: formData.userAbout,
+          resume: formData.resume,
         });
       } else if (formData.role === "company") {
-        axios.post(
-          "http://localhost:8080/api/company/signup/",
-          {
+        axios
+          .post("http://localhost:8080/api/company/signup/", {
             name: formData.companyName,
             ownerName: formData.ownerName,
             address: formData.companyAddress,
@@ -184,22 +196,22 @@ export default function Signup() {
             contactNumber: formData.contactNumber,
             contactEmail: formData.contactEmail,
             about: formData.about,
-          }
-        ).then((response) => {
-          console.log("Created");
-        });
+          })
+          .then((response) => {
+            console.log("Created");
+          });
       }
 
       showAlert("Account created successfully");
+      console.log(formData.resume);
       navigate("/login");
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     } catch (error) {
       showAlert(error.response.data);
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
       console.error("Error submitting form:", error);
     }
   };
-
 
   return (
     <div className="main-container">
@@ -256,39 +268,62 @@ export default function Signup() {
                   value={formData[field.name]}
                   onChange={handleInputChange}
                   required
-                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors[field.name] ? "border-red-500 " : ""
-                    } `}
+                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${
+                    errors[field.name] ? "border-red-500 " : ""
+                  } `}
                 />
                 {errors[field.name] && (
                   <p className="text-red-500">{errors[field.name]}</p>
                 )}
-
               </div>
             ))}
-            {formData.role === 'company' && <div className="form-group mb-6">
-              <label className="form-label">About Company *</label>
-              <textarea name="about" value={formData["about"]} onChange={handleInputChange} required className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors["about"] ? "border-red-500 " : ""
-                } `} cols="30" rows="5" />
-              {errors["about"] && (
-                <p className="text-red-500">{errors["about"]}</p>
-              )}
-            </div>}
-
-            {/* user fields */}
-            {formData.role === 'user' &&
-              <><div className="form-group mb-6">
-                <label className="form-label">About yourself *</label>
-                <textarea name="userAbout" value={formData["userAbout"]} onChange={handleInputChange} required className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors["userAbout"] ? "border-red-500 " : ""
-                  } `} cols="30" rows="5" />
-                {errors["userAbout"] && (
-                  <p className="text-red-500">{errors["userAbout"]}</p>
+            {formData.role === "company" && (
+              <div className="form-group mb-6">
+                <label className="form-label">About Company *</label>
+                <textarea
+                  name="about"
+                  value={formData["about"]}
+                  onChange={handleInputChange}
+                  required
+                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${
+                    errors["about"] ? "border-red-500 " : ""
+                  } `}
+                  cols="30"
+                  rows="5"
+                />
+                {errors["about"] && (
+                  <p className="text-red-500">{errors["about"]}</p>
                 )}
               </div>
+            )}
+
+            {/* user fields */}
+            {formData.role === "user" && (
+              <>
+                <div className="form-group mb-6">
+                  <label className="form-label">About yourself *</label>
+                  <textarea
+                    name="userAbout"
+                    value={formData["userAbout"]}
+                    onChange={handleInputChange}
+                    required
+                    className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${
+                      errors["userAbout"] ? "border-red-500 " : ""
+                    } `}
+                    cols="30"
+                    rows="5"
+                  />
+                  {errors["userAbout"] && (
+                    <p className="text-red-500">{errors["userAbout"]}</p>
+                  )}
+                </div>
 
                 <div className="form-group mb-6">
                   <label className="form-label">Skills *</label>
                   <TagsInput
-                    className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors["userSkills"] ? "border-red-500 " : ""} `}
+                    className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${
+                      errors["userSkills"] ? "border-red-500 " : ""
+                    } `}
                     value={formData.userSkills}
                     name="userSkills"
                     onChange={handleSkillsChange}
@@ -306,7 +341,9 @@ export default function Signup() {
                 <div className="form-group mb-6">
                   <label className="form-label">Languages *</label>
                   <TagsInput
-                    className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors["userLanguages"] ? "border-red-500 " : ""} `}
+                    className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${
+                      errors["userLanguages"] ? "border-red-500 " : ""
+                    } `}
                     value={formData.userLanguages}
                     name="userLanguages"
                     onChange={handleLanguagesChange}
@@ -320,8 +357,19 @@ export default function Signup() {
                     <p className="text-red-500">{errors["userLanguages"]}</p>
                   )}
                 </div>
-              </>}
-            <div className="form-group flex justify-between font-sm">
+                <div className="form-group mb-6">
+                  <label className="form-label">Resume</label>
+                  <input
+                    type="file"
+                    name="resume"
+                    onChange={handleResumeChange}
+                    className="form-input border-0 text-gray-900 rounded-lg block w-full p-2.5 shadow-sm bg-gray-50"
+                    accept=".pdf,.doc,.docx"
+                  />
+                </div>
+              </>
+            )}
+            <div className="form-group flex mt-5 justify-between font-sm">
               <label className="form-label cursor-pointer">
                 <input type="checkbox" className="form-input cursor-pointer" />
                 Agree our terms and policy
