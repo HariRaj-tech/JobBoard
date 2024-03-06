@@ -7,9 +7,8 @@ exports.signup = async (req, res) => {
         logger.info('user create request received.');
 
         const user_details = {
-            // todo: change this to first_name.
-            first_name: req.body.name,
-            last_name: req.body.last_name,
+            first_name: req.body.firsName,
+            last_name: req.body.lastName,
             email: req.body.email,
             password: req.body.password,
             contact_no: req.body.contactNumber,
@@ -17,6 +16,8 @@ exports.signup = async (req, res) => {
             languages: req.body.languages,
             skills: req.body.skills,
             about: req.body.about,
+            image: req.files.image,
+            resume: req.files.resume,
         };
 
         if (!user_details.email) {
