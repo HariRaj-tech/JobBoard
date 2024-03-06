@@ -12,6 +12,8 @@ exports.signup = async (req, res) => {
             last_name: req.body.last_name,
             email: req.body.email,
             password: req.body.password,
+            contact_no: req.body.contactNumber,
+            location: req.body.location,
             languages: req.body.languages,
             skills: req.body.skills,
             about: req.body.about,
@@ -78,7 +80,17 @@ exports.get = async (req, res) => {
 
     const user = await users.findByPk(userId, {
         attributes: {
-            include: ['id', 'first_name', 'last_name', 'email', 'languages', 'skills', 'about'],
+            include: [
+                'id',
+                'first_name',
+                'last_name',
+                'email',
+                'contact_no',
+                'location',
+                'languages',
+                'skills',
+                'about',
+            ],
         },
     });
     if (!user) {

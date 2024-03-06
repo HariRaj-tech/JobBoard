@@ -24,6 +24,12 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            contact_no: {
+                type: DataTypes.INTEGER,
+            },
+            location: {
+                type: DataTypes.STRING,
+            },
             languages: {
                 type: DataTypes.ARRAY(DataTypes.STRING),
             },
