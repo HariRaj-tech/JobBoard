@@ -87,7 +87,7 @@ exports.getJobs = async (req, res) => {
 
         const Jobs = await jobs.findAll({ include: companies });
         logger.info('all jobs returned.');
-        res.status(200).json(Jobs);
+        res.status(statusCodes.OK).json(Jobs);
     } catch (err) {
         logger.error('internal server error.', err);
         res.status(statusCodes.INTERNAL_SERVER_ERROR).send();

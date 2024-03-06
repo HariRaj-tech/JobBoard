@@ -73,7 +73,9 @@ exports.get = async (req, res) => {
     }
 
     const user = await users.findByPk(userId, {
-        attributes: { exclude: ['password', 'resume'] },
+        attributes: {
+            include: ['id', 'first_name', 'last_name', 'email', 'languages', 'skills', 'about'],
+        },
     });
     if (!user) {
         logger.info(`user for id '${userId}' not found.`);
@@ -83,11 +85,72 @@ exports.get = async (req, res) => {
     return res.status(statusCodes.OK).send(user.toJSON());
 };
 
+exports.postImage = async (req, res) => {
+    try {
+        logger.info('image post request recieved.');
+
+        const userId = req.params.id;
+        const image = req.file;
+
+        console.assert(userId, 'userId not provided.');
+        console.assert(image, 'image not provided.');
+
+        const user = await users.findByPk(userId);
+        if (!user) {
+            logger.info('user not found.');
+            return res.status(statusCodes.BAD_REQUEST).send('user not found.');
+        }
+
+        if (user.image) {
+            user.image = image.buffer;
+            user.save();
+
+            logger.info('image updated successfully.');
+            return res.status(statusCodes.OK).send('image updated successfully.');
+        } else {
+            user.image = image.buffer;
+            user.save();
+
+            logger.info('image posted successfully.');
+            return res.status(statusCodes.OK).send('image posted successfully.');
+        }
+    } catch (error) {
+        logger.info('internal server error.', error);
+        return res.status(statusCodes.INTERNAL_SERVER_ERROR).send();
+    }
+};
+
+exports.getImage = async (req, res) => {
+    try {
+        logger.info('image get request recieved.');
+
+        const userId = req.params.id;
+        console.assert(userId, 'userId not provided.');
+
+        const user = await users.findByPk(userId);
+        if (!user) {
+            logger.info('user not found.');
+            return res.status(statusCodes.BAD_REQUEST).send('user not found.');
+        }
+
+        if (!user.image) {
+            logger.info('no image was posted.');
+            return res.status(statusCodes.CONTINUE).send('no image was posted.');
+        }
+
+        logger.info('image sent successfully.');
+        return res.status(statusCodes.OK).send({ buffer: user.image });
+    } catch (error) {
+        logger.info('internal server error.');
+        return res.status(statusCodes.INTERNAL_SERVER_ERROR).send();
+    }
+};
+
 exports.postResume = async (req, res) => {
     try {
         logger.info('resume post request recieved.');
 
-        const userId = req.body.userId;
+        const userId = req.params.id;
         const resume = req.file;
 
         console.assert(userId, 'userId not provided.');
@@ -122,7 +185,7 @@ exports.getResume = async (req, res) => {
     try {
         logger.info('resume get request recieved.');
 
-        const userId = req.body.userId;
+        const userId = req.params.id;
         console.assert(userId, 'userId not provided.');
 
         const user = await users.findByPk(userId);

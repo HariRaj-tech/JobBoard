@@ -1,4 +1,5 @@
 const statusCodes = require('http-status-codes').StatusCodes;
+const { BAD_REQUEST } = require('http-status-codes');
 const logger = require('services/logger');
 const companies = require('models/index').companies;
 const jobs = require('models/index').jobs;
@@ -29,7 +30,7 @@ exports.signup = async (req, res) => {
 
         if (existing_company) {
             logger.info('a company with this email already exists');
-            return res.status(400).send('a company with this email already exists');
+            return res.status(statusCodes.BAD_REQUEST).send('a company with this email already exists');
         }
 
         const company = await companies.create(companyDetails);
