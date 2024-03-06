@@ -5,7 +5,7 @@ const controller = require('../controllers/job');
 router.post('/postJob', controller.post)
 router.get('/', controller.getJobs);
 router.get('/:userId/:jobId', controller.get)
-router.post('/apply', controller.apply);
+router.post('/apply/:userId/:jobId', controller.apply);
 router.get('/applications', controller.getApplications);
 
 module.exports = router;

@@ -53,13 +53,13 @@ exports.get = async (req, res) => {
 
         const jobId = req.params.jobId;
         const userId = req.params.userId;
-        
+
         if (!jobId) {
             logger.info('jobId not provided.');
             return res.status(statusCodes.BAD_REQUEST).send('jobId not provided.');
         }
 
-        const job = await jobs.findByPk(jobId,{ include: companies });
+        const job = await jobs.findByPk(jobId, { include: companies });
         if (!job) {
             logger.info(`job by for id '${jobId}' not found.`);
             return res.status(statusCodes.BAD_REQUEST).send('job not found.');
@@ -98,8 +98,8 @@ exports.apply = async (req, res) => {
     try {
         logger.info('user job apply request recieved.');
 
-        const userId = req.body.userId;
-        const jobId = req.body.jobId;
+        const userId = req.params.userId;
+        const jobId = req.params.jobId;
 
         console.assert(userId, 'userId not provided.');
         console.assert(jobId, 'jobId not provided.');

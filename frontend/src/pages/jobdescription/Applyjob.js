@@ -52,35 +52,52 @@ function Applyjob() {
     fetchData();
   }, [userId, jobId]);
 
+  console.log(jobInfo);
+
   const [loading, setLoading] = useState(false); // State to track loading status
   const [applied, setApplied] = useState(false); // State to track if job is applied
 
-  const jobData = {
-    company: "Address",
-    title: "Senior Full Stack Engineer, Creator Success Full Time",
-    type: "Fulltime",
-    industry: "Mechanical / Auto / Automotive, Civil / Construction",
-    level: "Experienced (Non - Manager)",
-    salary: "$800 - $1000",
-    experience: "1 - 2 years",
-    deadline: "1/2/2024",
-    skills: ["React js", "Node js", "python"],
-    location: "Dallas, Texas",
-    address: "205 North Michigan Avenue, Suite 810 Chicago, 60601, USA",
-    phone: "(123) 456-7890",
-    email: "contact@Evara.com",
-    jobDescription:
-      "A portfolio demonstrating well thought through and polished end to end customer journeys. 5+ years of industry experience in interactive design and / or visual design. Excellent interpersonal skills. Aware of trends inmobile, communications, and collaboration. Ability to create highly polished design prototypes, mockups, and other communication artifacts. The ability to scope and estimate efforts accurately and prioritize tasks and goals independently. History of impacting shipping products with your work. A Bachelor's Degree in Design (or related field) or equivalent professional experience. Proficiency in a variety of design tools such as Figma, Photoshop, Illustrator, and Sketch.",
-  };
+  // const jobData = {
+  //   company: "Address",
+  //   title: "Senior Full Stack Engineer, Creator Success Full Time",
+  //   type: "Fulltime",
+  //   industry: "Mechanical / Auto / Automotive, Civil / Construction",
+  //   level: "Experienced (Non - Manager)",
+  //   salary: "$800 - $1000",
+  //   experience: "1 - 2 years",
+  //   deadline: "1/2/2024",
+  //   skills: ["React js", "Node js", "python"],
+  //   location: "Dallas, Texas",
+  //   address: "205 North Michigan Avenue, Suite 810 Chicago, 60601, USA",
+  //   phone: "(123) 456-7890",
+  //   email: "contact@Evara.com",
+  //   jobDescription:
+  //     "A portfolio demonstrating well thought through and polished end to end customer journeys. 5+ years of industry experience in interactive design and / or visual design. Excellent interpersonal skills. Aware of trends inmobile, communications, and collaboration. Ability to create highly polished design prototypes, mockups, and other communication artifacts. The ability to scope and estimate efforts accurately and prioritize tasks and goals independently. History of impacting shipping products with your work. A Bachelor's Degree in Design (or related field) or equivalent professional experience. Proficiency in a variety of design tools such as Figma, Photoshop, Illustrator, and Sketch.",
+  // };
 
   const handleApplyClick = async () => {
-    setLoading(true); // Show loading UI
-    setTimeout(() => {
-      setLoading(false); // Hide loading UI after a delay
-      setApplied(true); // Mark the job as applied
-      showAlert("Job applied successfully");
-      navigate("/jobinfo");
-    }, 2000); // Simulating a 2-second loading time
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/api/job/apply/${userId}/${jobId}`
+      );
+
+      if (response.status === 200) {
+        // window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        setLoading(true); // Show loading UI
+        setTimeout(() => {
+          setLoading(false); // Hide loading UI after a delay
+          setApplied(true); // Mark the job as applied
+          showAlert("Job applied successfully");
+          // navigate("/jobinfo");
+        }, 2000); // Simulating a 2-second loading time
+        console.log("Job Given");
+      } else {
+        showAlert("Already applied");
+        // console.error("jobFetch failed:", response.statusText);
+      }
+    } catch (error) {
+      showAlert("Login Before Applying to job");
+    }
   };
 
   return (
