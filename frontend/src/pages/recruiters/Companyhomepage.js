@@ -7,6 +7,7 @@ import brand from '../../assets/brand.png'
 export default function Temppage() {
 
     const [companyData, setCompanyData] = useState({});
+    const [jobsData, setJobsData] = useState([]);
 
     const jobCard = {
         title: "Full Stack developer",
@@ -14,7 +15,7 @@ export default function Temppage() {
         jobType: "Fulltime",
         skills: ["nodejs", "Reactjs", "python"],
         desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae similique incidunt quaerat ea reiciendis assumenda fugit harum adipisci eaque fuga porro veniam ullam nobis molestiae possimus hic, perferendis velit architecto!",
-        salary: "500000"
+        salary: "5"
     };
 
 
@@ -24,20 +25,41 @@ export default function Temppage() {
                 if (localStorage.getItem('id')) {
                     const id = localStorage.getItem('id');
                     const response = await axios.get(`http://localhost:8080/api/company/${id}`);
-                        if(response.status===200) {
-                            const data = response.data;
-                            setCompanyData(data);
-                            console.log(data);
-                        }
+                    if (response.status === 200) {
+                        const data = response.data;
+                        setCompanyData(data);
+                        console.log(data);
+                    }
                 }
-            }catch (error) {
+            } catch (error) {
                 console.error('Error fetching Company details:', error);
             }
         }
+
+        async function fetchJobs() {
+            try {
+                if (localStorage.getItem('id')) {
+                    const id = localStorage.getItem('id');
+                    const response = await axios.get(`http://localhost:8080/api/company/jobs/${id}`);
+                    if (response.status === 200) {
+                        const data = response.data;
+                        setJobsData(data.jobs);
+                        console.log(data);
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching job details:', error);
+            }
+        }
+
         fetchData();
+        fetchJobs();
     }, [])
 
-    
+    console.log(jobsData);
+    // console.log(jobsData.jobs.length);
+
+
 
     const date = new Date(companyData.createdAt);
     const memberSince = date.toLocaleString('default', { month: 'long', year: 'numeric' });
@@ -53,7 +75,7 @@ export default function Temppage() {
                         <h1 className="text-3xl font-bold">{companyData.name}</h1>
                     </div>
                     <div className="flex items-center">
-                        <Link className="text-white text-lg bg-blue-600 p-2 rounded-lg hover:bg-blue-800 mr-10">View Older Jobs</Link>
+                        {/* <Link className="text-white text-lg bg-blue-600 p-2 rounded-lg hover:bg-blue-800 mr-10">View Older Jobs</Link> */}
                         <Link to="/postnewjob" className="text-white text-lg bg-blue-600 p-2 rounded-lg hover:bg-blue-800 ">Post New Job</Link>
                     </div>
                 </div>
@@ -67,95 +89,38 @@ export default function Temppage() {
                     </div>
                     <div className='mt-4 sm:mr-11'>
                         <h2 className="text-lg font-bold">Recently posted Jobs</h2>
-                        {/* card1 */}
-                        {/* <Link to="/postnewjob"> */}
-                        <div className='mt-3 border-2 border-gray-200 p-4'>
-                            <div className="flex flex-col">
-                                <div className='flex justify-between flex-wrap'>
-                                    <div className='flex'>
-                                        <div className=''>
-                                            <img src={brand} alt="" />
-                                        </div>
-                                        <div className='flex flex-col ml-5'>
-                                            <h5 className='font-bold text-lg'>{companyData.name}</h5>
-                                            <p><i className="fa-solid fa-location-dot mr-2"></i>{jobCard.location}</p>
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-row-reverse'>
-                                        <img src="https://jobbox-nextjs-v3.vercel.app/_next/static/media/flash.aea6c8a8.svg" alt="" />
-                                        {jobCard.skills.map((skill) => {
-                                            return <p className='mt-3 inline-block h-fit bg-gray-200 p-1 rounded text-xs text-gray-500 mr-2'>{skill}</p>
-                                        })}
-                                    </div>
-                                </div>
-                                <div className='mt-3 ml-3'>
-                                    <h3 className='font-bold text-2xl '>{jobCard.title}</h3>
-                                    <p className='mt-2 font-sm text-gray-600'><i className="fa-solid fa-briefcase mr-2" />{jobCard.jobType}</p>
-                                    <p className='mt-2 font-md'>{jobCard.desc}</p>
-                                    <p className="mt-3 text-xl font-bold text-blue-600"><i className="fa-solid fa-indian-rupee-sign mr-2" />{jobCard.salary}</p>
-                                </div>
-                            </div>
-                        </div>
-                        {/* </Link> */}
 
 
-                        {/* card2 */}
-                        <div className='mt-3 border-2 border-gray-200 p-4'>
-                            <div className="flex flex-col">
-                                <div className='flex justify-between flex-wrap'>
-                                    <div className='flex'>
-                                        <div className=''>
-                                            <img src={brand} alt="" />
+                        {jobsData.map((job) => {
+                            return <><div className='mt-5 border-2 border-gray-200 p-4 hover:-translate-y-3 hover:bg-[#fff] hover:border-[#b4c0e0]'>
+                                <div className="flex flex-col">
+                                    <div className='flex justify-between flex-wrap'>
+                                        <div className='flex'>
+                                            <div className=''>
+                                                <img src={brand} alt="" />
+                                            </div>
+                                            <div className='flex flex-col ml-5'>
+                                                <h5 className='font-bold text-lg'>{companyData.name}</h5>
+                                                <p><i className="fa-solid fa-location-dot mr-2"></i>{job.location}</p>
+                                            </div>
                                         </div>
-                                        <div className='flex flex-col ml-5'>
-                                            <h5 className='font-bold text-lg'>{companyData.name}</h5>
-                                            <p><i className="fa-solid fa-location-dot mr-2"></i>{jobCard.location}</p>
+                                        <div className='flex flex-row-reverse'>
+                                            <img src="https://jobbox-nextjs-v3.vercel.app/_next/static/media/flash.aea6c8a8.svg" alt="" />
+                                            {job.skills.map((skill) => {
+                                                return <p className='mt-3 inline-block h-fit bg-gray-200 p-1 rounded text-xs text-gray-500 mr-2'>{skill}</p>
+                                            })}
                                         </div>
                                     </div>
-                                    <div className='flex flex-row-reverse'>
-                                        <img src="https://jobbox-nextjs-v3.vercel.app/_next/static/media/flash.aea6c8a8.svg" alt="" />
-                                        {jobCard.skills.map((skill) => {
-                                            return <p className='mt-3 inline-block h-fit bg-gray-200 p-1 rounded text-xs text-gray-500 mr-2'>{skill}</p>
-                                        })}
+                                    <div className='mt-3 ml-3'>
+                                        <h3 className='font-bold text-2xl '>{job.title}</h3>
+                                        <p className='mt-2 font-sm text-gray-600'><i className="fa-solid fa-briefcase mr-2" />{job.type}</p>
+                                        <p className='mt-2 font-md'>{job.description}</p>
+                                        <p className="mt-3 text-xl font-bold text-blue-600"><i className="fa-solid fa-indian-rupee-sign mr-2" />{job.salary} Lakhs</p>
                                     </div>
-                                </div>
-                                <div className='mt-3 ml-3'>
-                                    <h3 className='font-bold text-2xl '>{jobCard.title}</h3>
-                                    <p className='mt-2 font-sm text-gray-600'><i className="fa-solid fa-briefcase mr-2" />{jobCard.jobType}</p>
-                                    <p className='mt-2 font-md'>{jobCard.desc}</p>
-                                    <p className="mt-3 text-xl font-bold text-blue-600"><i className="fa-solid fa-indian-rupee-sign mr-2" />{jobCard.salary}</p>
                                 </div>
                             </div>
-                        </div>
-
-                        {/* card3 */}
-                        <div className='mt-3 border-2 border-gray-200 p-4'>
-                            <div className="flex flex-col">
-                                <div className='flex justify-between flex-wrap'>
-                                    <div className='flex'>
-                                        <div className=''>
-                                            <img src={brand} alt="" />
-                                        </div>
-                                        <div className='flex flex-col ml-5'>
-                                            <h5 className='font-bold text-lg'>{companyData.name}</h5>
-                                            <p><i className="fa-solid fa-location-dot mr-2"></i>{jobCard.location}</p>
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-row-reverse'>
-                                        <img src="https://jobbox-nextjs-v3.vercel.app/_next/static/media/flash.aea6c8a8.svg" alt="" />
-                                        {jobCard.skills.map((skill) => {
-                                            return <p className='mt-3 inline-block h-fit bg-gray-200 p-1 rounded text-xs text-gray-500 mr-2'>{skill}</p>
-                                        })}
-                                    </div>
-                                </div>
-                                <div className='mt-3 ml-3'>
-                                    <h3 className='font-bold text-2xl '>{jobCard.title}</h3>
-                                    <p className='mt-2 font-sm text-gray-600'><i className="fa-solid fa-briefcase mr-2" />{jobCard.jobType}</p>
-                                    <p className='mt-2 font-md'>{jobCard.desc}</p>
-                                    <p className="mt-3 text-xl font-bold text-blue-600"><i className="fa-solid fa-indian-rupee-sign mr-2" />{jobCard.salary}</p>
-                                </div>
-                            </div>
-                        </div>
+                            </>
+                        })}
                     </div>
                 </div>
 
