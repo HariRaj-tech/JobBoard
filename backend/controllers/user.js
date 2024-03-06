@@ -7,16 +7,17 @@ exports.signup = async (req, res) => {
         logger.info('user create request received.');
 
         const user_details = {
-            // todo: change this to first_name.
-            first_name: req.body.name,
-            last_name: req.body.last_name,
+            first_name: req.body.firstName,
+            last_name: req.body.lastName,
             email: req.body.email,
             password: req.body.password,
-            contact_no: req.body.contactNumber,
-            location: req.body.location,
-            languages: req.body.languages,
-            skills: req.body.skills,
-            about: req.body.about,
+            contact_no: req.body.userContactNumber,
+            location: req.body.userLocation,
+            languages: req.body.userLanguages,
+            skills: req.body.userSkills,
+            about: req.body.userAbout,
+            image: req.files[0].buffer,
+            resume: req.files[1].buffer,
         };
 
         if (!user_details.email) {
@@ -30,9 +31,10 @@ exports.signup = async (req, res) => {
         }
 
         const user = await users.create(user_details);
-        logger.info('user created successfully.', user.toJSON());
+        const userId = user.id;
+        logger.info('user created successfully.', userId);
 
-        return res.status(200).send({ status: true, user: user.toJSON() });
+        return res.status(statusCodes.OK).send(userId);
     } catch (err) {
         logger.error(err);
         return res.status(statusCodes.INTERNAL_SERVER_ERROR).send();

@@ -6,7 +6,7 @@ const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-router.post('/signup', controller.signup);
+router.post('/signup', upload.any(), controller.signup);
 router.post('/login', controller.login);
 router.get('/:id', controller.get);
 router.post('/image/:id', upload.single('image'), controller.postImage);

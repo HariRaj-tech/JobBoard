@@ -6,6 +6,8 @@ import spaceShip from "../../assets/spaceship.svg";
 import bottomimg from "../../assets/loginbottom.svg";
 import googleIcon from "../../assets/icon-google.svg";
 import { alertContext } from "../../components/context/Context";
+import TagsInput from "react-tagsinput";
+import "react-tagsinput/react-tagsinput.css";
 
 export default function Signup() {
   const { showAlert } = useContext(alertContext);
@@ -13,8 +15,14 @@ export default function Signup() {
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     role: "user", // Default role is 'user'
-    userName: "",
+    firstName: "",
+    lastName: "",
     userEmail: "",
+    userLocation: "",
+    userContactNumber: "",
+    userSkills: [],
+    userLanguages: [],
+    userAbout: "",
     userPassword: "",
     userConfirmPassword: "",
     companyName: "",
@@ -29,14 +37,13 @@ export default function Signup() {
   });
 
   var inputFields = [
-    { name: "userName", label: "User Name *" },
+    { name: "firstName", label: "First Name *" },
+    { name: "lastName", label: "Last Name *" },
     { name: "userEmail", label: "Email *", type: "email" },
+    { name: "userLocation", label: "Location *" },
+    { name: "userContactNumber", label: "Contact Number *" },
     { name: "userPassword", label: "Password *", type: "password" },
-    {
-      name: "userConfirmPassword",
-      label: "confirmPassword *",
-      type: "password",
-    },
+    { name: "userConfirmPassword", label: "confirmPassword *", type: "password" },
   ];
   if (formData.role === "company") {
     inputFields = [
@@ -64,16 +71,31 @@ export default function Signup() {
     });
   };
 
+  const handleSkillsChange = (tags) => {
+    setFormData((formData) => ({ ...formData, userSkills: tags }));
+  };
+
+  const handleLanguagesChange = (tags) => {
+    setFormData((formData) => ({ ...formData, userLanguages: tags }));
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validation checks
     if (formData.role === "user") {
       if (
-        !formData.userName ||
+        !formData.firstName ||
+        !formData.lastName ||
         !formData.userEmail ||
         !formData.userPassword ||
-        !formData.userConfirmPassword
+        !formData.userConfirmPassword ||
+        !formData.userLocation ||
+        !formData.userContactNumber ||
+        !formData.userAbout ||
+        !formData.userSkills.length > 0 ||
+        !formData.userLanguages.length > 0
       ) {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
         showAlert("Please fill in all fields");
@@ -140,9 +162,15 @@ export default function Signup() {
       let response;
       if (formData.role === "user") {
         response = await axios.post("http://localhost:8080/api/user/signup", {
-          name: formData.userName,
+          firstName: formData.firstName,
+          lastName: formData.LastName,
           email: formData.userEmail,
           password: formData.userPassword,
+          userContactNumber: formData.userContactNumber,
+          userLocation: formData.userLocation,
+          userLanguages: formData.userLanguages,
+          userSkills: formData.userSkills,
+          userAbout:formData.userAbout,
         });
       } else if (formData.role === "company") {
         response = await axios.post(
@@ -171,6 +199,7 @@ export default function Signup() {
     }
   };
 
+  
   return (
     <div className="main-container">
       <div className="login-container">
@@ -243,6 +272,54 @@ export default function Signup() {
                 <p className="text-red-500">{errors["about"]}</p>
               )}
             </div>}
+
+            {/* user fields */}
+            {formData.role === 'user' &&
+              <><div className="form-group mb-6">
+                <label className="form-label">About yourself *</label>
+                <textarea name="userAbout" value={formData["userAbout"]} onChange={handleInputChange} required className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors["userAbout"] ? "border-red-500 " : ""
+                  } `} cols="30" rows="5" />
+                {errors["userAbout"] && (
+                  <p className="text-red-500">{errors["userAbout"]}</p>
+                )}
+              </div>
+
+                <div className="form-group mb-6">
+                <label className="form-label">Skills *</label>
+                <TagsInput
+                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors["userSkills"] ? "border-red-500 " : ""} `}
+                  value={formData.userSkills}
+                  name="userSkills"
+                  onChange={handleSkillsChange}
+                  inputProps={{
+                    placeholder: "Enter skills",
+                    style: { width: "240px" },
+                  }}
+                  required
+                />
+                {errors["userSkills"] && (
+                  <p className="text-red-500">{errors["userSkills"]}</p>
+                )}
+              </div>
+              
+              <div className="form-group mb-6">
+                <label className="form-label">Languages *</label>
+                <TagsInput
+                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors["userLanguages"] ? "border-red-500 " : ""} `}
+                  value={formData.userLanguages}
+                  name="userLanguages"
+                  onChange={handleLanguagesChange}
+                  inputProps={{
+                    placeholder: "Enter Languages",
+                    style: { width: "240px" },
+                  }}
+                  required
+                />
+                {errors["userLanguages"] && (
+                  <p className="text-red-500">{errors["userLanguages"]}</p>
+                )}
+              </div>
+              </>}
             <div className="form-group flex justify-between font-sm">
               <label className="form-label cursor-pointer">
                 <input type="checkbox" className="form-input cursor-pointer" />
