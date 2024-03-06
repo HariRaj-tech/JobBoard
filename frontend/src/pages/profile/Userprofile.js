@@ -16,6 +16,7 @@ import axios from 'axios';
 function Userprofile() {
 
     const [userInfo, setUserInfo] = useState({});
+    const [imageData, setImageData] = useState(null);
     const userId = localStorage.getItem('id');
 
     useEffect(() => {
@@ -27,6 +28,20 @@ function Userprofile() {
                 console.error('Error fetching User:', error);
             }
         };
+        fetch(`http://localhost:8080/api/user/image/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'image/jpeg',
+            },
+        })
+        .then(response => response.json())
+            .then(data => {
+                const uint8Array = new Uint8Array(data.buffer.data);
+                const blob = new Blob([uint8Array], { type: 'image/jpeg' });
+                const imageUrl = URL.createObjectURL(blob);
+                setImageData(imageUrl);
+            })
+            .catch(error => console.error('Error fetching image:', error));
 
         fetchUser();
     }, []);
@@ -41,7 +56,8 @@ function Userprofile() {
                     </div>
                     <div className="relative w-[90%] m-auto pt-6">
                         <div className="absolute -top-[90px] left-2">
-                            <img className="rounded-2xl" src={profile} alt="candidate profile" />
+                            {imageData && <img className="rounded-2xl" style={{ width: '100px', height: '100px'}} src={imageData} alt="User" />}
+                            {!imageData && <img className="rounded-2xl" src={profile} alt="candidate profile" />}
                         </div>
                         <div className="md:flex items-center justify-between">
                             <div className="md:w-[66.6%]">
