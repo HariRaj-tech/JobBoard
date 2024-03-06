@@ -68,7 +68,7 @@ exports.get = async (req, res) => {
         let result = job.toJSON();
 
         if (userId) {
-            const has = await job.hasUser(userId);
+            const has = await job.hasUser(Number(userId));
             result.applied = has;
 
             logger.info('added user relation info.');

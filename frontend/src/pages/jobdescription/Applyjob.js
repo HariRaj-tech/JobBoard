@@ -126,7 +126,8 @@ function Applyjob() {
               onClick={handleApplyClick}
               disabled={loading || applied} // Disable button during loading or after job is applied
             >
-              {loading ? "Applying..." : applied ? "Applied" : "Apply now"}
+              {jobInfo.applied ? "Applied" : (loading ? "Applying.." : (applied ? "Applied" : "Apply now"))}
+
             </button>
           </div>
         </div>
