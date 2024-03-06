@@ -2,7 +2,7 @@ import React from 'react';
 import brand from '../../assets/brand.png'
 
 export default function Applicantspage() {
-
+   
     const job = {
         location: "banglore",
         title: "Full Stack dev",

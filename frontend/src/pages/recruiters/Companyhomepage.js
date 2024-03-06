@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import companyimg from "../../assets/companyimg.png";
 import axios from "axios";
 import brand from "../../assets/brand.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Temppage() {
   const [companyData, setCompanyData] = useState({});
   const [jobsData, setJobsData] = useState([]);
-
+  let navigate = useNavigate();
   useEffect(() => {
     async function fetchData() {
       try {
@@ -58,6 +59,10 @@ export default function Temppage() {
     year: "numeric",
   });
 
+  const handleClick = (jobId) => {
+    navigate(`/applicantspage?jobId=${jobId}`);
+  };
+
   return (
     <div className="container">
       <div className="container mx-auto w-full">
@@ -94,7 +99,7 @@ export default function Temppage() {
                 return (
                   <>
                     <div className="mt-5 border-2 border-gray-200 bg-[#f8faff] p-4 hover:-translate-y-3 hover:bg-[#fff] hover:border-[#b4c0e0] rounded-lg">
-                      <div className="flex flex-col">
+                      <div className="flex flex-col" key={job.id}>
                         <div className="flex justify-between flex-wrap">
                           <div className="flex">
                             <div className="">
@@ -139,6 +144,12 @@ export default function Temppage() {
                             <i className="fa-solid fa-indian-rupee-sign mr-2" />
                             {job.salary}{" "}
                             <span className="text-[13px]">L.P.A</span>
+                            <div
+                              className="btn btn-apply ml-5"
+                              onClick={() => handleClick(job.id)}
+                            >
+                              View Applicants
+                            </div>
                           </p>
                         </div>
                       </div>
