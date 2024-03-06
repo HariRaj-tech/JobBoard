@@ -113,7 +113,7 @@ exports.apply = async (req, res) => {
         const alreadyApplied = await job.hasUser(userId);
         if (alreadyApplied) {
             logger.info('user has already applied for the job.');
-            return res.status(statusCodes.CONTINUE).send('user has already applied for the job.');
+            return res.status(statusCodes.OK).send('user has already applied for the job.');
         }
 
         await job.addUser(userId);

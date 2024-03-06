@@ -7,10 +7,14 @@ exports.signup = async (req, res) => {
         logger.info('user create request received.');
 
         const user_details = {
+            // todo: change this to first_name.
             first_name: req.body.name,
-            lasst_name: '',
+            last_name: req.body.last_name,
             email: req.body.email,
             password: req.body.password,
+            languages: req.body.languages,
+            skills: req.body.skills,
+            about: req.body.about,
         };
 
         if (!user_details.email) {
@@ -135,7 +139,7 @@ exports.getImage = async (req, res) => {
 
         if (!user.image) {
             logger.info('no image was posted.');
-            return res.status(statusCodes.CONTINUE).send('no image was posted.');
+            return res.status(statusCodes.BAD_REQUEST).send('no image was posted.');
         }
 
         logger.info('image sent successfully.');
@@ -196,7 +200,7 @@ exports.getResume = async (req, res) => {
 
         if (!user.resume) {
             logger.info('no resume was posted.');
-            return res.status(statusCodes.CONTINUE).send('no resume was posted.');
+            return res.status(statusCodes.BAD_REQUEST).send('no resume was posted.');
         }
 
         logger.info('resume sent successfully.');
