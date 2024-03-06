@@ -9,16 +9,6 @@ export default function Temppage() {
     const [companyData, setCompanyData] = useState({});
     const [jobsData, setJobsData] = useState([]);
 
-    const jobCard = {
-        title: "Full Stack developer",
-        location: "London, Uk",
-        jobType: "Fulltime",
-        skills: ["nodejs", "Reactjs", "python"],
-        desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae similique incidunt quaerat ea reiciendis assumenda fugit harum adipisci eaque fuga porro veniam ullam nobis molestiae possimus hic, perferendis velit architecto!",
-        salary: "5"
-    };
-
-
     useEffect(() => {
         async function fetchData() {
             try {
@@ -56,8 +46,8 @@ export default function Temppage() {
         fetchJobs();
     }, [])
 
-    console.log(jobsData);
-    // console.log(jobsData.jobs.length);
+    // console.log(jobsData);
+    // console.log(jobsData.length);
 
 
 
@@ -90,37 +80,38 @@ export default function Temppage() {
                     <div className='mt-4 sm:mr-11'>
                         <h2 className="text-lg font-bold">Recently posted Jobs</h2>
 
-
-                        {jobsData.map((job) => {
-                            return <><div className='mt-5 border-2 border-gray-200 p-4 hover:-translate-y-3 hover:bg-[#fff] hover:border-[#b4c0e0]'>
-                                <div className="flex flex-col">
-                                    <div className='flex justify-between flex-wrap'>
-                                        <div className='flex'>
-                                            <div className=''>
-                                                <img src={brand} alt="" />
+                        {jobsData.length > 0 ?
+                            jobsData.map((job) => {
+                                return <><div className='mt-5 border-2 border-gray-200 bg-[#f8faff] p-4 hover:-translate-y-3 hover:bg-[#fff] hover:border-[#b4c0e0]'>
+                                    <div className="flex flex-col">
+                                        <div className='flex justify-between flex-wrap'>
+                                            <div className='flex'>
+                                                <div className=''>
+                                                    <img src={brand} alt="" />
+                                                </div>
+                                                <div className='flex flex-col ml-5'>
+                                                    <h5 className='font-bold text-lg'>{companyData.name}</h5>
+                                                    <p><i className="fa-solid fa-location-dot mr-2"></i>{job.location}</p>
+                                                </div>
                                             </div>
-                                            <div className='flex flex-col ml-5'>
-                                                <h5 className='font-bold text-lg'>{companyData.name}</h5>
-                                                <p><i className="fa-solid fa-location-dot mr-2"></i>{job.location}</p>
+                                            <div className='flex flex-row-reverse'>
+                                                <img src="https://jobbox-nextjs-v3.vercel.app/_next/static/media/flash.aea6c8a8.svg" alt="" />
+                                                {job.skills.map((skill) => {
+                                                    return <p className='mt-3 inline-block h-fit bg-gray-200 p-1 rounded text-xs text-gray-500 mr-2'>{skill}</p>
+                                                })}
                                             </div>
                                         </div>
-                                        <div className='flex flex-row-reverse'>
-                                            <img src="https://jobbox-nextjs-v3.vercel.app/_next/static/media/flash.aea6c8a8.svg" alt="" />
-                                            {job.skills.map((skill) => {
-                                                return <p className='mt-3 inline-block h-fit bg-gray-200 p-1 rounded text-xs text-gray-500 mr-2'>{skill}</p>
-                                            })}
+                                        <div className='mt-3 ml-3'>
+                                            <h3 className='font-bold text-2xl '>{job.title}</h3>
+                                            <p className='mt-2 font-sm text-gray-600'><i className="fa-solid fa-briefcase mr-2" />{job.type}</p>
+                                            <p className='mt-2 font-md'>{job.description}</p>
+                                            <p className="mt-3 text-xl font-bold text-blue-600"><i className="fa-solid fa-indian-rupee-sign mr-2" />{job.salary} <span className='text-[13px]'>L.P.A</span></p>
                                         </div>
-                                    </div>
-                                    <div className='mt-3 ml-3'>
-                                        <h3 className='font-bold text-2xl '>{job.title}</h3>
-                                        <p className='mt-2 font-sm text-gray-600'><i className="fa-solid fa-briefcase mr-2" />{job.type}</p>
-                                        <p className='mt-2 font-md'>{job.description}</p>
-                                        <p className="mt-3 text-xl font-bold text-blue-600"><i className="fa-solid fa-indian-rupee-sign mr-2" />{job.salary} Lakhs</p>
                                     </div>
                                 </div>
-                            </div>
-                            </>
-                        })}
+                                </>
+                            }) :
+                            <div className='font-bold text-3xl text-red-600 mt-3'>No jobs posted</div>}
                     </div>
                 </div>
 
