@@ -31,12 +31,12 @@ exports.signup = async (req, res) => {
         }
 
         users.create(user_details).then((user) => {
-            logger.info('User Created Successfully.', user.userId);
-            return res.status(202).json({ user: user.userId });
+            logger.info('user created successfully.', user.userId);
+            return res.status(statusCodes.ACCEPTED).json({ user: user.userId });
         });
     } catch (err) {
         logger.error(err);
-        return res.status(500).send();
+        return res.status(statusCodes.INTERNAL_SERVER_ERROR).send();
     }
 };
 

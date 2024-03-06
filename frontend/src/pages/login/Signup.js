@@ -191,7 +191,6 @@ export default function Signup() {
       }
 
       showAlert("Account created successfully");
-      console.log("Form data submitted:", response.data);
       navigate("/login");
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     } catch (error) {
