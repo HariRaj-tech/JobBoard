@@ -9,8 +9,28 @@ import location from '../../assets/location.svg';
 import { CiPhone } from "react-icons/ci";
 import { MdOutlineEmail } from "react-icons/md";
 import { TbMessageLanguage } from "react-icons/tb";
+import { useState, useEffect} from 'react';
+import axios from 'axios';
+
 
 function Userprofile() {
+
+    const [userInfo, setUserInfo] = useState({});
+    const userId = localStorage.getItem('id');
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8080/api/user/${userId}/`);
+                setUserInfo(response.data);
+            } catch (error) {
+                console.error('Error fetching User:', error);
+            }
+        };
+
+        fetchUser();
+    }, []);
+
 
     return (
         <div className="userprofile">
@@ -26,7 +46,7 @@ function Userprofile() {
                         <div className="md:flex items-center justify-between">
                             <div className="md:w-[66.6%]">
                                 <div className="flex gap-3">
-                                    <h5 className="text-[18px]">Steven Jobs </h5>
+                                    <h5 className="text-[18px]">{userInfo.first_name} </h5>
                                     <span style={{ 'background': `url(${locationicon}) no-repeat 0 3px` }} className="inline-block px-4 ">
                                         NewYork, US
                                     </span>
@@ -52,29 +72,23 @@ function Userprofile() {
                             <div>
                                 <h4 className="mb-4">About Me</h4>
                                 <p className="mb-4 text-[16px] leading-8">
-                                    Hello there! My name is Alan Walker.
-                                    I am a graphic designer, and I am very passionate and dedicated to my work.
-                                    With 20 years experience as a professional a graphic designer,
-                                    I have acquired the skills and knowledge necessary to make your project a success.
+                                    {userInfo.about}
                                 </p>
                                 <h4 className="mb-4">Professional Skills</h4>
                                 <ul className="flex gap-[10%] mb-4">
                                     <div className="">
-                                        <li>HTML & CSS</li>
-                                        <li>Javascript</li>
-                                        <li>Database</li>
-                                    </div>
-                                    <div>
-                                        <li>React JS</li>
-                                        <li>Photoshop</li>
-                                        <li>Figma</li>
+                                        {userInfo.skills?.map((skill, index) => {
+                                            return (
+                                                <li key={index}>{skill}</li>
+                                            )
+                                        })}
                                     </div>
                                 </ul>
-                                <h4 className="mb-4">Work Experience</h4>
+                                {/* <h4 className="mb-4">Work Experience</h4>
                                 <ul className="pl-3 mb-4">
                                     <li>A portfolio demonstrating well thought through and polished end to end customer journeys</li>
                                     <li>5+ years of industry experience in interactive design and / or visual design</li>
-                                </ul>
+                                </ul> */}
                                 <div className="border-t-[1px] border-[#e0e6f7] py-5 mt-4 ">
 
                                 </div>
@@ -86,8 +100,8 @@ function Userprofile() {
                                     <h4>Overview</h4>
                                 </div>
                                 <div className="address-container py-4 border-b-[1px] border-[#e0e6f7]">
-                                    <div className='flex items-start gap-3 mb-4'>
-                                        <img className="w-[20px]" src={briefcaseimg} alt="exp" />
+                                    {/* <div className='flex items-start gap-3 mb-4'>
+                                        <img className="w-[20px]" src=briefcaseimg alt="exp" />
                                         <div>
                                             <span className='block text-[16px]'>
                                                 Experience
@@ -96,21 +110,21 @@ function Userprofile() {
                                         </div>
                                     </div>
                                     <div className='flex items-start gap-3 mb-4'>
-                                        <img className="w-[20px]" src={salary} alt="exp" />
+                                        <img className="w-[20px]" src=salary alt="exp" />
                                         <div>
                                             <span className='block text-[16px]'>
                                                 Expected Salary
                                             </span>
                                             <span className='block font-bold'>$26k - $30k</span>
                                         </div>
-                                    </div>
+                            </div> */}
                                     <div className='flex items-start gap-3 mb-4'>
                                         <TbMessageLanguage style={{"fontSize":"25px"}}/>
                                         <div>
                                             <span className='block text-[16px]'>
                                                 Language
                                             </span>
-                                            <span className='block font-bold'>English</span>
+                                            <span className='block font-bold'>{userInfo.languages?.join(', ')}</span>
                                         </div>
                                     </div>
                                 </div>
