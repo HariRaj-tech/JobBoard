@@ -53,22 +53,15 @@ export default function Applicantspage() {
                     </div>
                 </div>
 
-                <div className='font-bold text-3xl mt-3'>Job Applicants</div>
+                <div className='font-bold text-3xl my-3'>Job Applicants</div>
                 <div className='flex flex-col'>
 
-                    <div className='flex text-lg space-x-10'>
-
-                        <p className=''>vikas</p>
-                        <p>sai@gmail.com</p>
-                        <button className='border-b-2 bg-blue-600 rounded-md p-[2px]'><i class="fa-solid fa-download"></i>resume</button>
-                    </div>
-
-                    {applicants.map((person) => {
-                        return <div className='flex text-lg space-x-10'>
-
-                            <p className=''>{person.name}</p>
-                            <p>{person.email}</p>
-                            <button className='border-b-2 bg-blue-600 rounded-md p-[2px]'><i class="fa-solid fa-download"></i>{person.resume}</button>
+                    {applicants.map((person, i) => {
+                        return <div className='flex flex-row text-lg justify-start mt-1 mb-2'>
+                            <p className='mr-2'>{i + 1}.</p>
+                            <p className='basis-1/5'>{person.name}</p>
+                            <p className='basis-1/5'>{person.email}</p>
+                            <button className='border-b-2 bg-blue-600 rounded-md p-[2px] basis-1/5'><i class="fa-solid fa-download"></i>{person.resume}</button>
                         </div>
                     })}
                 </div>
