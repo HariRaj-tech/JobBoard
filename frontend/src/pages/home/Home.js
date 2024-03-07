@@ -23,7 +23,7 @@ const Home = () => {
         if (localStorage.getItem("id")) {
           const id = localStorage.getItem("id");
           const response = await axios.get(
-            `http://localhost:8080/api/user/${id}`
+            `http://localhost:8080/api/users/${id}`
           );
           if (response.status === 200) {
             const data = response.data;

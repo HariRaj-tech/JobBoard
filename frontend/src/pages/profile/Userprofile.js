@@ -21,7 +21,7 @@ function Userprofile() {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/user/${userId}/`
+          `http://localhost:8080/api/users/${userId}/`
         );
         setUserInfo(response.data);
         console.log(response.data);
@@ -29,7 +29,7 @@ function Userprofile() {
         console.error("Error fetching User:", error);
       }
     };
-    fetch(`http://localhost:8080/api/user/image/${userId}`, {
+    fetch(`http://localhost:8080/api/users/image/${userId}`, {
       method: "GET",
       headers: {
         "Content-Type": "image/jpeg",
@@ -49,7 +49,7 @@ function Userprofile() {
 
   const handleResumeClick = async () => {
     try {
-      fetch(`http://localhost:8080/api/user/resume/${userId}/`)
+      fetch(`http://localhost:8080/api/users/resume/${userId}/`)
         .then((response) => response.json())
         .then((data) => {
           console.log(data.buffer.data);

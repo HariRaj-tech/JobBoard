@@ -15,7 +15,7 @@ export default function Temppage() {
         if (localStorage.getItem("id")) {
           const id = localStorage.getItem("id");
           const response = await axios.get(
-            `http://localhost:8080/api/company/${id}`
+            `http://localhost:8080/api/companies/${id}`
           );
           if (response.status === 200) {
             const data = response.data;
@@ -33,7 +33,7 @@ export default function Temppage() {
         if (localStorage.getItem("id")) {
           const id = localStorage.getItem("id");
           const response = await axios.get(
-            `http://localhost:8080/api/company/jobs/${id}`
+            `http://localhost:8080/api/companies/jobs/${id}`
           );
           if (response.status === 200) {
             const data = response.data;

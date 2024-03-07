@@ -15,8 +15,8 @@ const port = 8080;
 
 app.use(express.json());
 app.use(cors());
-app.use('/api/user', user_routes);
-app.use('/api/company', company_routes);
+app.use('/api/users', user_routes);
+app.use('/api/companies', company_routes);
 app.use('/api/jobs', job_routes);
 
 app.listen(port, () => {

@@ -197,7 +197,7 @@ export default function Signup() {
         formDataToSend.append("resume", formData.resume);
 
         const response = await axios.post(
-          "http://localhost:8080/api/user/signup",
+          "http://localhost:8080/api/users/signup",
           formDataToSend,
 
           {
@@ -207,7 +207,7 @@ export default function Signup() {
           }
         );
         console.log("Response:", response.data);
-        // response = await axios.post("http://localhost:8080/api/user/signup", {
+        // response = await axios.post("http://localhost:8080/api/users/signup", {
         // firstName: formData.firstName,
         // lastName: formData.LastName,
         // email: formData.userEmail,
@@ -221,7 +221,7 @@ export default function Signup() {
         // });
       } else if (formData.role === "company") {
         axios
-          .post("http://localhost:8080/api/company/signup/", {
+          .post("http://localhost:8080/api/companies/signup/", {
             name: formData.companyName,
             ownerName: formData.ownerName,
             address: formData.companyAddress,
