@@ -5,6 +5,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { alertContext } from "../../components/context/Context";
 import { useNavigate } from "react-router-dom";
+import Table from "react-bootstrap/Table";
 
 export default function Applicantspage() {
   const [applicants, setApplicants] = useState([]);
@@ -55,7 +56,7 @@ export default function Applicantspage() {
           console.error("UserFetch failed:", response.statusText);
         }
       } catch (error) {
-        showAlert("NO Error");
+        showAlert("Error");
       }
     }
 
@@ -138,7 +139,45 @@ export default function Applicantspage() {
 
         <div className="font-bold text-3xl my-3">Job Applicants</div>
         <div className="flex flex-col">
-          {applicants.map((person, i) => {
+          <Table className="striped-columns">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Contact No</th>
+                <th>Resume</th>
+              </tr>
+            </thead>
+            <tbody>
+              {applicants.map((person, i) => (
+                <tr key={person.id}>
+                  <td>{i + 1}</td>
+                  <td>
+                    {person.first_name} {person.last_name}
+                  </td>
+                  <td>{person.email}</td>
+                  <td>{person.contact_no}</td>
+                  <td>
+                    <button
+                      onClick={() => handleResumeClick(person.id)}
+                      className="download-btn"
+                      style={{
+                        background: `url(${downloadicon}) no-repeat 24px 17px, #3c65f5`,
+                        width: "150px",
+                        height: "50px",
+                        lineHeight: "0px",
+                      }}
+                    >
+                      Resume
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+
+          {/* {applicants.map((person, i) => {
             return (
               <div className="flex flex-row text-lg justify-start mt-1 mb-2">
                 <p className="mr-2">{i + 1}.</p>
@@ -161,7 +200,7 @@ export default function Applicantspage() {
                 </button>
               </div>
             );
-          })}
+          })} */}
         </div>
       </div>
     </div>
