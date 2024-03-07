@@ -1,15 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
-*{
+* {
   margin: 0;
   padding: 0;
-  font-family: Plus Jakarta Sans,sans-serif;
+  font-family: Plus Jakarta Sans, sans-serif;
 }
-.app{
+.app {
   padding: 0 50px;
   height: 100%;
   width: 100%;
 }
-@media (max-width:680px) {
+@media (max-width: 680px) {
   .app {
     padding: 0 10px;
   }
@@ -34,6 +34,12 @@ input {
 
   100% {
     transform: translateY(50px);
+  }
+}
+
+@media (min-width: 680px) {
+  .pl-20rem {
+    padding-left: 20rem;
   }
 }
 

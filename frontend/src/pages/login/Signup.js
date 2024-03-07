@@ -25,7 +25,8 @@ export default function Signup() {
     userAbout: "",
     userPassword: "",
     userConfirmPassword: "",
-    resume: "",
+    resume: null,
+    image: null,
     companyName: "",
     ownerName: "",
     companyAddress: "",
@@ -83,6 +84,14 @@ export default function Signup() {
     setFormData((formData) => ({ ...formData, userLanguages: tags }));
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setFormData({
+      ...formData,
+      image: file,
+    });
+  };
+
   const handleResumeChange = (e) => {
     const file = e.target.files[0];
     setFormData({
@@ -106,8 +115,10 @@ export default function Signup() {
         !formData.userContactNumber ||
         !formData.userAbout ||
         !formData.userSkills.length > 0 ||
-        !formData.userLanguages.length > 0 ||
-        !formData.resume
+        !formData.userLanguages.length > 0
+
+        // !formData.image ||
+        // !formData.resume
       ) {
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         showAlert("Please fill in all fields");
@@ -173,6 +184,29 @@ export default function Signup() {
     try {
       let response;
       if (formData.role === "user") {
+        // const formDataToSend = new FormData();
+        // formDataToSend.append("firstName", formData.firstName);
+        // formDataToSend.append("lastName", formData.lastName);
+        // formDataToSend.append("email", formData.userEmail);
+        // formDataToSend.append("password", formData.userPassword);
+        // formDataToSend.append("userContactNumber", formData.userContactNumber);
+        // formDataToSend.append("userLocation", formData.userLocation);
+        // formDataToSend.append("userLanguages", formData.userLanguages);
+        // formDataToSend.append("userSkills", formData.userSkills);
+        // formDataToSend.append("userAbout", formData.userAbout);
+        // formDataToSend.append("image", formData.image);
+        // formDataToSend.append("resume", formData.resume);
+
+        // const response = await axios.post(
+        //   "http://localhost:8080/api/user/signup",
+        //   formDataToSend,
+        //   {
+        //     headers: {
+        //       "Content-Type": "multipart/form-data",
+        //     },
+        //   }
+        // );
+        // console.log("Response:", response.data);
         response = await axios.post("http://localhost:8080/api/user/signup", {
           firstName: formData.firstName,
           lastName: formData.LastName,
@@ -358,13 +392,23 @@ export default function Signup() {
                   )}
                 </div>
                 <div className="form-group mb-6">
-                  <label className="form-label">Resume</label>
+                  <label className="form-label">Image*</label>
+                  <input
+                    type="file"
+                    name="image"
+                    onChange={handleImageChange}
+                    className="form-input border-0 text-gray-900 rounded-lg block w-full p-2.5 shadow-sm bg-gray-50"
+                    accept=".pdf,.doc,.docx,.jpeg,.jpg,.png"
+                  />
+                </div>
+                <div className="form-group mb-6">
+                  <label className="form-label">Resume*</label>
                   <input
                     type="file"
                     name="resume"
                     onChange={handleResumeChange}
                     className="form-input border-0 text-gray-900 rounded-lg block w-full p-2.5 shadow-sm bg-gray-50"
-                    accept=".pdf,.doc,.docx"
+                    accept=".pdf,.doc,.docx.jpeg,.jpg,.png"
                   />
                 </div>
               </>

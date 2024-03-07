@@ -16,8 +16,8 @@ exports.signup = async (req, res) => {
             languages: req.body.userLanguages,
             skills: req.body.userSkills,
             about: req.body.userAbout,
-            image: req.files && req.files[0].buffer,
-            resume: req.files && req.files[1].buffer,
+            image: req.files && req.files[0] && req.files[0].buffer,
+            resume: req.files && req.files[1] && req.files[1].buffer,
         };
 
         if (!user_details.email) {

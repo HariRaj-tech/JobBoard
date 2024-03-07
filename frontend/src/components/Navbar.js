@@ -19,12 +19,16 @@ export default function Navbar() {
           <Link to="/home" className="text-white text-xl font-bold">
             JobBoard
           </Link>
-          <Link to="/home" className="text-white text-base hover:text-gray-200">
+
+          <Link
+            to="/home"
+            className="text-white pl-20rem text-base hover:text-gray-200"
+          >
             Home
           </Link>
           <Link
             to="/findjob"
-            className="text-white text-base hover:text-gray-200"
+            className="text-white px-5 text-base hover:text-gray-200"
           >
             FindJob
           </Link>
