@@ -22,7 +22,7 @@ const FindJob = () => {
 
     try {
       const searchResponse = await axios.get(
-        "http://localhost:8080/api/job/search",
+        "http://localhost:8080/api/jobs/search",
         {
           params: {
             industry:
@@ -59,7 +59,7 @@ const FindJob = () => {
           response = locationResponse.data.jobs;
         } else {
           const allJobsResponse = await axios.get(
-            "http://localhost:8080/api/job/"
+            "http://localhost:8080/api/jobs/"
           );
           response = allJobsResponse.data;
         }
@@ -162,10 +162,13 @@ const FindJob = () => {
                     }
                   >
                     <option value={0}>Location</option>
-                    <option value={1}>New York, US</option>
+                    <option value={1}>Bangalore</option>
                     <option value={2}>Punjab</option>
-                    <option value={3}>Cityville, USA</option>
-                    <option value={4}>San Francisco, US</option>
+                    <option value={3}>Hyderabad</option>
+                    <option value={4}>Chennai</option>
+                    <option value={5}>Kolkata</option>
+                    <option value={6}>Gurgaon</option>
+                    <option value={7}>Noida</option>
                   </select>
 
                   <button
@@ -430,7 +433,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Internship</span>
-                          <span className="">100</span>
                         </label>
                       </li>
                       <li>
@@ -608,7 +610,13 @@ const FindJob = () => {
                         </h6>
                         <span className="p-card mx-2">{job.type}</span>
                         <span className="p-card mx-4">{job.experience}</span>
-                        <p className=" py-3 p-card ">{job.description}</p>
+                        <p className=" py-3 p-card ">
+                          <p>
+                            {job.description && job.description.length > 50
+                              ? job.description.substring(0, 50) + "..."
+                              : job.description + "..."}
+                          </p>
+                        </p>
                         <div className="mt-30">
                           {job.skills.map((skill, index) => (
                             <a

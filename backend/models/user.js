@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
             },
             contact_no: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.STRING,
             },
             location: {
                 type: DataTypes.STRING,
@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.ARRAY(DataTypes.STRING),
             },
             about: {
-                type: DataTypes.STRING,
+                type: DataTypes.TEXT,
             },
             image: {
                 type: DataTypes.BLOB,

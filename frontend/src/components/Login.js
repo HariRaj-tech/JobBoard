@@ -33,9 +33,9 @@ export default function Login() {
     try {
       let apiUrl;
       if (loginData.role === "user") {
-        apiUrl = "http://localhost:8080/api/user/login";
+        apiUrl = "http://localhost:8080/api/users/login";
       } else if (loginData.role === "company") {
-        apiUrl = "http://localhost:8080/api/company/login";
+        apiUrl = "http://localhost:8080/api/companies/login";
       }
 
       const data = await axios.post(apiUrl, loginData);

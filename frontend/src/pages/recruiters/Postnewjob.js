@@ -65,7 +65,7 @@ const Postnewjob = () => {
     try {
       console.log(formData.companyId);
       const response = await axios.post(
-        "http://localhost:8080/api/job/postJob",
+        "http://localhost:8080/api/jobs",
         formData
       );
 

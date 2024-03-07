@@ -32,7 +32,7 @@ function Applyjob() {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/job/${userId}/${jobId}`
+          `http://localhost:8080/api/jobs/${jobId}?userId=${userId}`
         );
 
         if (response.status === 200) {
@@ -52,7 +52,12 @@ function Applyjob() {
     fetchData();
   }, [userId, jobId]);
 
-  console.log(jobInfo);
+  // console.log(jobInfo);
+  let deadline;
+
+  if (jobInfo.deadline && !isNaN(new Date(jobInfo.deadline))) {
+    deadline = jobInfo.deadline.substring(0, 10);
+  }
 
   const [loading, setLoading] = useState(false); // State to track loading status
   const [applied, setApplied] = useState(false); // State to track if job is applied
@@ -78,7 +83,7 @@ function Applyjob() {
   const handleApplyClick = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/job/apply/${userId}/${jobId}`
+        `http://localhost:8080/api/jobs/${jobId}/applications?userId=${userId}`
       );
 
       if (response.status === 200) {
@@ -88,6 +93,7 @@ function Applyjob() {
           setLoading(false); // Hide loading UI after a delay
           setApplied(true); // Mark the job as applied
           showAlert("Job applied successfully");
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
           // navigate("/jobinfo");
         }, 2000); // Simulating a 2-second loading time
         console.log("Job Given");
@@ -120,14 +126,18 @@ function Applyjob() {
           </div>
           <div className="btn-container">
             <button
-              className={`apply-btn ${applied ? "applied" : ""} ${
-                loading ? "loading" : ""
-              }`}
+              className={`apply-btn ${applied ? "applied" : ""} ${loading ? "loading" : ""
+                }`}
               onClick={handleApplyClick}
               disabled={loading || applied} // Disable button during loading or after job is applied
             >
-              {jobInfo.applied ? "Applied" : (loading ? "Applying.." : (applied ? "Applied" : "Apply now"))}
-
+              {jobInfo.applied
+                ? "Applied"
+                : loading
+                  ? "Applying.."
+                  : applied
+                    ? "Applied"
+                    : "Apply now"}
             </button>
           </div>
         </div>
@@ -195,7 +205,7 @@ function Applyjob() {
                   </div>
                   <div className="content">
                     <span>Deadline</span>
-                    <strong>{jobInfo.deadline}</strong>
+                    <strong>{deadline}</strong>
                   </div>
                 </div>
               </div>
@@ -207,10 +217,11 @@ function Applyjob() {
                   <div className="content">
                     <span>Skills</span>
                     <strong>
-                      {jobInfo.skills &&
+                      {/* {jobInfo.skills &&
                         jobInfo.skills.map((skill, index) => (
                           <span key={index}>{skill}</span>
-                        ))}
+                        ))} */}
+                      {jobInfo.skills?.join(', ')}
                     </strong>
                   </div>
                 </div>
@@ -269,7 +280,7 @@ function Applyjob() {
               <div className="address-container">
                 <ul>
                   <li>Address: {jobInfo.company && jobInfo.company.address}</li>
-                  <li>Phone: {jobInfo.company && jobInfo.company.phone}</li>
+                  <li>Phone: {jobInfo.company && jobInfo.company.contact_number}</li>
                   <li>Email: {jobInfo.company && jobInfo.company.email}</li>
                 </ul>
               </div>

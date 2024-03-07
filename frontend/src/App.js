@@ -20,7 +20,7 @@ import Userprofile from './pages/profile/Userprofile.js';
 import Alert from './pages/about/Alert.js';
 import { alertContext } from './components/context/Context.js';
 import CompanyNavbar from './components/CompanyNavbar.js';
-import Postedjob from './pages/recruiters/Postedjob.js';
+
 
 
 function App() {
@@ -57,7 +57,6 @@ function App() {
               <Route path="/postnewjob" element={<Postnewjob />} />
               <Route path="/findJob" element={<FindJob />} />
               <Route path="/userprofile" element={<Userprofile />} />
-              <Route path='/postedjob' element={<Postedjob/>} />
             </Routes>
             {/* <Footer/> */}
           </div>

@@ -3,9 +3,9 @@ const logger = require('services/logger');
 const companies = require('models/index').companies;
 const jobs = require('models/index').jobs;
 
-exports.post = async (req, res) => {
+exports.createJob = async (req, res) => {
     try {
-        logger.info('job create request recieved.');
+        logger.info('create job request recieved.');
 
         const jobDetails = {
             company_id: req.body.companyId,
@@ -47,12 +47,25 @@ exports.post = async (req, res) => {
     }
 };
 
-exports.get = async (req, res) => {
+exports.getJobs = async (req, res) => {
+    try {
+        logger.info('job get all request recieved.');
+
+        const Jobs = await jobs.findAll({ include: companies });
+        logger.info('all jobs returned.');
+        res.status(statusCodes.OK).json(Jobs);
+    } catch (err) {
+        logger.error('internal server error.', err);
+        res.status(statusCodes.INTERNAL_SERVER_ERROR).send();
+    }
+};
+
+exports.getJob = async (req, res) => {
     try {
         logger.info('job get request recieved.');
 
-        const jobId = req.params.jobId;
-        const userId = req.params.userId;
+        const jobId = req.params.id;
+        const userId = req.query.userId;
 
         if (!jobId) {
             logger.info('jobId not provided.');
@@ -81,28 +94,15 @@ exports.get = async (req, res) => {
     }
 };
 
-exports.getJobs = async (req, res) => {
-    try {
-        logger.info('job get all request recieved.');
-
-        const Jobs = await jobs.findAll({ include: companies });
-        logger.info('all jobs returned.');
-        res.status(statusCodes.OK).json(Jobs);
-    } catch (err) {
-        logger.error('internal server error.', err);
-        res.status(statusCodes.INTERNAL_SERVER_ERROR).send();
-    }
-};
-
-exports.apply = async (req, res) => {
+exports.createApplication = async (req, res) => {
     try {
         logger.info('user job apply request recieved.');
 
-        const userId = req.params.userId;
-        const jobId = req.params.jobId;
+        const jobId = req.params.id;
+        const userId = req.query.userId;
 
-        console.assert(userId, 'userId not provided.');
         console.assert(jobId, 'jobId not provided.');
+        console.assert(userId, 'userId not provided.');
 
         const job = await jobs.findByPk(jobId);
         if (!job) {
@@ -129,7 +129,7 @@ exports.getApplications = async (req, res) => {
     try {
         logger.info('get job applications request recieved.');
 
-        const jobId = req.body.jobId;
+        const jobId = req.params.id;
         console.assert(jobId, 'jobId not provided.');
 
         const job = await jobs.findByPk(jobId);
