@@ -14,13 +14,48 @@ export default function Applicantspage() {
   };
 
   const applicants = [
-    { name: "vikas", email: "sai@gmail.com", resume: "resume.pdf" },
-    { name: "lovish", email: "lovish@gmail.com", resume: "resume.pdf" },
-    { name: "chethan", email: "chethan@gmail.com", resume: "resume.pdf" },
-    { name: "suresh", email: "suresh@gmail.com", resume: "resume.pdf" },
-    { name: "hari", email: "hari@gmail.com", resume: "resume.pdf" },
-    { name: "santosh", email: "santosh@gmail.com", resume: "resume.pdf" },
-    { name: "shivkesh", email: "shivkesh@gmail.com", resume: "resume.pdf" },
+    {
+      name: "vikas",
+      email: "sai@gmail.com",
+      resume: "resume.pdf",
+      contact_no: 1234567890,
+    },
+    {
+      name: "lovish",
+      email: "lovish@gmail.com",
+      resume: "resume.pdf",
+      contact_no: 1234567890,
+    },
+    {
+      name: "chethan",
+      email: "chethan@gmail.com",
+      resume: "resume.pdf",
+      contact_no: 1234567890,
+    },
+    {
+      name: "suresh",
+      email: "suresh@gmail.com",
+      resume: "resume.pdf",
+      contact_no: 1234567890,
+    },
+    {
+      name: "hari",
+      email: "hari@gmail.com",
+      resume: "resume.pdf",
+      contact_no: 1234567890,
+    },
+    {
+      name: "santosh",
+      email: "santosh@gmail.com",
+      resume: "resume.pdf",
+      contact_no: 1234567890,
+    },
+    {
+      name: "shivkesh",
+      email: "shivkesh@gmail.com",
+      resume: "resume.pdf",
+      contact_no: 1234567890,
+    },
   ];
 
   return (
@@ -78,6 +113,7 @@ export default function Applicantspage() {
                 <p className="mr-2">{i + 1}.</p>
                 <p className="basis-1/5">{person.name}</p>
                 <p className="basis-1/5">{person.email}</p>
+                <p className="basis-1/5">{person.contact_no}</p>
                 <button
                   //   onClick={handleResumeClick}
                   style={{
