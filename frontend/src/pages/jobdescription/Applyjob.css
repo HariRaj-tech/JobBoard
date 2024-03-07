@@ -111,9 +111,9 @@
 }
 
 
-.row {
+/* .row {
     margin-top: 70px;
-}
+} */
 
 .job-overview {
     border: thin solid #e0e6f7;
@@ -174,7 +174,7 @@
 .address-location{
     display:flex;
     align-items: center;
-    gap:10px;
+    /* gap:10px; */
 }
 .address-title div span {
     min-width: 120px;

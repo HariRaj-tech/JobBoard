@@ -9,7 +9,7 @@ The server will be hosted at port 3000.
 User signup.
 
 ```
-POST /api/user/signup
+POST /api/users/signup
 
 {
     "name": "user-name",
@@ -23,7 +23,7 @@ POST /api/user/signup
 User login.
 
 ```
-POST /api/user/login
+POST /api/users/login
 
 {
     "email": "user-email",
@@ -36,7 +36,7 @@ POST /api/user/login
 User authentication.
 
 ```
-GET /api/user/auth
+GET /api/users/auth
 ```
 
 ---
@@ -48,7 +48,7 @@ GET /api/user/auth
 Company signup.
 
 ```
-POST /api/company/signup
+POST /api/companies/signup
 
 {
     "name": "company-name",
@@ -62,7 +62,7 @@ POST /api/company/signup
 Company login.
 
 ```
-POST /api/company/login
+POST /api/companies/login
 
 {
     "email": "company-email",
@@ -75,7 +75,7 @@ POST /api/company/login
 Company authentication.
 
 ```
-GET /api/company/auth
+GET /api/companies/auth
 ```
 
 ---

@@ -10,10 +10,14 @@
 .img-container {
     padding: 30px 0;
 }
-@media (min-width:1200px) {
-    .container {
-        max-width: 1160px;
-    }
+
+.download-btn {
+    padding: 18px 30px 18px 65px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 6px;
 }
 
 @media (min-width:992px) and (max-width:1200px) {

@@ -1,28 +1,58 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
-*{
-    margin: 0;
-    padding: 0;
-    font-family: Plus Jakarta Sans,sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Plus Jakarta Sans, sans-serif;
 }
-.app{
-    padding: 0 50px;
-    height: 100%;
-    width: 100%;
+.app {
+  padding: 0 50px;
+  height: 100%;
+  width: 100%;
 }
-@media (max-width:680px) {
-    .app {
-        padding: 0 10px;
-    }
+@media (max-width: 680px) {
+  .app {
+    padding: 0 10px;
+  }
 }
 
 h2 {
-    font-size: 36px;
-    line-height: 45px;
+  font-size: 36px;
+  line-height: 45px;
 }
 input {
-    outline: transparent;
+  outline: transparent;
 }
 
-h5,h6 {
-    color: #05264e;
+.home-image1 {
+  animation: animation-bouncey 2s linear infinite alternate;
+}
+
+@keyframes animation-bouncey {
+  0% {
+    transform: translateY(0px);
+  }
+
+  100% {
+    transform: translateY(50px);
+  }
+}
+
+@media (min-width: 680px) {
+  .pl-20rem {
+    padding-left: 20rem;
+  }
+}
+
+.home-image2 {
+  animation: animation-bouncex 2s linear infinite alternate;
+}
+
+@keyframes animation-bouncex {
+  0% {
+    transform: translateX(90px);
+  }
+
+  100% {
+    transform: translateX(30px);
+  }
 }
