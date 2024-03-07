@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
                 unique: true,
             },
             about: {
-                type: DataTypes.STRING(2000),
+                type: DataTypes.TEXT,
             },
         },
         {

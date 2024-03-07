@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.ARRAY(DataTypes.STRING),
             },
             about: {
-                type: DataTypes.STRING(2000),
+                type: DataTypes.TEXT,
             },
             image: {
                 type: DataTypes.BLOB,
