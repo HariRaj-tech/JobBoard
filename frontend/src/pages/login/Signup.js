@@ -184,41 +184,41 @@ export default function Signup() {
     try {
       let response;
       if (formData.role === "user") {
-        // const formDataToSend = new FormData();
-        // formDataToSend.append("firstName", formData.firstName);
-        // formDataToSend.append("lastName", formData.lastName);
-        // formDataToSend.append("email", formData.userEmail);
-        // formDataToSend.append("password", formData.userPassword);
-        // formDataToSend.append("userContactNumber", formData.userContactNumber);
-        // formDataToSend.append("userLocation", formData.userLocation);
-        // formDataToSend.append("userLanguages", formData.userLanguages);
-        // formDataToSend.append("userSkills", formData.userSkills);
-        // formDataToSend.append("userAbout", formData.userAbout);
-        // formDataToSend.append("image", formData.image);
-        // formDataToSend.append("resume", formData.resume);
+        const formDataToSend = new FormData();
+        formDataToSend.append("firstName", formData.firstName);
+        formDataToSend.append("lastName", formData.lastName);
+        formDataToSend.append("email", formData.userEmail);
+        formDataToSend.append("password", formData.userPassword);
+        formDataToSend.append("userContactNumber", formData.userContactNumber);
+        formDataToSend.append("userLocation", formData.userLocation);
+        formDataToSend.append("userLanguages", formData.userLanguages);
+        formDataToSend.append("userSkills", formData.userSkills);
+        formDataToSend.append("userAbout", formData.userAbout);
+        formDataToSend.append("image", formData.image);
+        formDataToSend.append("resume", formData.resume);
 
-        // const response = await axios.post(
-        //   "http://localhost:8080/api/user/signup",
-        //   formDataToSend,
-        //   {
-        //     headers: {
-        //       "Content-Type": "multipart/form-data",
-        //     },
-        //   }
-        // );
-        // console.log("Response:", response.data);
-        response = await axios.post("http://localhost:8080/api/user/signup", {
-          firstName: formData.firstName,
-          lastName: formData.LastName,
-          email: formData.userEmail,
-          password: formData.userPassword,
-          userContactNumber: formData.userContactNumber,
-          userLocation: formData.userLocation,
-          userLanguages: formData.userLanguages,
-          userSkills: formData.userSkills,
-          userAbout: formData.userAbout,
-          resume: formData.resume,
-        });
+        const response = await axios.post(
+          "http://localhost:8080/api/user/signup",
+          formDataToSend,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log("Response:", response.data);
+        // response = await axios.post("http://localhost:8080/api/user/signup", {
+        //   firstName: formData.firstName,
+        //   lastName: formData.LastName,
+        //   email: formData.userEmail,
+        //   password: formData.userPassword,
+        //   userContactNumber: formData.userContactNumber,
+        //   userLocation: formData.userLocation,
+        //   userLanguages: formData.userLanguages,
+        //   userSkills: formData.userSkills,
+        //   userAbout: formData.userAbout,
+        //   resume: formData.resume,
+        // });
       } else if (formData.role === "company") {
         axios
           .post("http://localhost:8080/api/company/signup/", {

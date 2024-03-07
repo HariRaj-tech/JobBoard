@@ -22,13 +22,13 @@ export default function CompanyNavbar({ setUserRole }) {
           </Link>
           <Link
             to="/companyhomepage"
-            className="text-white pl-20rem text-base hover:text-gray-200"
+            className="text-white  text-base hover:text-gray-200"
           >
             Home
           </Link>
           <Link
             to="/postnewjob"
-            className="text-white px-5 text-base hover:text-gray-200"
+            className="text-white text-base hover:text-gray-200"
           >
             Post New Job
           </Link>
@@ -59,7 +59,6 @@ export default function CompanyNavbar({ setUserRole }) {
             </>
           ) : (
             <div>
-                
               <Link
                 to="/signup"
                 onClick={handleLogoutClick}
