@@ -93,6 +93,7 @@ function Applyjob() {
           setLoading(false); // Hide loading UI after a delay
           setApplied(true); // Mark the job as applied
           showAlert("Job applied successfully");
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
           // navigate("/jobinfo");
         }, 2000); // Simulating a 2-second loading time
         console.log("Job Given");
@@ -125,19 +126,18 @@ function Applyjob() {
           </div>
           <div className="btn-container">
             <button
-              className={`apply-btn ${applied ? "applied" : ""} ${
-                loading ? "loading" : ""
-              }`}
+              className={`apply-btn ${applied ? "applied" : ""} ${loading ? "loading" : ""
+                }`}
               onClick={handleApplyClick}
               disabled={loading || applied} // Disable button during loading or after job is applied
             >
               {jobInfo.applied
                 ? "Applied"
                 : loading
-                ? "Applying.."
-                : applied
-                ? "Applied"
-                : "Apply now"}
+                  ? "Applying.."
+                  : applied
+                    ? "Applied"
+                    : "Apply now"}
             </button>
           </div>
         </div>
@@ -217,10 +217,11 @@ function Applyjob() {
                   <div className="content">
                     <span>Skills</span>
                     <strong>
-                      {jobInfo.skills &&
+                      {/* {jobInfo.skills &&
                         jobInfo.skills.map((skill, index) => (
                           <span key={index}>{skill}</span>
-                        ))}
+                        ))} */}
+                      {jobInfo.skills?.join(', ')}
                     </strong>
                   </div>
                 </div>
