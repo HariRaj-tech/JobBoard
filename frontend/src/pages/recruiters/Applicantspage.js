@@ -1,67 +1,95 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import brand from "../../assets/brand.png";
 import downloadicon from "../../assets/downloadicon.svg";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
+import { alertContext } from "../../components/context/Context";
+import { useNavigate } from "react-router-dom";
 
 export default function Applicantspage() {
-  const job = {
-    location: "banglore",
-    title: "Full Stack dev",
-    skills: ["nodejs", "reactjs", "python"],
-    type: "Fulltime",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi est iure praesentium consequuntur maiores temporibus incidunt excepturi corrupti voluptatibus, ducimus amet, fuga sunt. Alias, similique dolores obcaecati fugit sunt numquam.",
-    salary: "5",
-  };
+  const [applicants, setApplicants] = useState([]);
+  const [job, setJob] = useState([]);
+  const navigate = useNavigate();
+  const { showAlert } = useContext(alertContext);
+  const location = useLocation();
+  const jobId = new URLSearchParams(location.search).get("jobId");
 
-  const applicants = [
-    {
-      name: "vikas",
-      email: "sai@gmail.com",
-      resume: "resume.pdf",
-      contact_no: 1234567890,
-    },
-    {
-      name: "lovish",
-      email: "lovish@gmail.com",
-      resume: "resume.pdf",
-      contact_no: 1234567890,
-    },
-    {
-      name: "chethan",
-      email: "chethan@gmail.com",
-      resume: "resume.pdf",
-      contact_no: 1234567890,
-    },
-    {
-      name: "suresh",
-      email: "suresh@gmail.com",
-      resume: "resume.pdf",
-      contact_no: 1234567890,
-    },
-    {
-      name: "hari",
-      email: "hari@gmail.com",
-      resume: "resume.pdf",
-      contact_no: 1234567890,
-    },
-    {
-      name: "santosh",
-      email: "santosh@gmail.com",
-      resume: "resume.pdf",
-      contact_no: 1234567890,
-    },
-    {
-      name: "shivkesh",
-      email: "shivkesh@gmail.com",
-      resume: "resume.pdf",
-      contact_no: 1234567890,
-    },
-  ];
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/jobs/${jobId}/applications`
+        );
+
+        if (response.status === 200) {
+          // window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+          setApplicants(response.data);
+          console.log(response.data);
+          console.log("User Given");
+        } else {
+          showAlert("Login kr pehle");
+          console.error("UserFetch failed:", response.statusText);
+        }
+      } catch (error) {
+        showAlert("NO Error");
+      }
+    }
+
+    fetchData();
+  }, [jobId]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/jobs/${jobId}`
+        );
+
+        if (response.status === 200) {
+          // window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+          setJob(response.data);
+          // console.log(response.data);
+          console.log("User Given");
+        } else {
+          showAlert("Login kr pehle");
+          console.error("UserFetch failed:", response.statusText);
+        }
+      } catch (error) {
+        showAlert("NO Error");
+      }
+    }
+
+    fetchData();
+  }, [jobId]);
+
+  const handleResumeClick = async (userId) => {
+    try {
+      await fetch(`http://localhost:8080/api/users/resume/${userId}/`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.buffer.data);
+          const uint8Array = new Uint8Array(data.buffer.data);
+          const blob = new Blob([uint8Array]);
+          const resumeUrl = window.URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = resumeUrl;
+
+          link.setAttribute("download", "resume.pdf");
+          document.body.appendChild(link);
+          link.click();
+
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(resumeUrl);
+        });
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <div className="container">
       <div className="container mx-auto">
-        <div className="mt-5 border-2 border-gray-200 bg-[#f8faff] p-4 ">
+        <div className="mt-5 border-2 rounded-lg border-gray-200 bg-[#f8faff] p-4 ">
           <div className="flex flex-col">
             <div className="flex justify-between flex-wrap">
               <div className="flex">
@@ -69,8 +97,10 @@ export default function Applicantspage() {
                   <img src={brand} alt="" />
                 </div>
                 <div className="flex flex-col ml-5">
-                  <h5 className="font-bold text-lg">Google</h5>
-                  <p>
+                  <h5 className="font-bold text-2xl ">
+                    {job.company && job.company.name}
+                  </h5>
+                  <p className="font-sm">
                     <i className="fa-solid fa-location-dot mr-2"></i>
                     {job.location}
                   </p>
@@ -81,17 +111,18 @@ export default function Applicantspage() {
                   src="https://jobbox-nextjs-v3.vercel.app/_next/static/media/flash.aea6c8a8.svg"
                   alt=""
                 />
-                {job.skills.map((skill) => {
-                  return (
-                    <p className="mt-3 inline-block h-fit bg-gray-200 p-1 rounded text-xs text-gray-500 mr-2">
-                      {skill}
-                    </p>
-                  );
-                })}
+                {job?.skills &&
+                  job.skills.map((skill) => {
+                    return (
+                      <p className="mt-3 inline-block text-sm h-fit bg-gray-200 p-1 rounded text-gray-500 mr-5">
+                        {skill}
+                      </p>
+                    );
+                  })}
               </div>
             </div>
             <div className="mt-3 ml-3">
-              <h3 className="font-bold text-2xl ">{job.title}</h3>
+              <h3 className="font-bold text-xl ">{job.title}</h3>
               <p className="mt-2 font-sm text-gray-600">
                 <i className="fa-solid fa-briefcase mr-2" />
                 {job.type}
@@ -111,11 +142,13 @@ export default function Applicantspage() {
             return (
               <div className="flex flex-row text-lg justify-start mt-1 mb-2">
                 <p className="mr-2">{i + 1}.</p>
-                <p className="basis-1/5">{person.name}</p>
+                <p className="basis-1/5">
+                  {person.first_name + " " + person.last_name}
+                </p>
                 <p className="basis-1/5">{person.email}</p>
                 <p className="basis-1/5">{person.contact_no}</p>
                 <button
-                  //   onClick={handleResumeClick}
+                  onClick={() => handleResumeClick(person.id)}
                   style={{
                     background: ` url(${downloadicon}) no-repeat 24px 17px,#3c65f5`,
                     width: "150px",
