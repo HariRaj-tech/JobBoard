@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cors());
 app.use('/api/user', user_routes);
 app.use('/api/company', company_routes);
-app.use('/api/job', job_routes);
+app.use('/api/jobs', job_routes);
 
 app.listen(port, () => {
     logger.info(`server listening on port ${port}...`);

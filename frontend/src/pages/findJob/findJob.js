@@ -22,7 +22,7 @@ const FindJob = () => {
 
     try {
       const searchResponse = await axios.get(
-        "http://localhost:8080/api/job/search",
+        "http://localhost:8080/api/jobs/search",
         {
           params: {
             industry:
@@ -59,7 +59,7 @@ const FindJob = () => {
           response = locationResponse.data.jobs;
         } else {
           const allJobsResponse = await axios.get(
-            "http://localhost:8080/api/job/"
+            "http://localhost:8080/api/jobs/"
           );
           response = allJobsResponse.data;
         }

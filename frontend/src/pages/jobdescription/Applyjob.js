@@ -32,7 +32,7 @@ function Applyjob() {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/job/${userId}/${jobId}`
+          `http://localhost:8080/api/jobs/${jobId}?userId=${userId}`
         );
 
         if (response.status === 200) {
@@ -83,7 +83,7 @@ function Applyjob() {
   const handleApplyClick = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/job/apply/${userId}/${jobId}`
+        `http://localhost:8080/api/jobs/${jobId}/applications?userId=${userId}`
       );
 
       if (response.status === 200) {
