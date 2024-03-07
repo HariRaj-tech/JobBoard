@@ -3,8 +3,6 @@ import banner from '../../assets/userprofilebanner.png';
 import profile from '../../assets/candidate-profile.png';
 import locationicon from '../../assets/location.svg';
 import downloadicon from '../../assets/downloadicon.svg';
-import briefcaseimg from '../../assets/briefcase.svg';
-import salary from '../../assets/salary.svg';
 import location from '../../assets/location.svg';
 import { CiPhone } from "react-icons/ci";
 import { MdOutlineEmail } from "react-icons/md";
