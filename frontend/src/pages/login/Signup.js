@@ -115,10 +115,9 @@ export default function Signup() {
         !formData.userContactNumber ||
         !formData.userAbout ||
         !formData.userSkills.length > 0 ||
-        !formData.userLanguages.length > 0
-
-        // !formData.image ||
-        // !formData.resume
+        !formData.userLanguages.length > 0 ||
+        !formData.image ||
+        !formData.resume
       ) {
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         showAlert("Please fill in all fields");
@@ -200,6 +199,7 @@ export default function Signup() {
         const response = await axios.post(
           "http://localhost:8080/api/user/signup",
           formDataToSend,
+
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -208,15 +208,15 @@ export default function Signup() {
         );
         console.log("Response:", response.data);
         // response = await axios.post("http://localhost:8080/api/user/signup", {
-        //   firstName: formData.firstName,
-        //   lastName: formData.LastName,
-        //   email: formData.userEmail,
-        //   password: formData.userPassword,
-        //   userContactNumber: formData.userContactNumber,
-        //   userLocation: formData.userLocation,
-        //   userLanguages: formData.userLanguages,
-        //   userSkills: formData.userSkills,
-        //   userAbout: formData.userAbout,
+        // firstName: formData.firstName,
+        // lastName: formData.LastName,
+        // email: formData.userEmail,
+        // password: formData.userPassword,
+        // userContactNumber: formData.userContactNumber,
+        // userLocation: formData.userLocation,
+        // userLanguages: formData.userLanguages,
+        // userSkills: formData.userSkills,
+        // userAbout: formData.userAbout,
         //   resume: formData.resume,
         // });
       } else if (formData.role === "company") {
@@ -398,7 +398,7 @@ export default function Signup() {
                     name="image"
                     onChange={handleImageChange}
                     className="form-input border-0 text-gray-900 rounded-lg block w-full p-2.5 shadow-sm bg-gray-50"
-                    accept=".pdf,.doc,.docx,.jpeg,.jpg,.png"
+                    accept=".jpeg,.jpg,.png"
                   />
                 </div>
                 <div className="form-group mb-6">
@@ -408,7 +408,7 @@ export default function Signup() {
                     name="resume"
                     onChange={handleResumeChange}
                     className="form-input border-0 text-gray-900 rounded-lg block w-full p-2.5 shadow-sm bg-gray-50"
-                    accept=".pdf,.doc,.docx.jpeg,.jpg,.png"
+                    accept=".pdf,.doc,.docx,.jpeg,.jpg,.png"
                   />
                 </div>
               </>

@@ -433,7 +433,6 @@ const FindJob = () => {
                             }
                           />
                           <span className="text-small">Internship</span>
-                          <span className="">100</span>
                         </label>
                       </li>
                       <li>
@@ -613,8 +612,7 @@ const FindJob = () => {
                         <span className="p-card mx-4">{job.experience}</span>
                         <p className=" py-3 p-card ">
                           <p>
-                            {job.description &&
-                            job.description.length > 50
+                            {job.description && job.description.length > 50
                               ? job.description.substring(0, 50) + "..."
                               : job.description + "..."}
                           </p>
