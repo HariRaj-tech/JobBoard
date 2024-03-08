@@ -331,8 +331,8 @@ const Home = () => {
                 <div className="mt-3 card-bottom">
                   <div className="row">
                     <div className="col-6 col-lg-6">
-                      <span className="card-text-price">$500</span>
-                      <span className="card-text-muted">/Hour</span>
+                      <span className="card-text-price">5</span>
+                      <span className="card-text-muted ml-1">L.P.A</span>
                     </div>
                     <div className="col-6 col-lg-6">
                       <div className="btn btn-apply">Apply Now</div>
@@ -376,8 +376,8 @@ const Home = () => {
                 <div className="mt-3 card-bottom">
                   <div className="row">
                     <div className="col-6 col-lg-6">
-                      <span className="card-text-price">$800</span>
-                      <span className="card-text-muted">/Hour</span>
+                      <span className="card-text-price">8</span>
+                      <span className="card-text-muted ml-1">L.P.A</span>
                     </div>
                     <div className="col-6 col-lg-6">
                       <div className="btn btn-apply mx-4">Apply Now</div>
@@ -424,8 +424,8 @@ const Home = () => {
                 <div className="mt-3 card-bottom">
                   <div className="row">
                     <div className="col-6 col-lg-6">
-                      <span className="card-text-price">$250</span>
-                      <span className="card-text-muted">/Hour</span>
+                      <span className="card-text-price">25</span>
+                      <span className="card-text-muted ml-1">L.P.A</span>
                     </div>
                     <div className="col-6 col-lg-6">
                       <div className="btn btn-apply mx-4">Apply Now</div>
@@ -469,8 +469,8 @@ const Home = () => {
                 <div className="mt-3 card-bottom">
                   <div className="row">
                     <div className="col-6 col-lg-6">
-                      <span className="card-text-price">$250</span>
-                      <span className="card-text-muted">/Hour</span>
+                      <span className="card-text-price">25</span>
+                      <span className="card-text-muted ml-1">L.P.A</span>
                     </div>
                     <div className="col-6 col-lg-6">
                       <div className="btn btn-apply mx-4">Apply Now</div>
@@ -511,8 +511,8 @@ const Home = () => {
                 <div className="mt-5 card-bottom">
                   <div className="row">
                     <div className="col-6 col-lg-6">
-                      <span className="card-text-price">$500</span>
-                      <span className="card-text-muted">/Hour</span>
+                      <span className="card-text-price">50</span>
+                      <span className="card-text-muted ml-1">L.P.A</span>
                     </div>
                     <div className="col-6 col-lg-6">
                       <div className="btn btn-apply mx-4">Apply Now</div>
@@ -556,8 +556,8 @@ const Home = () => {
                 <div className="mt-5 card-bottom">
                   <div className="row">
                     <div className="col-6 col-lg-6">
-                      <span className="card-text-price">$800</span>
-                      <span className="card-text-muted">/Hour</span>
+                      <span className="card-text-price">10</span>
+                      <span className="card-text-muted ml-1">L.P.A</span>
                     </div>
                     <div className="col-6 col-lg-6">
                       <div className="btn btn-apply mx-4">Apply Now</div>
@@ -601,8 +601,8 @@ const Home = () => {
                 <div className="mt-5 card-bottom">
                   <div className="row">
                     <div className="col-6 col-lg-6">
-                      <span className="card-text-price">$250</span>
-                      <span className="card-text-muted">/Hour</span>
+                      <span className="card-text-price">35</span>
+                      <span className="card-text-muted ml-1">L.P.A</span>
                     </div>
                     <div className="col-6 col-lg-6">
                       <div className="btn btn-apply mx-4">Apply Now</div>
@@ -649,8 +649,8 @@ const Home = () => {
                 <div className="mt-5 card-bottom">
                   <div className="row">
                     <div className="col-6 col-lg-6">
-                      <span className="card-text-price">$250</span>
-                      <span className="card-text-muted">/Hour</span>
+                      <span className="card-text-price">12</span>
+                      <span className="card-text-muted ml-1">L.P.A</span>
                     </div>
                     <div className="col-6 col-lg-6">
                       <div className="btn btn-apply mx-4">Apply Now</div>

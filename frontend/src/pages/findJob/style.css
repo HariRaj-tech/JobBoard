@@ -430,7 +430,7 @@ h4 {
 }
 
 .card-text-muted {
-  font-size: 9px;
+  font-size: 12px;
   color: #6c757d !important;
 }
 
@@ -755,4 +755,11 @@ body {
 .login-footer {
   font-size: 12px;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 800px) {
+  .footer-second-info {
+    display: none;
+  }
+  
 }

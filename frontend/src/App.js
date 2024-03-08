@@ -10,6 +10,7 @@ import {
 import Login from './pages/login/Login.js';
 import Signup from './pages/login/Signup.js';
 import Home from './pages/home/Home.js';
+import Footer from './pages/home/Footer.js';
 import Companydetails from './pages/recruiters/Companydetails.js';
 import Applyjob from './pages/jobdescription/Applyjob.js';
 import About from './pages/about/About.js';
@@ -60,7 +61,7 @@ function App() {
               <Route path="/userprofile" element={<Userprofile />} />
               <Route path="/applicantspage" element={<Applicantspage/>}/>
             </Routes>
-            {/* <Footer/> */}
+            <Footer/>
           </div>
         </alertContext.Provider>
       </Router >
