@@ -2,20 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../findJob/style.css";
 import "../findJob/findJob.css";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const [clicked, setClicked] = useState(false);
+  const [jobData, setJobdata] = useState([]);
+
   const [userDetails, setUserDetails] = useState({ first_name: "" });
-
-  const handleSearch = async (e) => {
-    e.preventDefault();
-
-    try {
-      setClicked(true);
-    } catch (error) {
-      console.error("Error fetching jobs:", error);
-    }
-  };
+  let navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -37,6 +30,25 @@ const Home = () => {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        let res;
+        const JobsResponse = await axios.get("http://localhost:8080/api/jobs/");
+        res = JobsResponse.data;
+
+        setJobdata(Array.isArray(res) ? res : []);
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const handleClick = (jobId) => {
+    navigate(`/jobinfo?jobId=${jobId}`);
+  };
 
   return (
     <>
@@ -222,7 +234,8 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="container job-category">
+
+      <div className="container mb-5 job-category">
         <h2 class="text-center mb-10">Jobs of the day</h2>
         <p className="text-center ">
           Search and connect with the right candidates faster.
@@ -285,13 +298,128 @@ const Home = () => {
               />
             </div>
             <div className="job-category-content">
-              <h4>Security Analyst</h4>
+              <h4>Marketing</h4>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="row py-5">
+      <div className="row mt-100">
+        {jobData.slice(0, 8).map((job) => (
+          <div
+            className="col-md-6 col-xl-3 col-lg-4 col-sm-12 col-12"
+            key={job.id}
+          >
+            <div className="card">
+              <div className="card-body hover-up">
+                <div className="card-header d-flex">
+                  <span className="flash" />
+                  <div className="image-left">
+                    <img src={job.logo_url} alt={`logo for job`} />
+                  </div>
+                  <div className="left-info-card">
+                    <span className="job-name">
+                      {job.company && job.company.name}
+                    </span>
+                    <br />
+                    <span className="location-content">{job.location}</span>
+                  </div>
+                </div>
+                <div className="card-content ">
+                  <h6 style={{ fontWeight: 600, fontSize: 16 }}>{job.title}</h6>
+                  <span className="p-card mx-2">{job.type}</span>
+                  <span className="p-card mx-4">{job.experience}</span>
+                  <p className=" py-3 p-card ">
+                    <p>
+                      {job.description && job.description.length > 50
+                        ? job.description.substring(0, 50) + "..."
+                        : job.description + "..."}
+                    </p>
+                  </p>
+                  <div className="mt-30">
+                    {job.skills.map((skill, index) => (
+                      <a
+                        key={index}
+                        href="/"
+                        className="btn btn-grey-small mr-5"
+                      >
+                        {skill}
+                      </a>
+                    ))}
+                  </div>
+                  <div className="mt-5 card-bottom">
+                    <div className="row">
+                      <div className="col-6 col-lg-6">
+                        <span className="card-text-price">{job.salary}</span>
+                        <span className="card-text-muted mx-1">L.P.A</span>
+                      </div>
+                      <div className="col-6 col-lg-6">
+                        <div
+                          className="btn btn-apply mx-4 "
+                          onClick={() => handleClick(job.id)}
+                        >
+                          View Details
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="container mt-100">
+        <div className="row px-5">
+          <div className="col-md-6">
+            <div className="search-job-image">
+              <img
+                className="img-job-1"
+                alt="JobBox"
+                src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/page/homepage1/img-chart.png"
+              />
+              <img
+                className="img-job-2"
+                alt="JobBox"
+                src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/page/homepage1/controlcard.png"
+              />
+              <img
+                className="img-job-3"
+                alt="JobBox"
+                src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/page/homepage1/img1.png"
+              />
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="left-content">
+              <span className="text-left-1">Millions Of Jobs.</span>
+              <h2 className="text-left-2">
+                Find The One That's
+                <span className="text-right"> Right</span> For You
+              </h2>
+              <p className="text-p">
+                Search all the open positions on the web. Get your own
+                personalized salary estimate. Read reviews on over 600,000
+                companies worldwide. The right job is out there.
+              </p>
+              <div className="buttons">
+                <a
+                  className="btn btn-primary button-search px-3 py-2 hover-up"
+                  href="/findJob"
+                >
+                  Search Jobs
+                </a>
+                <a href="/about" className="btn btn-link px-4 py-4">
+                  Learn More
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className="row py-5">
         <div className="col-xl-3 col-lg-4 pb-2 col-md-6 col-sm-12 col-12">
           <div className="card">
             <div className="card-body hover-up">
@@ -661,55 +789,8 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="container">
-        <div className="row px-5">
-          <div className="col-md-6">
-            <div className="search-job-image">
-              <img
-                className="img-job-1"
-                alt="JobBox"
-                src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/page/homepage1/img-chart.png"
-              />
-              <img
-                className="img-job-2"
-                alt="JobBox"
-                src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/page/homepage1/controlcard.png"
-              />
-              <img
-                className="img-job-3"
-                alt="JobBox"
-                src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/page/homepage1/img1.png"
-              />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="left-content">
-              <span className="text-left-1">Millions Of Jobs.</span>
-              <h2 className="text-left-2">
-                Find The One That's
-                <span className="text-right"> Right</span> For You
-              </h2>
-              <p className="text-p">
-                Search all the open positions on the web. Get your own
-                personalized salary estimate. Read reviews on over 600,000
-                companies worldwide. The right job is out there.
-              </p>
-              <div className="buttons">
-                <a
-                  className="btn btn-primary button-search px-3 py-2 hover-up"
-                  href="/"
-                >
-                  Search Jobs
-                </a>
-                <a href="/" className="btn btn-link px-4 py-4">
-                  Learn More
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </div> */}
+
       <div className="container mt-100 mb-50">
         <div className="row px-5">
           <div className="col-md-6 col-lg-3">
