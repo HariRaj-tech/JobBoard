@@ -2,10 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import brand from "../../assets/brand.png";
 import downloadicon from "../../assets/downloadicon.svg";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { alertContext } from "../../components/context/Context";
 import { useNavigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
+import Userprofile from "../profile/Userprofile";
 
 export default function Applicantspage() {
   const [applicants, setApplicants] = useState([]);
@@ -86,7 +87,9 @@ export default function Applicantspage() {
       console.error(e);
     }
   };
-
+  const handleChange = (userId) => {
+    navigate(`/userprofile?userId=${userId}`);
+  };
   return (
     <div className="container">
       <div className="container mx-auto">
@@ -107,19 +110,12 @@ export default function Applicantspage() {
                   </p>
                 </div>
               </div>
+
               <div className="flex flex-row-reverse">
                 <img
                   src="https://jobbox-nextjs-v3.vercel.app/_next/static/media/flash.aea6c8a8.svg"
                   alt=""
                 />
-                {job?.skills &&
-                  job.skills.map((skill) => {
-                    return (
-                      <p className="mt-3 inline-block text-sm h-fit bg-gray-200 p-1 rounded text-gray-500 mr-5">
-                        {skill}
-                      </p>
-                    );
-                  })}
               </div>
             </div>
             <div className="mt-3 ml-3">
@@ -127,7 +123,19 @@ export default function Applicantspage() {
               <p className="mt-2 font-sm text-gray-600">
                 <i className="fa-solid fa-briefcase mr-2" />
                 {job.type}
+
+                <i className="fa fa-cogs mr-2 ml-10 mt-3" />
+
+                {job?.skills &&
+                  job.skills.map((skill) => {
+                    return (
+                      <p className="inline-block text-sm h-fit bg-gray-200 p-1 rounded text-gray-500 mr-2">
+                        {skill}
+                      </p>
+                    );
+                  })}
               </p>
+              <div className="mt-3 mb-3"></div>
               <p className="mt-2 font-md">{job.description}</p>
               <p className="mt-3 text-xl font-bold text-blue-600">
                 <i className="fa-solid fa-indian-rupee-sign mr-2" />
@@ -154,7 +162,12 @@ export default function Applicantspage() {
                 <tr key={person.id}>
                   <td>{i + 1}</td>
                   <td>
-                    {person.first_name} {person.last_name}
+                    <button
+                      className="btn-apply font-md"
+                      onClick={() => handleChange(person.id)}
+                    >
+                      {person.first_name} {person.last_name}
+                    </button>
                   </td>
                   <td>{person.email}</td>
                   <td>{person.contact_no}</td>

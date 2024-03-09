@@ -11,61 +11,108 @@ import { MdOutlineEmail } from "react-icons/md";
 import { TbMessageLanguage } from "react-icons/tb";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 function Userprofile() {
   const [userInfo, setUserInfo] = useState({});
   const [imageData, setImageData] = useState(null);
+  const location = useLocation();
   const userId = localStorage.getItem("id");
 
+  const user = new URLSearchParams(location.search).get("userId");
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8080/api/users/${userId}/`
-        );
-        setUserInfo(response.data);
-        console.log(response.data);
+        if (user) {
+          const response = await axios.get(
+            `http://localhost:8080/api/users/${user}/`
+          );
+          setUserInfo(response.data);
+        } else {
+          const response = await axios.get(
+            `http://localhost:8080/api/users/${userId}/`
+          );
+          setUserInfo(response.data);
+        }
       } catch (error) {
         console.error("Error fetching User:", error);
       }
     };
-    fetch(`http://localhost:8080/api/users/image/${userId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "image/jpeg",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const uint8Array = new Uint8Array(data.buffer.data);
-        const blob = new Blob([uint8Array], { type: "image/jpeg" });
-        const imageUrl = URL.createObjectURL(blob);
-        setImageData(imageUrl);
+
+    if (user) {
+      fetch(`http://localhost:8080/api/users/image/${user}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "image/jpeg",
+        },
       })
-      .catch((error) => console.error("Error fetching image:", error));
+        .then((response) => response.json())
+        .then((data) => {
+          const uint8Array = new Uint8Array(data.buffer.data);
+          const blob = new Blob([uint8Array], { type: "image/jpeg" });
+          const imageUrl = URL.createObjectURL(blob);
+          setImageData(imageUrl);
+        })
+        .catch((error) => console.error("Error fetching image:", error));
+    } else {
+      fetch(`http://localhost:8080/api/users/image/${userId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "image/jpeg",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const uint8Array = new Uint8Array(data.buffer.data);
+          const blob = new Blob([uint8Array], { type: "image/jpeg" });
+          const imageUrl = URL.createObjectURL(blob);
+          setImageData(imageUrl);
+        })
+        .catch((error) => console.error("Error fetching image:", error));
+    }
 
     fetchUser();
   }, []);
 
   const handleResumeClick = async () => {
     try {
-      fetch(`http://localhost:8080/api/users/resume/${userId}/`)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data.buffer.data);
-          const uint8Array = new Uint8Array(data.buffer.data);
-          const blob = new Blob([uint8Array]);
-          const resumeUrl = window.URL.createObjectURL(blob);
-          const link = document.createElement("a");
-          link.href = resumeUrl;
+      if (user) {
+        fetch(`http://localhost:8080/api/users/resume/${user}/`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.buffer.data);
+            const uint8Array = new Uint8Array(data.buffer.data);
+            const blob = new Blob([uint8Array]);
+            const resumeUrl = window.URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = resumeUrl;
 
-          link.setAttribute("download", "resume.pdf");
-          document.body.appendChild(link);
-          link.click();
+            link.setAttribute("download", "resume.pdf");
+            document.body.appendChild(link);
+            link.click();
 
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(resumeUrl);
-        });
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(resumeUrl);
+          });
+      } else {
+        fetch(`http://localhost:8080/api/users/resume/${userId}/`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.buffer.data);
+            const uint8Array = new Uint8Array(data.buffer.data);
+            const blob = new Blob([uint8Array]);
+            const resumeUrl = window.URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = resumeUrl;
+
+            link.setAttribute("download", "resume.pdf");
+            document.body.appendChild(link);
+            link.click();
+
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(resumeUrl);
+          });
+      }
     } catch (e) {
       console.error(e);
     }
