@@ -618,11 +618,11 @@ const FindJob = () => {
                           </p>
                         </p>
                         <div className="mt-30">
-                          {job.skills.map((skill, index) => (
+                          {job.skills.slice(0, 2).map((skill, index) => (
                             <a
                               key={index}
                               href="/"
-                              className="btn btn-grey-small mr-5"
+                              className="btn btn-grey-small mr-1 mt-1 "
                             >
                               {skill}
                             </a>
