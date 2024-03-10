@@ -89,7 +89,7 @@ export default function Temppage() {
         <div className="flex flex-col md:w-3/4">
           <div className="">
             <h2 className="text-lg font-bold mb-2">About Us</h2>
-            <p className="pr-5">{companyData.about}</p>
+            <p className="pr-5" dangerouslySetInnerHTML={{ __html: companyData.about }} />
           </div>
           <div className="mt-4 sm:mr-11">
             <h2 className="text-lg font-bold">Recently posted Jobs</h2>

@@ -190,7 +190,7 @@ function Userprofile() {
             <div className="col1">
               <div>
                 <h4 className="mb-4">About Me</h4>
-                <p className="mb-4 text-[16px] leading-8">{userInfo.about}</p>
+                <p className="mb-4 text-[16px] leading-8" dangerouslySetInnerHTML={{ __html: userInfo.about }} />
 
                 {/* <h4 className="mb-4">Work Experience</h4>
                                 <ul className="pl-3 mb-4">
