@@ -3,6 +3,7 @@ import axios from "axios";
 import "./findJob.css";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
+import Pagination from "react-bootstrap/Pagination";
 
 const FindJob = () => {
   const [jobData, setJobdata] = useState([]);
@@ -12,6 +13,29 @@ const FindJob = () => {
   const [salaryFilter, setSalaryFilter] = useState(null);
   const [locationFilter, setLocationFilter] = useState("");
   let navigate = useNavigate();
+
+  //pagination code
+  const [pageNumber, setPageNumber] = useState(0);
+  const jobsPerPage = 9;
+  const pagesVisited = pageNumber * jobsPerPage;
+  const totalPages = Math.ceil(jobData.length / jobsPerPage);
+  const changePage = (pageNumber) => {
+    setPageNumber(pageNumber - 1);
+  };
+
+  const paginationItems = [];
+  for (let i = pageNumber; i < Math.min(pageNumber + 5, totalPages); i++) {
+    paginationItems.push(
+      <Pagination.Item
+        key={i}
+        active={i === pageNumber}
+        onClick={() => changePage(i + 1)}
+      >
+        {i + 1}
+      </Pagination.Item>
+    );
+  }
+
   const [searchParams, setSearchParams] = useState({
     industry: 0,
     location: 0,
@@ -508,7 +532,7 @@ const FindJob = () => {
                     </ul>
                   </div>
                 </div>
-                <div className="filter-block mb-20">
+                <div className="filter-block mb-5">
                   <h5 className="mt-5">Job Type</h5>
                   <div className="form-group">
                     <ul className="list-checkbox">
@@ -585,80 +609,83 @@ const FindJob = () => {
           </div>
           <div className="col-md-9 ">
             <div className="row">
-              {jobData.map((job) => (
-                <div className="col-md-4" key={job.id}>
-                  <div className="card">
-                    <div className="card-body hover-up">
-                      <div className="card-header d-flex">
-                        <span className="flash" />
-                        <div className="image-left">
-                          <img src={job.logo_url} alt={`logo for job`} />
+              {jobData
+                .slice(pagesVisited, pagesVisited + jobsPerPage)
+                .map((job) => (
+                  <div className="col-md-4" key={job.id}>
+                    <div className="card">
+                      <div className="card-body hover-up">
+                        <div className="card-header d-flex">
+                          <span className="flash" />
+                          <div className="image-left">
+                            <img src={job.logo_url} alt={`logo for job`} />
+                          </div>
+                          <div className="left-info-card">
+                            <span className="job-name">
+                              {job.company && job.company.name}
+                            </span>
+                            <br />
+                            <span className="location-content">
+                              {job.location}
+                            </span>
+                          </div>
                         </div>
-                        <div className="left-info-card">
-                          <span className="job-name">
-                            {job.company && job.company.name}
+                        <div className="card-content ">
+                          <h6
+                            className="mb-1"
+                            style={{ fontWeight: 600, fontSize: 16 }}
+                          >
+                            {job.title}
+                          </h6>
+                          <span className="p-card mr-2">
+                            <i className="fa-solid fa-briefcase mr-2" />
+                            {job.type}
                           </span>
-                          <br />
-                          <span className="location-content">
-                            {job.location}
+                          <span className="p-card mx-2">
+                            <i
+                              className="fas fa-business-time mr-2"
+                              aria-hidden="true"
+                            ></i>
+                            {job.experience}
                           </span>
-                        </div>
-                      </div>
-                      <div className="card-content ">
-                        <h6
-                          className="mb-1"
-                          style={{ fontWeight: 600, fontSize: 16 }}
-                        >
-                          {job.title}
-                        </h6>
-                        <span className="p-card mr-2">
-                          <i className="fa-solid fa-briefcase mr-2" />
-                          {job.type}
-                        </span>
-                        <span className="p-card mx-2">
-                          <i
-                            className="fas fa-business-time mr-2"
-                            aria-hidden="true"
-                          ></i>
-                          {job.experience}
-                        </span>
-                        <p className=" py-3 p-card ">
-                          <p
-                            dangerouslySetInnerHTML={{
-                              __html:
-                                job.description && job.description.length > 50
-                                  ? job.description.substring(0, 50) + "..."
-                                  : job.description + "...",
-                            }}
-                          ></p>
-                        </p>
-                        <div className="mt-30">
-                          {job.skills.slice(0, 2).map((skill, index) => (
-                            <a
-                              key={index}
-                              href="/"
-                              className="btn btn-grey-small mr-1 mt-1 "
-                            >
-                              {skill}
-                            </a>
-                          ))}
-                        </div>
-                        <div className="mt-5 card-bottom">
-                          <div className="row">
-                            <div className="col-6 col-lg-6">
-                              <span className="card-text-price">
-                                {job.salary}
-                              </span>
-                              <span className="card-text-muted mx-1">
-                                L.P.A
-                              </span>
-                            </div>
-                            <div className="col-6 col-lg-6">
-                              <div
-                                className="btn btn-apply mx-4"
-                                onClick={() => handleClick(job.id)}
+                          <p className=" py-3 p-card ">
+                            <p
+                              dangerouslySetInnerHTML={{
+                                __html:
+                                  job.description && job.description.length > 50
+                                    ? job.description.substring(0, 50) + "..."
+                                    : job.description + "...",
+                              }}
+                            ></p>
+                          </p>
+                          <div className="mt-30">
+                            {job.skills.slice(0, 2).map((skill, index) => (
+                              <a
+                                key={index}
+                                href="/"
+                                className="btn btn-grey-small mr-1 mt-1 "
                               >
-                                View Details
+                                {skill}
+                              </a>
+                            ))}
+                          </div>
+                          <div className="mt-5 card-bottom">
+                            <div className="row">
+                              <div className="col-6 col-lg-6">
+                                <span className="card-text-price">
+                                  {job.salary}
+                                </span>
+                                <span className="card-text-muted mx-1">
+                                  L.P.A
+                                </span>
+                              </div>
+                              <div className="col-6 col-lg-6">
+                                <div
+                                  className="btn btn-apply mx-4"
+                                  onClick={() => handleClick(job.id)}
+                                >
+                                  View Details
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -666,11 +693,21 @@ const FindJob = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </div>
+        <Pagination className="d-flex justify-content-end">
+          <Pagination.Prev
+            onClick={() => changePage(Math.max(pageNumber - 1, 1))}
+            disabled={pageNumber === 0}
+          />
+          {paginationItems}
+          <Pagination.Next
+            onClick={() => changePage(Math.min(pageNumber + 2, totalPages))}
+            disabled={pageNumber === totalPages - 1}
+          />
+        </Pagination>
       </div>
     </>
   );

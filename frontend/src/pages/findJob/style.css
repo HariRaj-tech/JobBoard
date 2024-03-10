@@ -761,9 +761,12 @@ body {
   .footer-second-info {
     display: none;
   }
-  
 }
 
-.width-min-content{
+.pagination li {
+  padding: 0px !important;
+}
+
+.width-min-content {
   width: min-content !important;
 }
