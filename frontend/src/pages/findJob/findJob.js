@@ -21,6 +21,7 @@ const FindJob = () => {
   const totalPages = Math.ceil(jobData.length / jobsPerPage);
   const changePage = (pageNumber) => {
     setPageNumber(pageNumber - 1);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   const paginationItems = [];
