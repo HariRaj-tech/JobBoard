@@ -48,6 +48,7 @@ const Home = () => {
 
   const handleClick = (jobId) => {
     navigate(`/jobinfo?jobId=${jobId}`);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   return (
@@ -330,10 +331,10 @@ const Home = () => {
                   <span className="p-card mx-2">{job.type}</span>
                   <span className="p-card mx-4">{job.experience}</span>
                   <p className=" py-3 p-card ">
-                    <p>
-                      {job.description && job.description.length > 50
+                    <p dangerouslySetInnerHTML={{ __html: job.description }}>
+                      {/* {job.description && job.description.length > 50
                         ? job.description.substring(0, 50) + "..."
-                        : job.description + "..."}
+                        : job.description + "..."} */}
                     </p>
                   </p>
                   <div className="mt-30">

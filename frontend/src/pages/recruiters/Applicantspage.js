@@ -137,7 +137,7 @@ export default function Applicantspage() {
                   })}
               </p>
               <div className="mt-3 mb-3"></div>
-              <p className="mt-2 font-md">{job.description}</p>
+              <p className="mt-2 font-md" dangerouslySetInnerHTML={{ __html: job.description }}></p>
               <p className="mt-3 text-xl font-bold text-blue-600">
                 <i className="fa-solid fa-indian-rupee-sign mr-2" />
                 {job.salary} <span className="text-[13px]">L.P.A</span>

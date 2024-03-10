@@ -141,10 +141,10 @@ export default function Temppage() {
                               );
                             })}
                           </p>
-                          <p className="mt-2 font-md">
-                            {job.description && job.description.length > 50
+                          <p className="mt-2 font-md" dangerouslySetInnerHTML={{ __html: job.description }}>
+                            {/* {job.description && job.description.length > 50
                               ? job.description.substring(0, 500) + "..."
-                              : job.description + "..."}
+                              : job.description + "..."} */}
                           </p>
                           <div className="flex items-center justify-between">
                             <p className="mt-3 text-xl gap-1 font-bold text-blue-600 flex items-center">

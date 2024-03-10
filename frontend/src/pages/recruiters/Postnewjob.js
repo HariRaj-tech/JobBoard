@@ -7,17 +7,20 @@ import axios from "axios";
 import "../findJob/style.css";
 import "../findJob/findJob.css";
 import { useNavigate } from "react-router-dom";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const Postnewjob = () => {
 
   const { showAlert } = useContext(alertContext);
+  const [textEditor, setTextEditor] = useState("");
 
   const companyId = localStorage.getItem("id");
   let navigate = useNavigate();
   const [formData, setFormData] = useState({
     location: "",
     title: "",
-    description: "",
+    // description: textEditor,
     experience: "",
     type: "",
     industry: "",
@@ -43,7 +46,7 @@ const Postnewjob = () => {
     const requiredFields = [
       "location",
       "title",
-      "description",
+      // "description",
       "experience",
       "type",
       "deadline",
@@ -64,9 +67,21 @@ const Postnewjob = () => {
 
     try {
       console.log(formData.companyId);
+      
       const response = await axios.post(
         "http://localhost:8080/api/jobs",
-        formData
+        {
+          companyId: formData.companyId,
+          title: formData.title,
+          type: formData.type,
+          industry: formData.industry,
+          location: formData.location,
+          experience: formData.experience,
+          skills: formData.skills,
+          salary: formData.salary,
+          deadline: formData.deadline,
+          description: textEditor
+        }
       );
 
       if (response.status === 200) {
@@ -221,13 +236,25 @@ const Postnewjob = () => {
                     <label className=" form-label text-start">
                       Job Description
                     </label>
-                    <textarea
+                    {/* <textarea
                       className="form-control w-full"
                       placeholder="Describe your job in detail..."
                       name="description"
                       value={formData.description}
                       onChange={handleChange}
-                    ></textarea>
+                    ></textarea> */}
+                    <CKEditor
+                      editor={ClassicEditor}
+                      data={textEditor}
+                      onReady={editor => {
+                        // You can store the "editor" and use when it is needed.
+                        // console.log('Editor is ready to use!', editor);
+                      }}
+                      onChange={(event, editor) => {
+                        const data = editor.getData();
+                        setTextEditor(data);
+                      }}
+                    />
                   </div>
                 </div>
 

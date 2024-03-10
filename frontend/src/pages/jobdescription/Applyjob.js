@@ -238,7 +238,7 @@ function Applyjob() {
             </div>
             <div className="about-company">
               <h3 className="text-xl">Job description</h3>
-              <p>{jobInfo.description}</p>
+              <p dangerouslySetInnerHTML={{ __html: jobInfo.description }}></p>
             </div>
             <div className="col1-footer">
               <span>{jobInfo.company && jobInfo.company.name}</span>
