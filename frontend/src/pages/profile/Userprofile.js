@@ -27,11 +27,13 @@ function Userprofile() {
           const response = await axios.get(
             `http://localhost:8080/api/users/${user}/`
           );
+          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
           setUserInfo(response.data);
         } else {
           const response = await axios.get(
             `http://localhost:8080/api/users/${userId}/`
           );
+          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
           setUserInfo(response.data);
         }
       } catch (error) {
@@ -190,7 +192,10 @@ function Userprofile() {
             <div className="col1">
               <div>
                 <h4 className="mb-4">About Me</h4>
-                <p className="mb-4 text-[16px] leading-8" dangerouslySetInnerHTML={{ __html: userInfo.about }} />
+                <p
+                  className="mb-4 text-[16px] leading-8"
+                  dangerouslySetInnerHTML={{ __html: userInfo.about }}
+                />
 
                 {/* <h4 className="mb-4">Work Experience</h4>
                                 <ul className="pl-3 mb-4">
@@ -233,6 +238,9 @@ function Userprofile() {
                       </span>
                     </div>
                     <br></br>
+                  </div>
+                  <div className="flex items-start gap-3 mb-4">
+                    <i className="fa fa-cogs mr-1" />
                     <div>
                       <span className="block text-[16px]">Skills</span>
                       <span className="block font-bold">
@@ -245,7 +253,10 @@ function Userprofile() {
                   <ul>
                     {userInfo.location && (
                       <li className="flex items-baseline gap-3">
-                        <img src={location} alt="location" />{" "}
+                        <i
+                          className="fa-solid fa-location-dot"
+                          aria-hidden="true"
+                        ></i>
                         {userInfo.location}
                       </li>
                     )}

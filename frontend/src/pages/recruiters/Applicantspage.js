@@ -24,7 +24,7 @@ export default function Applicantspage() {
         );
 
         if (response.status === 200) {
-          // window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
           setApplicants(response.data);
           console.log(response.data);
           console.log("User Given");
@@ -50,6 +50,7 @@ export default function Applicantspage() {
         if (response.status === 200) {
           // window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
           setJob(response.data);
+          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
           // console.log(response.data);
           console.log("User Given");
         } else {

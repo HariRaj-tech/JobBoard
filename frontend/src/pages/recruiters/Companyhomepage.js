@@ -20,6 +20,7 @@ export default function Temppage() {
           if (response.status === 200) {
             const data = response.data;
             setCompanyData(data);
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
             console.log(data);
           }
         }
@@ -38,6 +39,7 @@ export default function Temppage() {
           if (response.status === 200) {
             const data = response.data;
             setJobsData(data.jobs);
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
             console.log(data);
           }
         }
@@ -89,7 +91,10 @@ export default function Temppage() {
         <div className="flex flex-col md:w-3/4">
           <div className="">
             <h2 className="text-lg font-bold mb-2">About Us</h2>
-            <p className="pr-5" dangerouslySetInnerHTML={{ __html: companyData.about }} />
+            <p
+              className="pr-5"
+              dangerouslySetInnerHTML={{ __html: companyData.about }}
+            />
           </div>
           <div className="mt-4 sm:mr-11">
             <h2 className="text-lg font-bold">Recently posted Jobs</h2>
@@ -120,13 +125,6 @@ export default function Temppage() {
                               src="https://jobbox-nextjs-v3.vercel.app/_next/static/media/flash.aea6c8a8.svg"
                               alt=""
                             />
-                            {job.skills.map((skill) => {
-                              return (
-                                <p className="mt-3 inline-block h-fit bg-gray-200 p-1 rounded text-xs text-gray-500 mr-2">
-                                  {skill}
-                                </p>
-                              );
-                            })}
                           </div>
                         </div>
                         <div className="mt-3 ml-3">
@@ -134,23 +132,33 @@ export default function Temppage() {
                           <p className="mt-2 font-sm text-gray-600">
                             <i className="fa-solid fa-briefcase mr-2" />
                             {job.type}
+                            <i className="fa fa-cogs mr-2 ml-10 mb-3" />
+                            {job.skills.map((skill) => {
+                              return (
+                                <p className="mt-2 inline-block h-fit bg-gray-200 p-1 rounded text-xs text-gray-500 mr-2">
+                                  {skill}
+                                </p>
+                              );
+                            })}
                           </p>
                           <p className="mt-2 font-md">
                             {job.description && job.description.length > 50
                               ? job.description.substring(0, 500) + "..."
                               : job.description + "..."}
                           </p>
-                          <p className="mt-3 text-xl font-bold text-blue-600">
-                            <i className="fa-solid fa-indian-rupee-sign mr-2" />
-                            {job.salary}{" "}
-                            <span className="text-[13px]">L.P.A</span>
+                          <div className="flex items-center justify-between">
+                            <p className="mt-3 text-xl gap-1 font-bold text-blue-600 flex items-center">
+                              <i className="fa-solid fa-indian-rupee-sign mr-2" />
+                              {job.salary}{" "}
+                              <span className="text-[13px] mt-1">L.P.A</span>
+                            </p>
                             <div
-                              className="btn btn-apply ml-5"
+                              className="btn btn-apply mr-5 text-xl text-blue-600 "
                               onClick={() => handleClick(job.id)}
                             >
                               View Applicants
                             </div>
-                          </p>
+                          </div>
                         </div>
                       </div>
                     </div>
