@@ -132,7 +132,7 @@ export default function Temppage() {
                           <p className="mt-2 font-sm text-gray-600">
                             <i className="fa-solid fa-briefcase mr-2" />
                             {job.type}
-                            <i className="fa fa-cogs mr-2 ml-10 mb-3" />
+                            <i className="fas fa-tasks mr-2 ml-10 mb-3" />
                             {job.skills.map((skill) => {
                               return (
                                 <p className="mt-2 inline-block h-fit bg-gray-200 p-1 rounded text-xs text-gray-500 mr-2">
@@ -141,7 +141,12 @@ export default function Temppage() {
                               );
                             })}
                           </p>
-                          <p className="mt-2 font-md" dangerouslySetInnerHTML={{ __html: job.description }}>
+                          <p
+                            className="mt-2 font-md"
+                            dangerouslySetInnerHTML={{
+                              __html: job.description,
+                            }}
+                          >
                             {/* {job.description && job.description.length > 50
                               ? job.description.substring(0, 500) + "..."
                               : job.description + "..."} */}

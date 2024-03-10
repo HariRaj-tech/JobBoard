@@ -240,7 +240,7 @@ function Userprofile() {
                     <br></br>
                   </div>
                   <div className="flex items-start gap-3 mb-4">
-                    <i className="fa fa-cogs mr-1" />
+                    <i className="fa fa-tasks mr-1" />
                     <div>
                       <span className="block text-[16px]">Skills</span>
                       <span className="block font-bold">

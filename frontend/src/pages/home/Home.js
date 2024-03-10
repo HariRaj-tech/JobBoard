@@ -327,15 +327,29 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="card-content ">
-                  <h6 style={{ fontWeight: 600, fontSize: 16 }}>{job.title}</h6>
-                  <span className="p-card mx-2">{job.type}</span>
-                  <span className="p-card mx-4">{job.experience}</span>
+                  <h6
+                    className="mb-1"
+                    style={{ fontWeight: 600, fontSize: 16 }}
+                  >
+                    {job.title}
+                  </h6>
+                  <span className="p-card mr-2">
+                    <i className="fa-solid fa-briefcase mr-2" />
+                    {job.type}
+                  </span>
+                  <span className="p-card mx-4">
+                    <i className="fas fa-business-time mr-2" aria-hidden="true"></i>
+                    {job.experience}
+                  </span>
                   <p className=" py-3 p-card ">
-                    <p dangerouslySetInnerHTML={{ __html: job.description }}>
-                      {/* {job.description && job.description.length > 50
-                        ? job.description.substring(0, 50) + "..."
-                        : job.description + "..."} */}
-                    </p>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          job.description && job.description.length > 50
+                            ? job.description.substring(0, 70) + "..."
+                            : job.description + "...",
+                      }}
+                    ></p>
                   </p>
                   <div className="mt-30">
                     {job.skills.slice(0, 2).map((skill, index) => (

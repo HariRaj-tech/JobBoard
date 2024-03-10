@@ -125,7 +125,7 @@ export default function Applicantspage() {
                 <i className="fa-solid fa-briefcase mr-2" />
                 {job.type}
 
-                <i className="fa fa-cogs mr-2 ml-10 mt-3" />
+                <i className="fas fa-tasks mr-2 ml-10 mt-3" />
 
                 {job?.skills &&
                   job.skills.map((skill) => {
@@ -137,7 +137,10 @@ export default function Applicantspage() {
                   })}
               </p>
               <div className="mt-3 mb-3"></div>
-              <p className="mt-2 font-md" dangerouslySetInnerHTML={{ __html: job.description }}></p>
+              <p
+                className="mt-2 font-md"
+                dangerouslySetInnerHTML={{ __html: job.description }}
+              ></p>
               <p className="mt-3 text-xl font-bold text-blue-600">
                 <i className="fa-solid fa-indian-rupee-sign mr-2" />
                 {job.salary} <span className="text-[13px]">L.P.A</span>

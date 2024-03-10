@@ -7,11 +7,10 @@ import axios from "axios";
 import "../findJob/style.css";
 import "../findJob/findJob.css";
 import { useNavigate } from "react-router-dom";
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const Postnewjob = () => {
-
   const { showAlert } = useContext(alertContext);
   const [textEditor, setTextEditor] = useState("");
 
@@ -60,33 +59,30 @@ const Postnewjob = () => {
         showAlert(
           `Please fill in ${field.replace(/([A-Z])/g, " $1").toLowerCase()}`
         );
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         return;
       }
     }
 
     try {
       console.log(formData.companyId);
-      
-      const response = await axios.post(
-        "http://localhost:8080/api/jobs",
-        {
-          companyId: formData.companyId,
-          title: formData.title,
-          type: formData.type,
-          industry: formData.industry,
-          location: formData.location,
-          experience: formData.experience,
-          skills: formData.skills,
-          salary: formData.salary,
-          deadline: formData.deadline,
-          description: textEditor
-        }
-      );
+
+      const response = await axios.post("http://localhost:8080/api/jobs", {
+        companyId: formData.companyId,
+        title: formData.title,
+        type: formData.type,
+        industry: formData.industry,
+        location: formData.location,
+        experience: formData.experience,
+        skills: formData.skills,
+        salary: formData.salary,
+        deadline: formData.deadline,
+        description: textEditor,
+      });
 
       if (response.status === 200) {
         showAlert("Successfully registered your job");
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         navigate("/companyhomepage");
         console.log("Registration Complete");
       } else {
@@ -231,8 +227,8 @@ const Postnewjob = () => {
                   </div>
                 </div>
 
-                <div className="row">
-                  <div className="mb-3 w-full form-group">
+                <div className="row width-min-content">
+                  <div className="mb-3 form-group">
                     <label className=" form-label text-start">
                       Job Description
                     </label>
@@ -244,9 +240,10 @@ const Postnewjob = () => {
                       onChange={handleChange}
                     ></textarea> */}
                     <CKEditor
+                      className="form-control "
                       editor={ClassicEditor}
                       data={textEditor}
-                      onReady={editor => {
+                      onReady={(editor) => {
                         // You can store the "editor" and use when it is needed.
                         // console.log('Editor is ready to use!', editor);
                       }}
