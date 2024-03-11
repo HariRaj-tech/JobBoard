@@ -80,10 +80,12 @@ export default function Login({ setUserRole }) {
         if (loginData.role === "user") {
 
           localStorage.setItem('id', data.data.id);
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
           navigate("/");
         }
         else if (loginData.role === "company") {
           localStorage.setItem('id', data.data.id);
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
           navigate("/companyhomepage");
         }
         console.log("Loged in");
