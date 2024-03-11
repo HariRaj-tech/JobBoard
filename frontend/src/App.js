@@ -22,6 +22,7 @@ import Alert from './pages/about/Alert.js';
 import { alertContext } from './components/context/Context.js';
 import CompanyNavbar from './components/CompanyNavbar.js';
 import Applicantspage from './pages/recruiters/Applicantspage.js';
+import Userprofileedit from './pages/profile/Userprofileedit.js';
 
 
 
@@ -59,9 +60,10 @@ function App() {
               <Route path="/postnewjob" element={<Postnewjob />} />
               <Route path="/findJob" element={<FindJob />} />
               <Route path="/userprofile" element={<Userprofile />} />
-              <Route path="/applicantspage" element={<Applicantspage/>}/>
+              <Route path="/applicantspage" element={<Applicantspage />} />
+              <Route path="/editprofile" element={<Userprofileedit />} />
             </Routes>
-            <Footer/>
+            <Footer />
           </div>
         </alertContext.Provider>
       </Router >
