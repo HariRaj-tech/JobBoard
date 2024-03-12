@@ -11,29 +11,33 @@ import { MdOutlineEmail } from "react-icons/md";
 import { TbMessageLanguage } from "react-icons/tb";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Userprofile() {
   const [userInfo, setUserInfo] = useState({});
   const [imageData, setImageData] = useState(null);
   const location = useLocation();
   const userId = localStorage.getItem("id");
+  const [userRole, setUserRole] = useState(true);
 
   const user = new URLSearchParams(location.search).get("userId");
   useEffect(() => {
     const fetchUser = async () => {
       try {
         if (user) {
+          setUserRole(false);
           const response = await axios.get(
             `http://localhost:8080/api/users/${user}/`
           );
           window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
           setUserInfo(response.data);
         } else {
           const response = await axios.get(
             `http://localhost:8080/api/users/${userId}/`
           );
           window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
           setUserInfo(response.data);
         }
       } catch (error) {
@@ -166,6 +170,7 @@ function Userprofile() {
                     </span>
                   )} */}
                 </div>
+
                 {/* <p className="my-2">
                                     UI/UX Designer. Front end Developer
                                 </p> */}
@@ -240,7 +245,7 @@ function Userprofile() {
                     <br></br>
                   </div>
                   <div className="flex items-start gap-3 mb-4">
-                    <i className="fa fa-tasks mr-1" />
+                    <i className="fa fa-tasks mr-2" />
                     <div>
                       <span className="block text-[16px]">Skills</span>
                       <span className="block font-bold">
@@ -269,6 +274,20 @@ function Userprofile() {
                       <MdOutlineEmail /> Email: {userInfo.email}
                     </li>
                   </ul>
+                  {userRole == 1 && (
+                    <Link to="/editprofile">
+                      <button
+                        style={{
+                          padding: "18px",
+                          background: `#3c65f5`,
+                        }}
+                        className="download-btn mt-3"
+                      >
+                        <i className="fas fa-user-edit mr-3 "></i>
+                        Edit Profile
+                      </button>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

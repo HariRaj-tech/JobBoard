@@ -611,6 +611,7 @@ const FindJob = () => {
           <div className="col-md-9 ">
             <div className="row">
               {jobData
+                .sort((a, b) => b.id - a.id)
                 .slice(pagesVisited, pagesVisited + jobsPerPage)
                 .map((job) => (
                   <div className="col-md-4" key={job.id}>
