@@ -56,3 +56,7 @@ input {
     transform: translateX(30px);
   }
 }
+
+iframe#webpack-dev-server-client-overlay {
+  display: none !important;
+}

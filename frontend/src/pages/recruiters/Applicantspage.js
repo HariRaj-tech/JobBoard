@@ -2,11 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import brand from "../../assets/brand.png";
 import downloadicon from "../../assets/downloadicon.svg";
 import axios from "axios";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { alertContext } from "../../components/context/Context";
 import { useNavigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
-import Userprofile from "../profile/Userprofile";
+
 
 export default function Applicantspage() {
   const [applicants, setApplicants] = useState([]);
@@ -29,7 +29,7 @@ export default function Applicantspage() {
           console.log(response.data);
           console.log("User Given");
         } else {
-          showAlert("Login kr pehle");
+          showAlert("Login First");
           console.error("UserFetch failed:", response.statusText);
         }
       } catch (error) {

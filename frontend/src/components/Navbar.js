@@ -1,11 +1,9 @@
-
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { alertContext } from "./context/Context";
-import Container from "react-bootstrap/Container";
+
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 
 export default function CustomNavbar() {
   const { showAlert } = useContext(alertContext);
@@ -97,13 +95,13 @@ export default function CustomNavbar() {
               </>
             ) : (
               <>
-                <Nav
+                {/* <Nav
                   as={Link}
                   to="/editprofile"
                   className="bg-blue-500 text-white px-4 my-1 py-2 rounded-lg hover:bg-blue-700"
                 >
                   Edit Profile
-                </Nav>
+                </Nav> */}
                 <Nav
                   as={Link}
                   to="/userprofile"
