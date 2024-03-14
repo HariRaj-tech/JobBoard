@@ -13,9 +13,9 @@ body {
 }
 
 .nav-link {
-  color: #000 !important;
+  color: white !important;
   font-family: "Rubik", sans-serif;
-  font-weight: bold;
+  font-weight: 500 !important;
 }
 
 .color-brand-2 {
@@ -618,12 +618,6 @@ h5 {
 .end-text p {
   color: #111;
   text-transform: capitalize;
-}
-
-body {
-  color: #05264e;
-  font-family: Plus Jakarta Sans, sans-serif;
-  font-style: normal;
 }
 
 .main-banner {

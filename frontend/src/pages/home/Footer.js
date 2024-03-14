@@ -1,13 +1,14 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <>
       <section className="contact container mt-100 mx-5">
         <div className="contact-info">
           <div className="first-info">
-            <img
-              src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/template/jobhub-logo.svg"
-              alt=""
-            />
+            <Link to="/" className="text-2xl font-bold">
+              JobBoard
+            </Link>
             <p>
               JobBox is the heart of the design community and the best resource
               to discover and connect with designers and jobs worldwide.

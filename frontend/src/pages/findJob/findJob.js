@@ -11,10 +11,10 @@ const FindJob = () => {
   const [experienceFilter, setExperienceFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [salaryFilter, setSalaryFilter] = useState(null);
-  const [locationFilter, setLocationFilter] = useState("");
+  // const [locationFilter, setLocationFilter] = useState("");
   let navigate = useNavigate();
 
-  //pagination code
+  //pagination code logic
   const [pageNumber, setPageNumber] = useState(0);
   const jobsPerPage = 9;
   const pagesVisited = pageNumber * jobsPerPage;
@@ -37,6 +37,7 @@ const FindJob = () => {
     );
   }
 
+  //search handling
   const [searchParams, setSearchParams] = useState({
     industry: 0,
     location: 0,
@@ -61,7 +62,7 @@ const FindJob = () => {
           },
         }
       );
-      // Handle the response data, e.g., update state with the fetched jobs
+      // Handling the response data
       let response = searchResponse.data.Jobs;
       // console.log("response", response);
       setJobdata(Array.isArray(response) ? response : []);
@@ -69,25 +70,17 @@ const FindJob = () => {
       console.error("Error fetching jobs:", error);
     }
   };
-  // console.log(jobData);
 
+  //all jobs fetching and filters logic
   useEffect(() => {
     const fetchData = async () => {
       try {
         let response;
 
-        if (locationFilter) {
-          // Make API call for location filter
-          const locationResponse = await axios.get(
-            `/jobs/location/${locationFilter}`
-          );
-          response = locationResponse.data.jobs;
-        } else {
-          const allJobsResponse = await axios.get(
-            "http://localhost:8080/api/jobs/"
-          );
-          response = allJobsResponse.data;
-        }
+        const allJobsResponse = await axios.get(
+          "http://localhost:8080/api/jobs/"
+        );
+        response = allJobsResponse.data;
 
         if (industryFilter) {
           response = response.filter(
@@ -122,14 +115,9 @@ const FindJob = () => {
     };
 
     fetchData();
-  }, [
-    locationFilter,
-    industryFilter,
-    salaryFilter,
-    experienceFilter,
-    typeFilter,
-  ]);
+  }, [industryFilter, salaryFilter, experienceFilter, typeFilter]);
 
+  // on view details click it goes to jobProfile page
   const handleClick = (jobId) => {
     navigate(`/jobinfo?jobId=${jobId}`);
   };
@@ -138,14 +126,15 @@ const FindJob = () => {
     <>
       <div className="container">
         <div className="px-4 py-5 my-5 text-center box-banner">
+          {/* frontBanner code including search  */}
           <h1 className="fw-bold box-banner-header">
-            <span className="box-banner-header-22Jobs">22 Jobs</span>
+            <span className="box-banner-header-22Jobs">New Jobs</span>
             <span>Available Now</span>
           </h1>
           <div className="col-lg-6 mx-auto">
             <p className="lead box-banner-text mb-4">
-              Quickly design and customize responsive mobile-first sites with
-              Bootstrap.
+              Unlock your potential, seize the opportunity, and build your
+              future with JobBoard.
             </p>
 
             <div className="d-grid gap-2  justify-content-sm-center">
@@ -213,6 +202,7 @@ const FindJob = () => {
           </div>
         </div>
         <div className="row mt-5">
+          {/* filters on left side */}
           <div className="col-md-3">
             <div className="slidebar">
               <div className="slidebar-filter">
@@ -609,10 +599,12 @@ const FindJob = () => {
             </div>
           </div>
           <div className="col-md-9 ">
+            {/* jobs representation */}
             <div className="row">
+              {/* jobdata mapping */}
               {jobData
-                .sort((a, b) => b.id - a.id)
-                .slice(pagesVisited, pagesVisited + jobsPerPage)
+                .sort((a, b) => b.id - a.id) //sorting based on newest job first
+                .slice(pagesVisited, pagesVisited + jobsPerPage) // for pagination 9 job presented in each page
                 .map((job) => (
                   <div className="col-md-4" key={job.id}>
                     <div className="card">
@@ -651,6 +643,7 @@ const FindJob = () => {
                             {job.experience}
                           </span>
                           <p className=" py-3 p-card ">
+                            {/* to remove tags dangerouslySetInnerHTML is used and only some string is shown in jobCard */}
                             <p
                               dangerouslySetInnerHTML={{
                                 __html:
@@ -661,15 +654,20 @@ const FindJob = () => {
                             ></p>
                           </p>
                           <div className="mt-30">
-                            {job.skills.slice(0, 2).map((skill, index) => (
-                              <a
-                                key={index}
-                                href="/"
-                                className="btn btn-grey-small mr-1 mt-1 "
-                              >
-                                {skill}
-                              </a>
-                            ))}
+                            {job.skills.slice(0, 2).map(
+                              (
+                                skill,
+                                index //only two skills in jobCard
+                              ) => (
+                                <a
+                                  key={index}
+                                  href="/"
+                                  className="btn btn-grey-small mr-1 mt-1 "
+                                >
+                                  {skill}
+                                </a>
+                              )
+                            )}
                           </div>
                           <div className="mt-5 card-bottom">
                             <div className="row">
@@ -699,6 +697,8 @@ const FindJob = () => {
             </div>
           </div>
         </div>
+
+        {/* Pagination code logic */}
         <Pagination className="d-flex justify-content-end">
           <Pagination.Prev
             onClick={() => changePage(Math.max(pageNumber - 1, 1))}

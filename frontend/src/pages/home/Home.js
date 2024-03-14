@@ -5,8 +5,7 @@ import "../findJob/findJob.css";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const [jobData, setJobdata] = useState([]);
-
+  //Fetching user Details for name in home page
   const [userDetails, setUserDetails] = useState({ first_name: "" });
   let navigate = useNavigate();
 
@@ -31,6 +30,9 @@ const Home = () => {
     fetchData();
   }, []);
 
+  //Jobs to show in home
+  const [jobData, setJobdata] = useState([]);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -46,6 +48,7 @@ const Home = () => {
     fetchData();
   }, []);
 
+  //when click view details goes to another page
   const handleClick = (jobId) => {
     navigate(`/jobinfo?jobId=${jobId}`);
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -81,44 +84,6 @@ const Home = () => {
                 applications every single day
                 <br className="d-none d-lg-block" />
               </div>
-              {/* search bar */}
-              {/* <div className="searchBar">
-                                <form className="d-block" onSubmit={handleSearch}>
-                                    <select
-                                        className="form-input m-2 col-lg-4 col-md-6 col-sm-12 col-auto box"
-                                        size={1}
-                                        aria-label="size 1 select example"
-                                        onChange={handleSearch}
-                                    >
-                                        <option value={0}>Industry</option>
-                                        <option value={1}>Software</option>
-                                        <option value={2}>Finance</option>
-                                        <option value={3}>Technology</option>
-                                        <option value={4}>Management</option>
-                                        <option value={5}>Human Resources</option>
-                                        <option value={6}>Marketing</option>
-                                    </select>
-                                    <select
-                                        className="form-input  m-2 col-lg-4 col-md-6 col-sm-12 col-auto box"
-                                        size={1}
-                                        aria-label="size 1 select example"
-                                        onChange={handleSearch}
-                                    >
-                                        <option value={0}>Location</option>
-                                        <option value={1}>New York, US</option>
-                                        <option value={2}>Punjab</option>
-                                        <option value={3}>Cityville, USA</option>
-                                        <option value={4}>San Francisco, US</option>
-                                    </select>
-
-                                    <button
-                                        type="submit"
-                                        className="btn-primary m-2 btn-default col-auto font-sm button-box"
-                                    >
-                                        Search
-                                    </button>
-                                </form>
-                            </div> */}
             </div>
           </div>
           <div className="col-md-5 images images2 container">
@@ -132,6 +97,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      {/* Browse by category section */}
       <div className="container category">
         <h2 class="text-center mb-10" style={{ marginTop: "10% !important" }}>
           Browse by category
@@ -217,6 +183,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      {/* Hiring Apply Now Banner */}
       <div className="section-box mb-30 ">
         <div className="container">
           <div className="box-hiring d-flex ">
@@ -235,7 +203,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-
+      {/* Job of the day Section */}
       <div className="container mb-5 job-category">
         <h2 class="text-center mb-10">Jobs of the day</h2>
         <p className="text-center ">
@@ -304,7 +272,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-
+      {/* JobCard only upto shown here for show */}
       <div className="row mt-100">
         {jobData.slice(0, 8).map((job) => (
           <div
@@ -338,7 +306,10 @@ const Home = () => {
                     {job.type}
                   </span>
                   <span className="p-card mx-4">
-                    <i className="fas fa-business-time mr-2" aria-hidden="true"></i>
+                    <i
+                      className="fas fa-business-time mr-2"
+                      aria-hidden="true"
+                    ></i>
                     {job.experience}
                   </span>
                   <p className=" py-3 p-card ">
@@ -384,7 +355,7 @@ const Home = () => {
           </div>
         ))}
       </div>
-
+      {/* millions of jobs section */}
       <div className="container mt-100">
         <div className="row px-5">
           <div className="col-md-6">
@@ -433,379 +404,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-
-      {/* <div className="row py-5">
-        <div className="col-xl-3 col-lg-4 pb-2 col-md-6 col-sm-12 col-12">
-          <div className="card">
-            <div className="card-body hover-up">
-              <div className="card-header d-flex">
-                <span className="flash" />
-                <div className="image-left">
-                  <img
-                    src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/brands/brand-1.png"
-                    alt=""
-                  />
-                </div>
-                <div className="left-info-card">
-                  <span className="job-name">LinkedIn</span>
-                  <br />
-                  <span className="location-content">New York, US</span>
-                </div>
-              </div>
-              <div className="card-content">
-                <h6 style={{ fontWeight: 600, fontSize: 16 }}>
-                  UI / UX Designer
-                </h6>
-                <p className="mt-15 py-3 p-card">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <div className="mt-30">
-                  <a href="/" className="btn btn-grey-small m-1">
-                    Adobe XD
-                  </a>
-                  <a href="/" className="btn btn-grey-small m-1">
-                    Figma
-                  </a>
-                  <a href="/" className="btn btn-grey-small m-1">
-                    Photoshop
-                  </a>
-                </div>
-                <div className="mt-3 card-bottom">
-                  <div className="row">
-                    <div className="col-6 col-lg-6">
-                      <span className="card-text-price">5</span>
-                      <span className="card-text-muted ml-1">L.P.A</span>
-                    </div>
-                    <div className="col-6 col-lg-6">
-                      <div className="btn btn-apply">Apply Now</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-xl-3 col-lg-4 pb-5 col-md-6 col-sm-12 col-12">
-          <div className="card">
-            <div className="card-body hover-up">
-              <div className="card-header d-flex">
-                <span className="flash" />
-                <div className="image-left">
-                  <img src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/brands/brand-2.png" />
-                </div>
-                <div className="left-info-card">
-                  <span className="job-name">Adobe</span>
-                  <br />
-                  <span className="location-content">New York, US</span>
-                </div>
-              </div>
-              <div className="card-content">
-                <h6 style={{ fontWeight: 600, fontSize: 16 }}>
-                  Full Stack Engineer
-                </h6>
-                <p className="mt-15 py-3 p-card">
-                  Lorem ipsum, dolor sit amet consectetur, saepe architecto sunt
-                  existe.
-                </p>
-                <div className="mt-30">
-                  <a href="/" className="btn btn-grey-small m-1">
-                    React
-                  </a>
-                  <a href="/" className="btn btn-grey-small m-1">
-                    NodeJS
-                  </a>
-                </div>
-                <div className="mt-3 card-bottom">
-                  <div className="row">
-                    <div className="col-6 col-lg-6">
-                      <span className="card-text-price">8</span>
-                      <span className="card-text-muted ml-1">L.P.A</span>
-                    </div>
-                    <div className="col-6 col-lg-6">
-                      <div className="btn btn-apply mx-4">Apply Now</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-xl-3 col-lg-4 pb-5 col-md-6 col-sm-12 col-12">
-          <div className="card">
-            <div className="card-body hover-up">
-              <div className="card-header d-flex">
-                <span className="flash" />
-                <div className="image-left">
-                  <img src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/brands/brand-3.png" />
-                </div>
-                <div className="left-info-card">
-                  <span className="job-name">Bing Search</span>
-                  <br />
-                  <span className="location-content">New York, US</span>
-                </div>
-              </div>
-              <div className="card-content">
-                <h6 style={{ fontWeight: 600, fontSize: 16 }}>
-                  Java Software Engineer
-                </h6>
-                <p className="mt-15 py-3 p-card">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <div className="mt-30">
-                  <a href="/" className="btn btn-grey-small m-1">
-                    Python
-                  </a>
-                  <a href="/" className="btn btn-grey-small m-1">
-                    AWS
-                  </a>
-                  <a href="/" className="btn btn-grey-small m-1">
-                    Photoshop
-                  </a>
-                </div>
-                <div className="mt-3 card-bottom">
-                  <div className="row">
-                    <div className="col-6 col-lg-6">
-                      <span className="card-text-price">25</span>
-                      <span className="card-text-muted ml-1">L.P.A</span>
-                    </div>
-                    <div className="col-6 col-lg-6">
-                      <div className="btn btn-apply mx-4">Apply Now</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-xl-3 col-lg-4 pb-5 col-md-6 col-sm-12 col-12">
-          <div className="card">
-            <div className="card-body hover-up">
-              <div className="card-header d-flex">
-                <span className="flash" />
-                <div className="image-left">
-                  <img src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/brands/brand-4.png" />
-                </div>
-                <div className="left-info-card">
-                  <span className="job-name">Daily Motion</span>
-                  <br />
-                  <span className="location-content">New York, US</span>
-                </div>
-              </div>
-              <div className="card-content">
-                <h6 style={{ fontWeight: 600, fontSize: 16 }}>
-                  Frontend Developer
-                </h6>
-                <p className="mt-15 py-3 p-card">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <div className="mt-30">
-                  <a href="/" className="btn btn-grey-small m-1">
-                    Typescript
-                  </a>
-                  <a href="/" className="btn btn-grey-small m-1">
-                    Java
-                  </a>
-                </div>
-                <div className="mt-3 card-bottom">
-                  <div className="row">
-                    <div className="col-6 col-lg-6">
-                      <span className="card-text-price">25</span>
-                      <span className="card-text-muted ml-1">L.P.A</span>
-                    </div>
-                    <div className="col-6 col-lg-6">
-                      <div className="btn btn-apply mx-4">Apply Now</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-xl-3 col-lg-4 pb-5 col-md-6 col-sm-12 col-12">
-          <div className="card">
-            <div className="card-body hover-up">
-              <div className="card-header d-flex">
-                <span className="flash" />
-                <div className="image-left">
-                  <img src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/brands/brand-5.png" />
-                </div>
-                <div className="left-info-card">
-                  <span className="job-name">LinkedIn</span>
-                  <br />
-                  <span className="location-content">New York, US</span>
-                </div>
-              </div>
-              <div className="card-content">
-                <h6 style={{ fontWeight: 600, fontSize: 16 }}>
-                  React Native Web Developer
-                </h6>
-                <p className="mt-15 py-3 p-card">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <div className="mt-30">
-                  <a href="/" className="btn btn-grey-small mr-5">
-                    Angular
-                  </a>
-                </div>
-                <div className="mt-5 card-bottom">
-                  <div className="row">
-                    <div className="col-6 col-lg-6">
-                      <span className="card-text-price">50</span>
-                      <span className="card-text-muted ml-1">L.P.A</span>
-                    </div>
-                    <div className="col-6 col-lg-6">
-                      <div className="btn btn-apply mx-4">Apply Now</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-xl-3 col-lg-4 pb-5 col-md-6 col-sm-12 col-12">
-          <div className="card">
-            <div className="card-body hover-up">
-              <div className="card-header d-flex">
-                <span className="flash" />
-                <div className="image-left">
-                  <img src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/brands/brand-6.png" />
-                </div>
-                <div className="left-info-card">
-                  <span className="job-name">Quora JSC</span>
-                  <br />
-                  <span className="location-content">New York, US</span>
-                </div>
-              </div>
-              <div className="card-content">
-                <h6 style={{ fontWeight: 600, fontSize: 16 }}>
-                  Senior System Engineer
-                </h6>
-                <p className="mt-15 py-3 p-card">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <div className="mt-30">
-                  <a href="/" className="btn btn-grey-small mr-5">
-                    PHP
-                  </a>
-                  <a href="/" className="btn btn-grey-small mr-5">
-                    Android
-                  </a>
-                </div>
-                <div className="mt-5 card-bottom">
-                  <div className="row">
-                    <div className="col-6 col-lg-6">
-                      <span className="card-text-price">10</span>
-                      <span className="card-text-muted ml-1">L.P.A</span>
-                    </div>
-                    <div className="col-6 col-lg-6">
-                      <div className="btn btn-apply mx-4">Apply Now</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-xl-3 col-lg-4 pb-5 col-md-6 col-sm-12 col-12">
-          <div className="card">
-            <div className="card-body hover-up">
-              <div className="card-header d-flex">
-                <span className="flash" />
-                <div className="image-left">
-                  <img src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/brands/brand-7.png" />
-                </div>
-                <div className="left-info-card">
-                  <span className="job-name">Nintendo</span>
-                  <br />
-                  <span className="location-content">New York, US</span>
-                </div>
-              </div>
-              <div className="card-content">
-                <h6 style={{ fontWeight: 600, fontSize: 16 }}>
-                  Products Manager
-                </h6>
-                <p className="mt-15 py-3 p-card">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <div className="mt-30">
-                  <a href="/" className="btn btn-grey-small mr-5">
-                    Asp.Net
-                  </a>
-                  <a href="/" className="btn btn-grey-small mr-5">
-                    Figma
-                  </a>
-                </div>
-                <div className="mt-5 card-bottom">
-                  <div className="row">
-                    <div className="col-6 col-lg-6">
-                      <span className="card-text-price">35</span>
-                      <span className="card-text-muted ml-1">L.P.A</span>
-                    </div>
-                    <div className="col-6 col-lg-6">
-                      <div className="btn btn-apply mx-4">Apply Now</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-xl-3 col-lg-4 pb-5 col-md-6 col-sm-12 col-12">
-          <div className="card">
-            <div className="card-body hover-up">
-              <div className="card-header d-flex">
-                <span className="flash" />
-                <div className="image-left">
-                  <img src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/brands/brand-8.png" />
-                </div>
-                <div className="left-info-card">
-                  <span className="job-name">Periscope</span>
-                  <br />
-                  <span className="location-content">New York, US</span>
-                </div>
-              </div>
-              <div className="card-content">
-                <h6 style={{ fontWeight: 600, fontSize: 16 }}>
-                  Lead Quality Control QA
-                </h6>
-                <p className="mt-15 py-3 p-card">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <div className="mt-30">
-                  <a href="/" className="btn btn-grey-small mr-5">
-                    iOS
-                  </a>
-                  <a href="/" className="btn btn-grey-small mr-5">
-                    Laravel
-                  </a>
-                  <a href="/" className="btn btn-grey-small mr-5">
-                    GoLang
-                  </a>
-                </div>
-                <div className="mt-5 card-bottom">
-                  <div className="row">
-                    <div className="col-6 col-lg-6">
-                      <span className="card-text-price">12</span>
-                      <span className="card-text-muted ml-1">L.P.A</span>
-                    </div>
-                    <div className="col-6 col-lg-6">
-                      <div className="btn btn-apply mx-4">Apply Now</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
+      {/*No of Cases etc section */}
       <div className="container mt-100 mb-50">
         <div className="row px-5">
           <div className="col-md-6 col-lg-3">

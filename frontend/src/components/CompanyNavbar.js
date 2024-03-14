@@ -33,10 +33,6 @@ export default function CompanyNavbar({ setUserRole }) {
           .collapse {
             visibility: visible !important;
           }
-          .nav-link {
-            color: white !important;
-            font-weight:500 !important;
-          }
         `}
       </style>
       <Navbar

@@ -27,14 +27,11 @@ export default function CustomNavbar() {
 
   return (
     <>
+      {/* styling to override bootstrap classes styling */}
       <style>
         {`
           .collapse {
             visibility: visible !important;
-          }
-          .nav-link {
-            color: white !important;
-            font-weight:500 !important;
           }
         `}
       </style>
@@ -95,13 +92,6 @@ export default function CustomNavbar() {
               </>
             ) : (
               <>
-                {/* <Nav
-                  as={Link}
-                  to="/editprofile"
-                  className="bg-blue-500 text-white px-4 my-1 py-2 rounded-lg hover:bg-blue-700"
-                >
-                  Edit Profile
-                </Nav> */}
                 <Nav
                   as={Link}
                   to="/userprofile"

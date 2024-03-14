@@ -11,15 +11,16 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const Postnewjob = () => {
-  const { showAlert } = useContext(alertContext);
+  const { showAlert } = useContext(alertContext); //to show alerts
   const [textEditor, setTextEditor] = useState("");
 
   const companyId = localStorage.getItem("id");
   let navigate = useNavigate();
+
+  //job details form
   const [formData, setFormData] = useState({
     location: "",
     title: "",
-    // description: textEditor,
     experience: "",
     type: "",
     industry: "",
@@ -45,7 +46,6 @@ const Postnewjob = () => {
     const requiredFields = [
       "location",
       "title",
-      // "description",
       "experience",
       "type",
       "deadline",
@@ -65,7 +65,7 @@ const Postnewjob = () => {
     }
 
     try {
-      console.log(formData.companyId);
+      //sending response data to backend
 
       const response = await axios.post("http://localhost:8080/api/jobs", {
         companyId: formData.companyId,
@@ -91,7 +91,6 @@ const Postnewjob = () => {
     } catch (err) {
       console.log("An error occured:", err);
     }
-    // Add your form submission logic here
   };
 
   return (
@@ -101,13 +100,14 @@ const Postnewjob = () => {
           <div className="login-register-cover justify-content-center">
             <div className="text-center">
               <div className="text-center">
+                {/* top heading */}
                 <p className="font-sm">Post The Job</p>
                 <h2 className="mt-10">Make Hiring Effortless</h2>
                 <p className="login-text-p">
                   Access to all features. No credit card required.
                 </p>
               </div>
-
+              {/* form details  */}
               <form className="mt-50 login-register mx-auto justify-content-center">
                 <div className="row">
                   <div className="mb-3 col-lg-4 col-md-6 col-sm-12 form-group">
@@ -133,9 +133,7 @@ const Postnewjob = () => {
                     ></input>
                   </div>
                 </div>
-                {/* <div className="row">
-                  
-                </div> */}
+
                 <div className="row">
                   <div className="mb-3 col-lg-4 col-md-6 col-sm-12 form-group">
                     <label className=" form-label text-start">Experience</label>
@@ -232,13 +230,7 @@ const Postnewjob = () => {
                     <label className=" form-label text-start">
                       Job Description
                     </label>
-                    {/* <textarea
-                      className="form-control w-full"
-                      placeholder="Describe your job in detail..."
-                      name="description"
-                      value={formData.description}
-                      onChange={handleChange}
-                    ></textarea> */}
+                    {/* ckeditor to put details of jobs */}
                     <CKEditor
                       className="form-control "
                       editor={ClassicEditor}

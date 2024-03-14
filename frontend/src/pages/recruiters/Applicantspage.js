@@ -7,7 +7,6 @@ import { alertContext } from "../../components/context/Context";
 import { useNavigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 
-
 export default function Applicantspage() {
   const [applicants, setApplicants] = useState([]);
   const [job, setJob] = useState([]);
@@ -16,6 +15,7 @@ export default function Applicantspage() {
   const location = useLocation();
   const jobId = new URLSearchParams(location.search).get("jobId");
 
+  //fetching job details
   useEffect(() => {
     async function fetchData() {
       try {
@@ -39,6 +39,8 @@ export default function Applicantspage() {
 
     fetchData();
   }, [jobId]);
+
+  //fetching user details who have applied
 
   useEffect(() => {
     async function fetchData() {
@@ -65,6 +67,8 @@ export default function Applicantspage() {
     fetchData();
   }, [jobId]);
 
+  //handling resume download
+
   const handleResumeClick = async (userId) => {
     try {
       await fetch(`http://localhost:8080/api/users/resume/${userId}/`)
@@ -88,12 +92,15 @@ export default function Applicantspage() {
       console.error(e);
     }
   };
+
+  //onClicking on applicants it will go user profile page
   const handleChange = (userId) => {
     navigate(`/userprofile?userId=${userId}`);
   };
   return (
     <div className="container">
       <div className="container mx-auto">
+        {/* jobCard for particular job */}
         <div className="mt-5 border-2 rounded-lg border-gray-200 bg-[#f8faff] p-4 ">
           <div className="flex flex-col">
             <div className="flex justify-between flex-wrap">
@@ -148,7 +155,7 @@ export default function Applicantspage() {
             </div>
           </div>
         </div>
-
+        {/* table to show applicants details */}
         <div className="font-bold text-3xl my-3">Job Applicants</div>
         <div className="flex flex-col">
           <Table className="striped-columns">
@@ -193,31 +200,6 @@ export default function Applicantspage() {
               ))}
             </tbody>
           </Table>
-
-          {/* {applicants.map((person, i) => {
-            return (
-              <div className="flex flex-row text-lg justify-start mt-1 mb-2">
-                <p className="mr-2">{i + 1}.</p>
-                <p className="basis-1/5">
-                  {person.first_name + " " + person.last_name}
-                </p>
-                <p className="basis-1/5">{person.email}</p>
-                <p className="basis-1/5">{person.contact_no}</p>
-                <button
-                  onClick={() => handleResumeClick(person.id)}
-                  style={{
-                    background: ` url(${downloadicon}) no-repeat 24px 17px,#3c65f5`,
-                    width: "150px",
-                    height: "50px",
-                    lineHeight: "0px",
-                  }}
-                  className="download-btn"
-                >
-                  Resume
-                </button>
-              </div>
-            );
-          })} */}
         </div>
       </div>
     </div>
