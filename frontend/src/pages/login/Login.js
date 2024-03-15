@@ -10,8 +10,9 @@ import bottomimg from "../../assets/loginbottom.svg";
 export default function Login({ setUserRole }) {
   const { showAlert } = useContext(alertContext);
 
+
+
   let navigate = useNavigate();
-  const [loading, setLoading] = useState(false); // State to track loading
   const [errors, setErrors] = useState({});
   const [loginData, setLoginData] = useState({
     email: "",
@@ -54,15 +55,13 @@ export default function Login({ setUserRole }) {
 
     for (const field of requiredFields) {
       if (!loginData[field]) {
-        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
         showAlert("Please fill in all fields");
         return;
       }
     }
 
     try {
-      setLoading(true); // Set loading to true when submitting form
-
       let apiUrl;
       if (loginData.role === "user") {
         apiUrl = "http://localhost:8080/api/users/login";
@@ -73,28 +72,33 @@ export default function Login({ setUserRole }) {
       const data = await axios.post(apiUrl, loginData);
 
       if (data.status === 200) {
+        // alert("Loged in successfully");
+
         showAlert("Log in successfull");
+        console.log(data);
         setUserRole(loginData.role);
         if (loginData.role === "user") {
-          localStorage.setItem("id", data.data.id);
-          setTimeout(() => {
-            navigate("/");
-          }, 1000); // Delay navigation for 1 second (adjust as needed)
-        } else if (loginData.role === "company") {
-          localStorage.setItem("id", data.data.id);
-          setTimeout(() => {
-            navigate("/companyhomepage");
-          }, 1000); // Delay navigation for 1 second (adjust as needed)
+
+          localStorage.setItem('id', data.data.id);
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+          navigate("/");
         }
+        else if (loginData.role === "company") {
+          localStorage.setItem('id', data.data.id);
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+          navigate("/companyhomepage");
+        }
+        console.log("Loged in");
       }
+      //  else {
+      //   alert("Put valid data");
+      //   console.log("Login failed:", data.statusText);
+      // }
     } catch (err) {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
       showAlert(err.response.data);
-    } finally {
-      // Delay resetting loading state to false
-      setTimeout(() => {
-        setLoading(false); // Set loading to false after submission completes
-      }, 1000);
+      // console.log("An error occured", err.response.data.message);
+      // alert("Put Valid Data");
     }
   };
 
@@ -113,10 +117,42 @@ export default function Login({ setUserRole }) {
             >
               Access to all features. No credit card required.
             </p>
+            {/* <button className="google-login">
+              <img src={googleIcon} alt="google-icon" />
+              <strong>Sign in with Google</strong>
+            </button>
+            <div className="divider">
+              <span>Or continue with</span>
+            </div> */}
           </div>
 
           <form className="login-form">
-            {/* Input fields */}
+            <div className="flex items-center mt-2 mb-5">
+              <input
+                type="radio"
+                id="user"
+                name="role"
+                value="user"
+                checked={loginData.role === "user"}
+                onChange={handleChange}
+                className="mr-2"
+              />
+              <label htmlFor="user" className="text-sm font-medium">
+                User
+              </label>
+              <input
+                type="radio"
+                id="company"
+                name="role"
+                value="company"
+                checked={loginData.role === "company"}
+                onChange={handleChange}
+                className="ml-4 mr-2"
+              />
+              <label htmlFor="company" className="text-sm font-medium">
+                Company
+              </label>
+            </div>
             {inputFields.map((field, i) => (
               <div key={i} className="from-group">
                 <label className="form-label">{field.label}</label>
@@ -127,22 +163,27 @@ export default function Login({ setUserRole }) {
                   value={loginData[field.name]}
                   onChange={handleChange}
                   required
-                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${
-                    errors[field.name] ? "border-red-500 " : ""
-                  } `}
+                  className={`form-input shadow-sm bg-gray-50 border border-[#e0e6f6] text-gray-900 rounded-lg block w-full p-2.5 ${errors[field.name] ? "border-red-500 " : ""
+                    } `}
                 />
                 {errors[field.name] && (
                   <p className="text-red-500">{errors[field.name]}</p>
                 )}
               </div>
             ))}
+            <div className="form-group flex justify-between font-sm">
+              <label className="form-label cursor-pointer">
+                <input type="checkbox" className="form-input cursor-pointer" />
+                Remenber me
+              </label>
+              <span className="cursor-pointer">Forget Password</span>
+            </div>
             <button
               type="submit"
               onClick={handleSubmit}
               className=" w-full  px-4 py-3 bg-[#05264e] text-white font-bold rounded-md hover:bg-[#3c65f5]  focus:ring-4 focus:outline-none focus:ring-blue-300"
             >
-              {/* Conditional rendering of loading UI */}
-              {loading ? "Logging in..." : "Sign in"}
+              Sign in
             </button>
             <div className="text-center mt-4 text-[#6c757d] text-sm">
               Don't have an Account?
