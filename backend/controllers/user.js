@@ -223,3 +223,41 @@ exports.getResume = async (req, res) => {
         return res.status(statusCodes.INTERNAL_SERVER_ERROR).send();
     }
 };
+
+exports.updateProfile = async (req, res) => {
+    try {
+        logger.info('user update request received.');
+
+        const userId = req.params.id;
+        const user = await users.findByPk(userId);
+
+        if (user) {
+            user.first_name = req.body.firstName;
+            user.last_name = req.body.lastName;
+            user.contact_no = req.body.contactNo;
+            user.location = req.body.location;
+            user.about = req.body.about;
+
+            if (req.files) {
+                if (req.body.imageFlag && req.files[0] && req.files[0].buffer) {
+                    user.image = req.files[0].buffer;
+                }
+                if (req.body.resumeFlag) {
+                    if (!req.body.imageFlag && req.files[0] && req.files[0].buffer) {
+                        user.resume = req.files[0].buffer
+                    } else {
+                        user.resume = req.files[1].buffer
+                    }
+                }
+            }
+
+            await user.save().then(() => {
+                logger.info('uper updated successfully.');
+                return res.status(statusCodes.OK).send(user.toJSON());
+            });
+        }
+    } catch (err) {
+        logger.error(err);
+        return res.status(statusCodes.INTERNAL_SERVER_ERROR).send();
+    }
+}

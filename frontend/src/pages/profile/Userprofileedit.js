@@ -8,7 +8,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default function Userprofileedit() {
 
-    const [userInfo, setUserInfo] = useState({});
+    const [userInfo, setUserInfo] = useState({ image: false, resume: false });
     const [textEditor, setTextEditor] = useState();
 
 
@@ -50,23 +50,69 @@ export default function Userprofileedit() {
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
-        setUserInfo({
-            ...userInfo,
-            image: file,
-        });
+        if (file) {
+            setUserInfo({
+                ...userInfo,
+                image: file,
+            });
+        } else {
+            setUserInfo({
+                ...userInfo,
+                image: false,
+            });
+        }
     };
 
     const handleResumeChange = (e) => {
         const file = e.target.files[0];
-        setUserInfo({
-            ...userInfo,
-            resume: file,
-        });
+        if (file) {
+            setUserInfo({
+                ...userInfo,
+                resume: file,
+            });
+        } else {
+            setUserInfo({
+                ...userInfo,
+                resume: false,
+            });
+        }
     };
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-    }
+        try {
+            const sendformData = new FormData();
+            console.log(userInfo);
+            sendformData.append('firstName', userInfo.first_name);
+            sendformData.append('lastName', userInfo.last_name);
+            sendformData.append('contactNo', userInfo.contact_no);
+            sendformData.append('location', userInfo.location);
+            sendformData.append('about', textEditor);
+
+            if (userInfo.image.size) {
+                sendformData.append('image', userInfo.image);
+                sendformData.append('imageFlag', true);
+            }
+
+            if (userInfo.resume.size) {
+                sendformData.append('resume', userInfo.resume);
+                sendformData.append('resumeFlag', true);
+            }
+
+            const response = await axios.post(`http://localhost:8080/api/users/${localStorage.getItem('id')}`, sendformData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            // Handle successful update (e.g., show success message, redirect)
+            console.log('Profile updated successfully:', response.data);
+        } catch (error) {
+            // Handle error (e.g., show error message)
+            console.error('Error updating profile:', error);
+        }
+    };
 
 
 
