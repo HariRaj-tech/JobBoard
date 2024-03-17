@@ -29,6 +29,7 @@ export default function Userprofileedit() {
         };
 
         fetchUser();
+        setTextEditor(userInfo.about);
     }, [])
 
     const handleInputChange = (e) => {
@@ -70,7 +71,7 @@ export default function Userprofileedit() {
 
 
     // console.log(userInfo);
-    // console.log(textEditor);
+    // console.log(textEditor) ;
 
     return (
         <div className='container mx-auto px-4 py-8'>
@@ -124,7 +125,7 @@ export default function Userprofileedit() {
                         <CKEditor
                             className="shadow appearance-none border border-gray-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8"
                             editor={ClassicEditor}
-                            data={textEditor}
+                            data={userInfo.about}
                             onReady={(editor) => {
                                 // You can store the "editor" and use when it is needed.
                                 // console.log('Editor is ready to use!', editor);
