@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios';
 import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
+import { useNavigate } from 'react-router-dom';
+import { alertContext } from '../../components/context/Context';
 
 export default function Userprofileedit() {
 
     const [userInfo, setUserInfo] = useState({ image: false, resume: false });
     const [textEditor, setTextEditor] = useState();
 
+    let navigate = useNavigate();
+    const { showAlert } = useContext(alertContext);
 
     useEffect(() => {
         const user = localStorage.getItem('id');
@@ -105,12 +108,14 @@ export default function Userprofileedit() {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-
+            navigate("/userprofile");
             // Handle successful update (e.g., show success message, redirect)
-            console.log('Profile updated successfully:', response.data);
+            showAlert("Profile updated successfully");
+            // console.log('Profile updated successfully:', response.data);
         } catch (error) {
             // Handle error (e.g., show error message)
-            console.error('Error updating profile:', error);
+            showAlert("Error updating profile")
+            // console.error('Error updating profile:', error);
         }
     };
 
